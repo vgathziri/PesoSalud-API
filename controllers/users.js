@@ -18,20 +18,20 @@ class UserCtrl {
       },
     ];
 
-    // Binding this to not loose context on router
     this.getAll = this.getAll.bind(this);
     this.get = this.get.bind(this);
     this.create = this.create.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   getAll(req, res) {
-    // let users = db.findAll('Users');
-    return res.status(200).send({ data: this.users });
+    return res.status(200).send({
+      data: this.users,
+    });
   }
 
   get(req, res) {
     const data = this.data.find(el => el.id === Number(req.params.userId));
-
     res.status(200).send(data);
   }
 
@@ -47,6 +47,10 @@ class UserCtrl {
 
     res.status(201).send(data);
   }
-}
 
-module.exports = new UserCtrl();
+  edit(req, res) {
+    const data = { message: 'item-updated' };
+    res.status(201).send(data);
+  }
+}
+module.exports = new UsersCtrl();
