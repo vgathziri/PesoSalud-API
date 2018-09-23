@@ -1,3 +1,5 @@
+const { db } = require('../db');
+
 class UserCtrl {
   constructor() {
     // User data temporary hardcoded
@@ -23,6 +25,7 @@ class UserCtrl {
   }
 
   getAll(req, res) {
+    // let users = db.findAll('Users');
     return res.status(200).send({ data: this.users });
   }
 
