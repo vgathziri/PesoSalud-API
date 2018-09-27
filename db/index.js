@@ -14,14 +14,19 @@ class DB {
   }
 
   findAll(table) {
-    return this.connection.query(`SELECT * FROM ${table}`, (err, rows) => {
-      if (err) throw err;
-      return CircularJSON.stringify(rows);
+    return new Promise((resolve, reject) => {
+      return this.connection.query(`SELECT * FROM ${table}`, (err, rows) => {
+        if (err) return reject(err);
+        let lala = this.processResults(rows);
+        // console.log('lala', lala);
+        return resolve(lala);
+        // return resolve(rows);
+      });
     });
   }
 
   findById(table, userId) {
-    let sql    = 'SELECT * FROM users WHERE id = ' + connection.escape(userId);
+    const sql = 'SELECT * FROM users WHERE id = ' + connection.escape(userId);
     return this.connection.query(sql, (err, rows) => {
       if (err) throw err;
       return (rows);
@@ -29,7 +34,7 @@ class DB {
   }
 
   processResults(data) {
-    return CircularJSON.stringify(data);
+    return JSON.parse(CircularJSON.stringify(data));
   }
 }
 
