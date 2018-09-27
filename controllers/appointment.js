@@ -23,7 +23,7 @@ class AppointmentCtrl {
     this.getByUserID = this.getByUserID.bind(this);
     this.getByPlaceID = this.getByPlaceID.bind(this);
     this.create = this.create.bind(this);
-    this.put = this.put.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   getByDate(req, res) {

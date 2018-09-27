@@ -30,7 +30,7 @@ class MedicalRecordsCtrl {
     this.edit = this.edit.bind(this);
   }
 
-  getByDate(req, res) {
+  getByUserID(req, res) {
     res.send(this.data);
   }
 
