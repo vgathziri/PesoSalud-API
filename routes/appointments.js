@@ -3,9 +3,9 @@ const { appointmentCtrl } = require('../controllers');
 
 router.get('/:date', appointmentCtrl.getByDate);
 
-router.get('/:userID', appointmentCtrl.getByUserID);
+router.get('/user/:userID', appointmentCtrl.getByUserID);
 
-router.get('/:placeID', appointmentCtrl.getByPlaceID);
+router.get('/place/:placeID', appointmentCtrl.getByPlaceID);
 
 router.post('/', appointmentCtrl.create);
 

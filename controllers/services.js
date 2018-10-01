@@ -29,7 +29,6 @@ class ServiceCtrl {
     };
 
     this.data.push(data);
-    console.log(req.body);
     res.status(201).send(data);
   }
 

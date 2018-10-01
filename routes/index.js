@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/users', usersRouter);
-router.use('/apopointments', appointmentsRouter);
+router.use('/appointments', appointmentsRouter);
 router.use('/medicalRecords', medicalRecordsRouter);
 router.use('/services', servicesRouter);
 
