@@ -53,4 +53,4 @@ class UserCtrl {
     res.status(201).send(data);
   }
 }
-module.exports = new UsersCtrl();
+module.exports = new UserCtrl();

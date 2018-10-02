@@ -27,7 +27,7 @@ class PromotionsCtrl {
 
   getPromotionbyUser(req, res) {
     const data = this.data.find(usuario => usuario.id === Number(req.params.userId));
-    res.status(200).send(data);
+    return res.status(200).send(data);
   }
 
   createPromotion(req, res) {
@@ -46,3 +46,5 @@ class PromotionsCtrl {
     res.status(201).send(data);
   }
 }
+
+module.exports = new PromotionsCtrl();
