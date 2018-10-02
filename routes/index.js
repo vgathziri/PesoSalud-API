@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 // Cargamos la rutas de los modulos
-const usersRouter = require('./users');
+//const usersRouter = require('./users');
 
 // Cargamos ruta de "users"
 router.use('/users', usersRouter);
@@ -30,4 +30,4 @@ router.use('/users', usersRouter);
 const promotionsRouter = require('./promotions');
 router.use('/promotions', promotionsRouter);
 
-modules.exports = router;
+module.exports = router;

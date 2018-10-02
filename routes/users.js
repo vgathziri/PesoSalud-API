@@ -4,12 +4,12 @@ const router = Router();
 
 // const middlewares = require('../middlewares');
 
-const { usersCtrl } = require('../controllers');
+const { userCtrl } = require('../controllers');
 
 //  router.get('/users', [middlewares.requireAuth, middlewares.lala], usersCtrl.getAll);
 //  router.get('/all-users',middlewares.ensureAuth, usersCtrl.getAll)
-router.get('/', usersCtrl.getAll);
-router.get('/:id', usersCtrl.get);
-router.post('/', usersCtrl.create);
-router.put('/', usersCtrl.edit);
+router.get('/', userCtrl.getAll);
+router.get('/:id', userCtrl.get);
+router.post('/', userCtrl.create);
+router.put('/', userCtrl.edit);
 module.exports = router;
