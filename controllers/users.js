@@ -1,4 +1,4 @@
-const { db } = require('../db');
+const userMdl = require('../models/users');
 
 class UserCtrl {
   constructor() {
@@ -25,8 +25,9 @@ class UserCtrl {
   }
 
   getAll(req, res) {
-    // let users = db.findAll('Users');
-    return res.status(200).send({ data: this.users });
+    userMdl.findAll('Users')
+      .then(response => res.status(200).send({ data: response }))
+      .catch(err => res.status(400).send({ message: err }));
   }
 
   get(req, res) {
