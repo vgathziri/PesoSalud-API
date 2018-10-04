@@ -1,24 +1,40 @@
 class ServicesPlacesCtrl {
+  constructor() {
+    this.data = [
+      {
+        servicesID: 1,
+        placeID: 1,
+      },
+    ];
+
+    this.create = this.create.bind(this);
+    this.searchService = this.searchService.bind(this);
+    this.searchPlaces = this.searchPlaces.bind(this);
+  }
+
   create(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
-    const last2Id = this.data[this.data.length - 1].placeID;
     const data = {
-      serviceID: lastId + 1,
-      placeID: last2Id + 1,
+      serviceID: req.body.service,
+      placeID: req.body.place,
     };
+
     this.data.push(data);
-    res.status(201).send(data);
+    res.status(201).send({
+      data: this.data,
+    });
   }
 
   searchService(req, res) {
-    const data = this.data.find(el => el.serviceID === Number(req.params.serviceID);
-    res.send(data);
+    res.send({
+      data: this.data,
+    });
   }
 
   searchPlaces(req, res) {
-    const data = this.data.find(el => el.placeID === Number(req.params.placeID);
-    res.send(data);
+    res.send({
+      data: this.data,
+    });
   }
-
 }
+
 module.exports = new ServicesPlacesCtrl();

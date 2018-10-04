@@ -6,4 +6,4 @@ exports.scheduleCtrl = require('./schedule');
 
 exports.dietsCtrl = require('./diets');
 
-exports.servicesPlacesCtrl = require('./servicesPlaces');
+exports.ServicesPlacesCtrl = require('./servicesPlaces');
