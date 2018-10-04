@@ -18,10 +18,10 @@ class UserCtrl {
       },
     ];
 
-    // Binding this to not loose context on router
     this.getAll = this.getAll.bind(this);
     this.get = this.get.bind(this);
     this.create = this.create.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   getAll(req, res) {
@@ -31,23 +31,31 @@ class UserCtrl {
   }
 
   get(req, res) {
-    const data = this.data.find(el => el.id === Number(req.params.userId));
-
-    res.status(200).send(data);
+    res.status(200).send({
+      data: this.users,
+    });
   }
 
   create(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
     const data = {
-      id: lastId + 1,
+      id: req.body.id,
       name: req.body.name,
       email: req.body.email,
     };
 
-    this.data.push(data);
+    this.users.push(data);
 
+    res.status(201).send({
+      data: this.users,
+    });
+  }
+
+  edit(req, res) {
+    const data = {
+      message: 'item-updated',
+      data: this.users,
+    };
     res.status(201).send(data);
   }
 }
-
 module.exports = new UserCtrl();
