@@ -27,7 +27,6 @@ class PlacesCtrl {
       name: req.body.name,
       place_type: req.body.placeType,
       active: req.body.active,
-
     };
     this.data.push(data);
 
