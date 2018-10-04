@@ -5,3 +5,5 @@ exports.placesCtrl = require('./places');
 exports.scheduleCtrl = require('./schedule');
 
 exports.dietsCtrl = require('./diets');
+
+exports.servicesPlacesCtrl = require('./servicesPlaces');

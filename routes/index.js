@@ -20,6 +20,8 @@ const scheduleRouter = require('./schedule');
 
 const dietsRouter = require('./diets');
 
+const servicesRouter = require('./servicesPlaces');
+
 router.get('/', (req, res) => {
   res.send('This is Home!');
 });
@@ -28,6 +30,7 @@ router.use('/users', usersRouter);
 router.use('/places', placesRouter);
 router.use('/schedule', scheduleRouter);
 router.use('/diets', dietsRouter);
+router.use('/servicesPlaces', servicesRouter);
 
 // si se necesita aplicar un middlewares para todo users
 // router.use('/users', middlewares, usersRouter);
