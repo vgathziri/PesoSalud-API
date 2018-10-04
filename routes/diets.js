@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { DietsCtrl } = require('../controllers');
+const { dietsCtrl } = require('../controllers');
 
-router.get('/', DietsCtrl.getAll);
-router.post('/', DietsCtrl.create);
-router.get('/:ID', DietsCtrl.searchID);
-router.put('/:ID', DietsCtrl.edit);
+router.get('/', dietsCtrl.getAll);
+router.post('/', dietsCtrl.create);
+router.get('/:ID', dietsCtrl.get);
+router.put('/:ID', dietsCtrl.edit);
 
 module.exports = router;

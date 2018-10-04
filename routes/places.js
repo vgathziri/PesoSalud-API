@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { PlacesCtrl } = require('../controllers');
+const { placesCtrl } = require('../controllers');
 
-router.get('/', PlacesCtrl.getAll);
-router.post('/', PlacesCtrl.create);
-router.put('/:ID', PlacesCtrl.edit);
+router.get('/', placesCtrl.getAll);
+router.post('/', placesCtrl.create);
+router.put('/:ID', placesCtrl.edit);
 
 module.exports = router;
