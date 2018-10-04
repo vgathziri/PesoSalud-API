@@ -11,5 +11,5 @@ const { userCtrl } = require('../controllers');
 router.get('/', userCtrl.getAll);
 router.get('/:id', userCtrl.get);
 router.post('/', userCtrl.create);
-router.put('/', userCtrl.edit);
+router.put('/:id', userCtrl.edit);
 module.exports = router;

@@ -17,6 +17,9 @@ class PromotionsCtrl {
     ];
 
     this.getAll = this.getAll.bind(this);
+    this.getPromotionbyUser = this.getPromotionbyUser.bind(this);
+    this.createPromotion = this.createPromotion.bind(this);
+    this.editPromotion = this.editPromotion.bind(this);
   }
 
   getAll(req, res) {
@@ -26,23 +29,28 @@ class PromotionsCtrl {
   }
 
   getPromotionbyUser(req, res) {
-    const data = this.data.find(usuario => usuario.id === Number(req.params.userId));
-    return res.status(200).send(data);
+    return res.status(200).send({
+      data: this.promotions,
+    });
   }
 
   createPromotion(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
     const data = {
-      id: lastId + 1,
+      id: req.body.id,
       descrip: req.body.descrip,
     };
-    this.data.push(data);
+    this.promotions.push(data);
 
-    res.status(201).send(data);
+    res.status(201).send({
+      data: this.promotions,
+    });
   }
 
   editPromotion(req, res) {
-    const data = { message: 'item-updated' };
+    const data = {
+      message: 'item-updated',
+      data: this.promotions,
+    };
     res.status(201).send(data);
   }
 }
