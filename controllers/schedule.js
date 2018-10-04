@@ -1,10 +1,25 @@
 class ScheduleCtrl {
+  constructor() {
+    this.data = [
+      {
+        id: 1,
+        weekDay: 1,
+        startTime: '10:00',
+        endTime: '13:00',
+        active: 1,
+      },
+    ];
+
+    this.get = this.get.bind(this);
+    this.create = this.create.bind(this);
+    this.edit = this.edit.bind(this);
+  }
+
   create(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
     const data = {
-      id: lastId + 1,
+      id: req.body.id,
       weekDay: req.body.weekDay,
-      startTime: req.body.weekDay,
+      startTime: req.body.startTime,
       endTime: req.body.endTime,
       active: req.body.active,
     };
@@ -22,9 +37,10 @@ class ScheduleCtrl {
 
   // input: WeekDay
   // Output: Schedules List Filtered by WeekDay
-  search(req, res) {
-    const data = this.data.find(el => el.weekDay === Number(req.params.weekDay));
-    res.send(data);
+  get(req, res) {
+    res.send({
+      data: this.data,
+    });
   }
 }
 

@@ -4,7 +4,7 @@ class DietsCtrl {
       {
         id: 1,
         name: 'Baja en carbohidratos',
-        descripcion: '0 harinas',
+        description: '0 harinas',
         active: 1,
       },
     ];
@@ -12,41 +12,41 @@ class DietsCtrl {
     this.getAll = this.getAll.bind(this);
     this.get = this.get.bind(this);
     this.create = this.create.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   getAll(req, res) {
     const json = {
       data: this.data,
-      total_count: this.data.length,
-      per_page: 10,
-      page: 0,
     };
     res.send(json);
   }
 
   create(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
     const data = {
-      id: lastId + 1,
+      id: req.body.id,
       name: req.body.name,
-      descripcion: req.body.descripcion,
+      descripcion: req.body.description,
       active: req.body.active,
 
     };
     this.data.push(data);
 
-    res.status(201).send(data);
+    res.status(201).send({
+      data: this.data,
+    });
   }
 
-  search(req, res) {
-    const data = this.data.find(el => el.id === Number(req.params.id));
-    res.status(200).send(data);
+  get(req, res) {
+    res.status(200).send({
+      data: this.data,
+    });
   }
 
   edit(req, res) {
     const json = {
       data: this.data,
-      message: 'Item update',
+      message: 'Item updated',
     };
     res.status(201).send(json);
   }

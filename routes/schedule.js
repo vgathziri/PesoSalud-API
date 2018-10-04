@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { ScheduleCtrl } = require('../controllers');
+const { scheduleCtrl } = require('../controllers');
 
-router.post('/', ScheduleCtrl.create);
-router.put('/:ID', ScheduleCtrl.edit);
-router.get('/:weekDay', ScheduleCtrl.search);
+router.post('/', scheduleCtrl.create);
+router.put('/:ID', scheduleCtrl.edit);
+router.get('/:weekDay', scheduleCtrl.get);
 
 module.exports = router;
