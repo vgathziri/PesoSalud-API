@@ -11,9 +11,14 @@ EL proyecto PesoSalud pretende satisfacer las necesidades, se pretende diseñar 
 ## Usuarios, permisos
 
 ## Características técnicas de instalación  
+Se instala los paquetes de desarrollo como Airbnb
 `npm install eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+Ademas de express y body-parser
 `npm install express body-parser`
-`Base de datos`
+Tambien se instala nodemon
+`npm install nodemon`
+
+`Base de datos-->mysql`
 
 ## URLs para ver demo  
 
