@@ -1,2 +1,2 @@
-exports.usersCtrl = require('./users');
+exports.userCtrl = require('./users');
 exports.promotionsCtrl = require('./promotions');
