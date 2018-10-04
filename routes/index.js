@@ -21,6 +21,10 @@ router.get('/', (req, res) => {
   res.send('This is Home!');
 });
 
+// Cargamos la rutas de los modulos
+// const usersRouter = require('./users');
+
+// Cargamos ruta de "users"
 router.use('/users', usersRouter);
 router.use('/appointments', appointmentsRouter);
 router.use('/medicalRecords', medicalRecordsRouter);
@@ -29,5 +33,8 @@ router.use('/services', servicesRouter);
 // si se necesita aplicar un middlewares para todo users
 // router.use('/users', middlewares, usersRouter);
 
+const promotionsRouter = require('./promotions');
+
+router.use('/promotions', promotionsRouter);
 
 module.exports = router;
