@@ -2,24 +2,9 @@ const userMdl = require('../models/users');
 
 class UserCtrl {
   constructor() {
-    // User data temporary hardcoded
-    this.users = [
-      {
-        id: 1,
-        name: 'felipe',
-      },
-      {
-        id: 2,
-        name: 'eduardo',
-      },
-      {
-        id: 3,
-        name: 'juan',
-      },
-    ];
-
+    // Binding this to not loose context on router
     this.getAll = this.getAll.bind(this);
-    this.get = this.get.bind(this);
+    this.getUser = this.getUser.bind(this);
     this.create = this.create.bind(this);
     this.edit = this.edit.bind(this);
   }
@@ -30,32 +15,24 @@ class UserCtrl {
       .catch(err => res.status(400).send({ message: err }));
   }
 
-  get(req, res) {
-    res.status(200).send({
-      data: this.users,
-    });
+  getUser(req, res) {
+    userMdl.findById('Users', req.params.id)
+      .then(response => {
+        (response.length) !== 0 ? res.status(200).send({ data: response }) : res.status(400).send({ message: 'User not found' })
+      })
+      .catch(err => res.status(400).send({ message: err }));
   }
 
   create(req, res) {
-    const data = {
-      id: req.body.id,
-      name: req.body.name,
-      email: req.body.email,
-    };
-
-    this.users.push(data);
-
-    res.status(201).send({
-      data: this.users,
-    });
+    userMdl.create('Users', req.body)
+      .then(response => res.status(200).send({ message: `ID: ${response}` }))
+      .catch(err => res.status(400).send({ message: err }));
   }
 
   edit(req, res) {
-    const data = {
-      message: 'item-updated',
-      data: this.users,
-    };
-    res.status(201).send(data);
+    userMdl.update('Users', req.body, req.params.id)
+      .then(response => res.status(200).send({ message: `Number of changed rows: ${response}` }))
+      .catch(err => res.status(400).send({ message: err }));
   }
 }
 module.exports = new UserCtrl();

@@ -14,10 +14,10 @@ class UserMdl {
     this.Comments = data.Comments;
   }
 
-  create() {
+  static create(table, data) {
     return new Promise((resolve, reject) => {
-      db.create('Users', this)
-        .then(res => resolve(this.processData(res)))
+      db.create('Users', data)
+        .then(res => resolve(res))
         .catch(err => reject(err));
     });
   }
@@ -26,6 +26,22 @@ class UserMdl {
     return new Promise((resolve, reject) => {
       db.findAll(table)
         .then(res => resolve(this.processData(res)))
+        .catch(err => reject(err));
+    });
+  }
+
+  static findById(table, userId) {
+    return new Promise((resolve, reject) => {
+      db.findById(table, userId)
+        .then(res => resolve(this.processData(res)))
+        .catch(err => reject(err));
+    });
+  }
+
+  static update(table, data, userId) {
+    return new Promise((resolve, reject) => {
+      db.update('Users', data)
+        .then(res => resolve(res))
         .catch(err => reject(err));
     });
   }
