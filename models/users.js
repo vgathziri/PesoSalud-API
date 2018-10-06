@@ -40,7 +40,7 @@ class UserMdl {
 
   static update(table, data, userId) {
     return new Promise((resolve, reject) => {
-      db.update('Users', data)
+      db.update('Users', data, userId)
         .then(res => resolve(res))
         .catch(err => reject(err));
     });
