@@ -9,32 +9,56 @@ class UserCtrl {
     this.edit = this.constructor.edit.bind(this);
   }
 
-  static getAll(req, res) {
-    userMdl.findAll('Users')
-      .then(response => res.status(200).send({ data: response }))
-      .catch(err => res.status(400).send({ message: err }));
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await userMdl.findAll('Users');
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User not found' });
+      }
+    } catch (e) {
+      res.status(400).send({ message: e });
+    }
+    res.status(201).send({ data });
   }
 
-  static getUser(req, res) {
-    userMdl.findById('Users', req.params.id)
-      .then((response) => {
-        (response.length) !== 0 ? res.status(200).send({ data: response }) : res.status(400).send({ message: 'User not found' })
-      })
-      .catch(err => res.status(400).send({ message: err }));
+  static async getUser(req, res, next) {
+    try {
+      const data = await userMdl.findById('Users', req.params.id);
+
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User not found' });
+      }
+
+      res.status(200).send({ data });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static create(req, res) {
-    userMdl.create('Users', req.body)
-      .then(response => res.status(200).send({ message: `ID: ${response}` }))
-      .catch(err => res.status(400).send({ message: err }));
+  static async create(req, res, next) {
+    try {
+      const data = await userMdl.create('Users', req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static edit(req, res) {
-    userMdl.update('Users', req.body, req.params.id)
-      .then((response) => {
-        (response) !== 0 ? res.status(200).send({ data: 'User updated' }) : res.status(400).send({ message: 'User could not be updated' })
-      })
-      .catch(err => res.status(400).send({ message: err }));
+  static async edit(req, res, next) {
+    try {
+      const data = await userMdl.update('Users', req.body, req.params.id);
+
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User could not be updated' });
+      }
+
+      res.status(200).send({ data: 'User updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 module.exports = new UserCtrl();
