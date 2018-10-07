@@ -12,7 +12,7 @@ class UserCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await userMdl.findAll('Users');
+      data = await userMdl.findAll();
       if (data.length === 0) {
         res.status(400).send({ message: 'User not found' });
       }
@@ -24,7 +24,7 @@ class UserCtrl {
 
   static async getUser(req, res, next) {
     try {
-      const data = await userMdl.findById('Users', req.params.id);
+      const data = await userMdl.findById('id', req.params.id);
 
       // In case user was not found
       if (data.length === 0) {
@@ -39,7 +39,7 @@ class UserCtrl {
 
   static async create(req, res, next) {
     try {
-      const data = await userMdl.create('Users', req.body);
+      const data = await userMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -48,7 +48,7 @@ class UserCtrl {
 
   static async edit(req, res, next) {
     try {
-      const data = await userMdl.update('Users', req.body, req.params.id);
+      const data = await userMdl.update(req.body, req.params.id);
 
       // In case user was not found
       if (data.length === 0) {
