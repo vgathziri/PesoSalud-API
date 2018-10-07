@@ -14,20 +14,44 @@ class UserMdl {
     this.Comments = data.Comments;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('Users', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async create(table, obj) {
+    let data;
+    try {
+      data = await db.create('Users', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findAll(table) {
+    let data;
+    try {
+      data = await db.findAll(table);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async findById(table, userId) {
+    let data;
+    try {
+      data = await db.findById(table, userId);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async update(table, obj, userId) {
+    let data;
+    try {
+      data = await db.update('Users', obj, userId);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {
