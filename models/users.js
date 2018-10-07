@@ -14,36 +14,44 @@ class UserMdl {
     this.Comments = data.Comments;
   }
 
-  static create(table, data) {
-    return new Promise((resolve, reject) => {
-      db.create('Users', data)
-        .then(res => resolve(res))
-        .catch(err => reject(err));
-    });
+  static async create(table, obj) {
+    let data;
+    try {
+      data = await db.create('Users', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findAll(table) {
+    let data;
+    try {
+      data = await db.findAll(table);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
   }
 
-  static findById(table, userId) {
-    return new Promise((resolve, reject) => {
-      db.findById(table, userId)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findById(table, userId) {
+    let data;
+    try {
+      data = await db.findById(table, userId);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
   }
 
-  static update(table, data, userId) {
-    return new Promise((resolve, reject) => {
-      db.update('Users', data, userId)
-        .then(res => resolve(res))
-        .catch(err => reject(err));
-    });
+  static async update(table, obj, userId) {
+    let data;
+    try {
+      data = await db.update('Users', obj, userId);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {
