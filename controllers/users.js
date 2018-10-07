@@ -1,52 +1,64 @@
-const { db } = require('../db');
+const userMdl = require('../models/users');
 
 class UserCtrl {
   constructor() {
-    // User data temporary hardcoded
-    this.users = [
-      {
-        id: 1,
-        name: 'felipe',
-      },
-      {
-        id: 2,
-        name: 'eduardo',
-      },
-      {
-        id: 3,
-        name: 'juan',
-      },
-    ];
-
     // Binding this to not loose context on router
-    this.getAll = this.getAll.bind(this);
-    this.get = this.get.bind(this);
-    this.create = this.create.bind(this);
+    this.getAll = this.constructor.getAll.bind(this);
+    this.getUser = this.constructor.getUser.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  getAll(req, res) {
-    // let users = db.findAll('Users');
-    return res.status(200).send({ data: this.users });
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await userMdl.findAll('Users');
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User not found' });
+      }
+    } catch (e) {
+      res.status(400).send({ message: e });
+    }
+    res.status(201).send({ data });
   }
 
-  get(req, res) {
-    const data = this.data.find(el => el.id === Number(req.params.userId));
+  static async getUser(req, res, next) {
+    try {
+      const data = await userMdl.findById('Users', req.params.id);
 
-    res.status(200).send(data);
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User not found' });
+      }
+
+      res.status(200).send({ data });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  create(req, res) {
-    const lastId = this.data[this.data.length - 1].id;
-    const data = {
-      id: lastId + 1,
-      name: req.body.name,
-      email: req.body.email,
-    };
+  static async create(req, res, next) {
+    try {
+      const data = await userMdl.create('Users', req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
+  }
 
-    this.data.push(data);
+  static async edit(req, res, next) {
+    try {
+      const data = await userMdl.update('Users', req.body, req.params.id);
 
-    res.status(201).send(data);
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'User could not be updated' });
+      }
+
+      res.status(200).send({ data: 'User updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
-
 module.exports = new UserCtrl();
