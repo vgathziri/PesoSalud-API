@@ -23,9 +23,11 @@ class DB {
   }
 
   findById(table, userId) {
+    console.log(table, userId);
     return new Promise((resolve, reject) => {
       this.connection.query('SELECT * FROM ?? WHERE id = ?', [table, userId], (err, rows) => {
         if (err) return reject(err);
+        console.log('rows', rows);
         return resolve(this.processResults(rows));
       });
     });

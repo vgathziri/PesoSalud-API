@@ -21,6 +21,14 @@ router.post('/', (req, res, next) => {
   });
 }, userCtrl.create);
 
-router.put('/:id', userCtrl.edit);
+router.put('/:id', (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    body: {
+      Name: 'word',
+      Email: 'email',
+      UserType: 'word',
+    },
+  });
+}, userCtrl.edit);
 
 module.exports = router;
