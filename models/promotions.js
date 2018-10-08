@@ -11,20 +11,44 @@ class PromotionsMdl {
     this.active = data.Active;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('Promotions', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async createPromotion(obj) {
+    let data;
+    try {
+      data = await db.create('Promotions', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findAll(table) {
+    let data;
+    try {
+      data = await db.findAll(table);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async getPromotionbyUser(UserId) {
+    let data;
+    try {
+      data = await db.findByAttribute('Promotions', 'UserID', UserId);
+    } catch (e) {
+      throw e;
+    }
+    return data;
+  }
+
+  static async editPromotion(obj, ID) {
+    let data;
+    try {
+      data = await db.update('Promotions', obj, ID);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {
