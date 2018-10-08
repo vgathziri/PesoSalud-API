@@ -14,10 +14,10 @@ class UserCtrl {
     try {
       data = await userMdl.findAll();
       if (data.length === 0) {
-        res.status(400).send({ message: 'User not found' });
+        return res.status(400).send({ message: 'User not found' });
       }
     } catch (e) {
-      res.status(400).send({ message: e });
+      return res.status(400).send({ message: e });
     }
     res.status(201).send({ data });
   }
@@ -28,7 +28,7 @@ class UserCtrl {
 
       // In case user was not found
       if (data.length === 0) {
-        res.status(400).send({ message: 'User not found' });
+        return res.status(400).send({ message: 'User not found' });
       }
 
       res.status(200).send({ data });
@@ -52,7 +52,7 @@ class UserCtrl {
 
       // In case user was not found
       if (data.length === 0) {
-        res.status(400).send({ message: 'User could not be updated' });
+        return res.status(400).send({ message: 'User could not be updated' });
       }
 
       res.status(200).send({ data: 'User updated' });

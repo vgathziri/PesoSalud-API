@@ -14,7 +14,7 @@ class UserMdl {
     this.Comments = data.Comments;
   }
 
-  static async create(table, obj) {
+  static async create(obj) {
     let data;
     try {
       data = await db.create('Users', obj);
