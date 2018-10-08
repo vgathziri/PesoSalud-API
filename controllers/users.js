@@ -14,7 +14,7 @@ class UserCtrl {
     try {
       data = await userMdl.findAll();
       if (data.length === 0) {
-        return res.status(400).send({ message: 'User not found' });
+        return res.status(400).send({ message: 'Users not found' });
       }
     } catch (e) {
       return res.status(400).send({ message: e });
@@ -24,7 +24,7 @@ class UserCtrl {
 
   static async getUser(req, res, next) {
     try {
-      const data = await userMdl.findById('id', req.params.id);
+      const data = await userMdl.findById(req.params.id);
 
       // In case user was not found
       if (data.length === 0) {
