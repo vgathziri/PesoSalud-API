@@ -19,6 +19,6 @@ app.use(router);
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
+app.listen(process.env.DB_PORT, () => {
   console.log('Server is running on port 3000...');
 });
