@@ -44,6 +44,16 @@ class UserMdl {
     return this.processData(data);
   }
 
+  static async findByAttribute(attribute, value) {
+    let data;
+    try {
+      data = await db.findByAttribute('Users', attribute, value);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
   static async update(table, obj, userId) {
     let data;
     try {

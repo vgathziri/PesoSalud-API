@@ -19,7 +19,7 @@ const servicesRouter = require('./services');
 const placesRouter = require('./places');
 const scheduleRouter = require('./schedule');
 const dietsRouter = require('./diets');
-const servicesRouter = require('./servicesPlaces');
+const servicesPlacesRouter = require('./servicesPlaces');
 const promotionsRouter = require('./promotions');
 
 router.get('/', (req, res) => {
@@ -34,10 +34,11 @@ router.use('/users', usersRouter);
 router.use('/places', placesRouter);
 router.use('/schedule', scheduleRouter);
 router.use('/diets', dietsRouter);
-router.use('/servicesPlaces', servicesRouter);
+router.use('/servicesPlaces', servicesPlacesRouter);
 router.use('/appointments', appointmentsRouter);
 router.use('/medicalRecords', medicalRecordsRouter);
 router.use('/services', servicesRouter);
 router.use('/promotions', promotionsRouter);
+
 
 module.exports = router;

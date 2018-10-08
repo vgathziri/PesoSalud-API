@@ -31,6 +31,15 @@ class DB {
     });
   }
 
+  findByAttribute(table, attribute, value) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('SELECT * FROM ?? WHERE ?? = ?', [table, attribute, value], (err, rows) => {
+        if (err) return reject(err);
+        return resolve(this.processResults(rows));
+      });
+    });
+  }
+
   create(table, data) {
     return new Promise((resolve, reject) => {
       this.connection.query('INSERT INTO ?? SET ?', [table, data], (err, results) => {
