@@ -1,45 +1,48 @@
-class ServiceCtrl {
+const servicesMdl = require('../models/services');
+
+class ServicesCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        name: 'Consultory',
-        description: 'Main Place',
-        placeType: 'Consultory',
-        active: 1,
-      },
-    ];
-
-    this.getAll = this.getAll.bind(this);
-    this.create = this.create.bind(this);
-    this.edit = this.edit.bind(this);
+    this.getAll = this.constructor.getAll.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  getAll(req, res) {
-    res.send(this.data);
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await servicesMdl.findAll('Service');
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Service not found' });
+      }
+    } catch (e) {
+      res.status(400).send({ message: e });
+    }
+    res.status(201).send({ data });
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      name: req.body.name,
-      description: req.body.description,
-      placeType: req.body.placeType,
-      actvie: req.body.active,
-    };
-
-    this.data.push(data);
-    res.status(201).send(data);
+  static async create(req, res, next) {
+    try {
+      const data = await servicesMdl.create('Services', req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const json = {
-      data: this.data,
-      message: 'Item updated',
-    };
+  static async edit(req, res, next) {
+    try {
+      const data = await servicesMdl.update('Services', req.body, req.params.id);
 
-    res.status(200).send(json);
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Service could not be updated' });
+      }
+
+      res.status(200).send({ data: 'Service updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 
-module.exports = new ServiceCtrl();
+module.exports = new ServicesCtrl();

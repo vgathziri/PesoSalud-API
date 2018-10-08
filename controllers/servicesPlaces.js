@@ -1,40 +1,51 @@
+const servicesPlacesMdl = require('../models/servicesPlaces');
+
 class ServicesPlacesCtrl {
   constructor() {
-    this.data = [
-      {
-        servicesID: 1,
-        placeID: 1,
-      },
-    ];
-
-    this.create = this.create.bind(this);
-    this.searchService = this.searchService.bind(this);
-    this.searchPlaces = this.searchPlaces.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.searchService = this.constructor.searchService.bind(this);
+    this.searchPlaces = this.constructor.searchPlaces.bind(this);
   }
 
-  create(req, res) {
-    const data = {
-      serviceID: req.body.service,
-      placeID: req.body.place,
-    };
-
-    this.data.push(data);
-    res.status(201).send({
-      data: this.data,
-    });
+  static async create(req, res, next) {
+    try {
+      const data = await servicesPlacesMdl.create('ServicesPlaces', req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  searchService(req, res) {
-    res.send({
-      data: this.data,
-    });
+  static async searchService(req, res, next) {
+    try {
+      const data = await servicesPlacesMdl.findByService('Services_Places', req.params.id);
+
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Service not found' });
+      }
+
+      res.status(200).send({ data });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  searchPlaces(req, res) {
-    res.send({
-      data: this.data,
-    });
+  static async searchPlaces(req, res, next) {
+    try {
+      const data = await servicesPlacesMdl.findByPlace('Services_Places', req.params.id);
+
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Places not found' });
+      }
+
+      res.status(200).send({ data });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 
+// find by 2
 module.exports = new ServicesPlacesCtrl();
