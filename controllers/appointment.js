@@ -12,7 +12,8 @@ class AppointmentCtrl {
 
   static async getByDate(req, res, next) {
     try {
-      const data = await AppointmentMdl.findByDate('Date', req.params.DateID);
+      console.log(req.params);
+      const data = await AppointmentMdl.findByDate(req.params.date);
       // In case Data was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Date not found' });
@@ -26,7 +27,7 @@ class AppointmentCtrl {
 
   static async getByUserID(req, res, next) {
     try {
-      const data = await AppointmentMdl.findByUserID('UserID', req.params.UserID);
+      const data = await AppointmentMdl.findByUserID(req.params.userID);
       // In case User ID was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'User  not found' });
@@ -40,7 +41,7 @@ class AppointmentCtrl {
 
   static async getByPlaceID(req, res, next) {
     try {
-      const data = await AppointmentMdl.findByPlaceID('PlaceID', req.params.PlaceID);
+      const data = await AppointmentMdl.findByPlaceID(req.params.placeID);
       // In case Place was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Place not found' });
@@ -54,7 +55,7 @@ class AppointmentCtrl {
 
   static async create(req, res, next) {
     try {
-      const data = await AppointmentMdl.create('Appointment', req.body);
+      const data = await AppointmentMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -63,7 +64,8 @@ class AppointmentCtrl {
 
   static async edit(req, res, next) {
     try {
-      const data = await AppointmentMdl.update('Appointment', req.body, req.params.appId);
+      console.log(req.params);
+      const data = await AppointmentMdl.update(req.body, req.params.id);
 
       if (data.length === 0) {
         res.status(400).send({ message: 'Appointment could not be aupdate' });

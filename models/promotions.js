@@ -8,7 +8,6 @@ class PromotionsMdl {
     this.date = data.Date;
     this.quantityBought = data.QuantityBought;
     this.quantityiUsed = data.QuantityUsed;
-    this.active = data.Active;
   }
 
   static async create(obj) {
@@ -21,17 +20,17 @@ class PromotionsMdl {
     return data;
   }
 
-  static async findAllPromotions(table) {
+  static async findAllPromotions() {
     let data;
     try {
-      data = await db.findAll(table);
+      data = await db.findAll('Promotions');
     } catch (e) {
       throw e;
     }
     return this.processData(data);
   }
 
-  static async findByUserID(table, UserId) {
+  static async findByUserID(UserId) {
     let data;
     try {
       data = await db.findByAttribute('Promotions', 'UserID', UserId);
@@ -44,6 +43,7 @@ class PromotionsMdl {
   static async update(obj, id) {
     let data;
     try {
+      console.log(obj, id);
       data = await db.update('Promotions', obj, id);
     } catch (e) {
       throw e;
