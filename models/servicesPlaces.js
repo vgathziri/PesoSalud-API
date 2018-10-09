@@ -6,20 +6,34 @@ class ServicesPlacesMdl {
     this.placeid = data.PlaceID;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('ServicesPlaces', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async create(obj) {
+    let data;
+    try {
+      data = await db.create('Services_Places', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findByService(servicesid) {
+    let data;
+    try {
+      data = await db.findByAttribute('Services_Places', 'ServicesID', servicesid);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async findByPlace(placeid) {
+    let data;
+    try {
+      data = await db.findByAttribute('Services_Places', 'PlaceID', placeid);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
   }
 
   static processData(data) {

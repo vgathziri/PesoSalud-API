@@ -7,22 +7,37 @@ class ServicesMdl {
     this.description = data.Description;
     this.price = data.Price;
     this.duration = data.Duration;
+    this.active = data.Active;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('Services', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async create(obj) {
+    let data;
+    try {
+      data = await db.create('Services', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findAll() {
+    let data;
+    try {
+      data = await db.findAll('Services');
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async update(obj, servicesId) {
+    let data;
+    try {
+      data = await db.update('Services', obj, servicesId);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {

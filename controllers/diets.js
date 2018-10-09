@@ -1,54 +1,67 @@
+const dietsMdl = require('../models/diets');
+
 class DietsCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        name: 'Baja en carbohidratos',
-        description: '0 harinas',
-        active: 1,
-      },
-    ];
-
-    this.getAll = this.getAll.bind(this);
-    this.get = this.get.bind(this);
-    this.create = this.create.bind(this);
-    this.edit = this.edit.bind(this);
+    this.getAll = this.constructor.getAll.bind(this);
+    this.get = this.constructor.getID.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  getAll(req, res) {
-    const json = {
-      data: this.data,
-    };
-    res.send(json);
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await dietsMdl.findAll('Diets');
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Diet not found' });
+        return;
+      }
+    } catch (e) {
+      res.status(400).send({ message: e });
+      return;
+    }
+    res.status(201).send({ data });
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      name: req.body.name,
-      descripcion: req.body.description,
-      active: req.body.active,
+  static async getID(req, res, next) {
+    try {
+      const data = await dietsMdl.findById(req.params.ID);
 
-    };
-    this.data.push(data);
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Diet not found' });
+        return;
+      }
 
-    res.status(201).send({
-      data: this.data,
-    });
+      res.status(200).send({ data });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  get(req, res) {
-    res.status(200).send({
-      data: this.data,
-    });
+  static async create(req, res, next) {
+    try {
+      const data = await dietsMdl.create(req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const json = {
-      data: this.data,
-      message: 'Item updated',
-    };
-    res.status(201).send(json);
+  static async edit(req, res, next) {
+    try {
+      const data = await dietsMdl.update(req.body, req.params.ID);
+
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Diet could not be updated' });
+        return;
+      }
+
+      res.status(200).send({ data: 'Diet updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 
