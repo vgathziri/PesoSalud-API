@@ -5,3 +5,5 @@ exports.AppointmetMdl = require('./appointmet');
 exports.ServicesMdl = require('./services');
 exports.DietsMdl = require('./diets');
 exports.PromotionsMdl = require('./promotions');
+exports.ScheduleMdl = require('./schedule');
+exports.ServicesPlacesMdl = require('./servicesPlaces');

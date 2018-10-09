@@ -24,20 +24,20 @@ class UserMdl {
     return data;
   }
 
-  static async findAll(table) {
+  static async findAll() {
     let data;
     try {
-      data = await db.findAll(table);
+      data = await db.findAll('Users');
     } catch (e) {
       throw e;
     }
     return this.processData(data);
   }
 
-  static async findById(table, userId) {
+  static async findById(userId) {
     let data;
     try {
-      data = await db.findById(table, userId);
+      data = await db.findById('Users', userId);
     } catch (e) {
       throw e;
     }
@@ -54,7 +54,7 @@ class UserMdl {
     return this.processData(data);
   }
 
-  static async update(table, obj, userId) {
+  static async update(obj, userId) {
     let data;
     try {
       data = await db.update('Users', obj, userId);
