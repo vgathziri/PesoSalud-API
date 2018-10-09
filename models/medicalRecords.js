@@ -23,20 +23,44 @@ class MedicalRecordsMdl {
     this.finalLowAbdomen = data.FinalLowAbdomen;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('MedicalRecords', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async create(obj) {
+    let data;
+    try {
+      data = await db.create('MedicalRecords', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findByUser(userID) {
+    let data;
+    try {
+      data = await db.findByAttribute('MedicalRecords', 'UserID', userID);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async findByAppointmentID(appointmentID) {
+    let data;
+    try {
+      data = await db.findByAttribute('MedicalRecords', 'AppointmentID', appointmentID);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async edit(obj, id) {
+    let data;
+    try {
+      data = await db.update('MedicalRecords', obj, id);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {

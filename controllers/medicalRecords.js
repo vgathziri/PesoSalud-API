@@ -1,78 +1,72 @@
+const medicalRecordsMdl = require('../models/medicalRecords');
+
 class MedicalRecordsCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        userID: 1,
-        appointmentID: 1,
-        serviceID: 1,
-        weight: 71.5,
-        bust: 70.1,
-        waistline: 65.0,
-        hip: 67.8,
-        chest: 75.4,
-        abdomen: 81.2,
-        dietID: 1,
-        symptom: 'Gripa',
-        comments: 'Paciente Nuevo',
-        initialHighAbdomen: 77.3,
-        finalHighAbdomen: 75.8,
-        initialMediumAbdomen: 77.3,
-        finalMediumAbdomen: 75.8,
-        initialLowAbdomen: 77.3,
-        finalLowAbdomen: 75.8,
-      },
-    ];
-
-    this.getByUserID = this.getByUserID.bind(this);
-    this.getByAppointmentID = this.getByAppointmentID.bind(this);
-    this.create = this.create.bind(this);
-    this.edit = this.edit.bind(this);
+    this.getByAppointmentID = this.constructor.getByAppointmentID.bind(this);
+    this.getByUserID = this.constructor.getByUserID.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  getByUserID(req, res) {
-    res.send(this.data);
+  static async getByAppointmentID(req, res, next) {
+    try {
+      console.log('req.params.appointmentID: ', req.params.appointmentID);
+      const data = await medicalRecordsMdl.findByAppointmentID(req.params.appointmentID);
+
+      if (data.lenght === 0) {
+        res.status(409).send({
+          message: 'Record not found',
+        });
+        return;
+      }
+
+      res.status(200).send({ data });
+      return;
+    } catch (e) {
+      next(e);
+    }
   }
 
-  getByAppointmentID(req, res) {
-    res.send(this.data);
+  static async getByUserID(req, res, next) {
+    try {
+      const data = await medicalRecordsMdl.findByUser(req.params.userID);
+
+      if (data.lenght === 0) {
+        res.status(409).send({
+          message: 'Record not found',
+        });
+        return;
+      }
+
+      res.status(200).send({ data });
+      return;
+    } catch (e) {
+      next(e);
+    }
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      userID: req.body.userID,
-      appointmentID: req.body.appointmentID,
-      serviceID: req.body.serviceID,
-      weight: req.body.weight,
-      bust: req.body.bust,
-      waistline: req.body.waistline,
-      hip: req.body.hip,
-      chest: req.body.chest,
-      abdomen: req.body.abdomen,
-      dietID: req.body.dietID,
-      symptom: req.body.symptom,
-      comments: req.body.comments,
-      initialHighAbdomen: req.body.initialHighAbdomen,
-      finalHighAbdomen: req.body.finalHighAbdomen,
-      initialMediumAbdomen: req.body.initialMediumAbdomen,
-      finalMediumAbdomen: req.body.finalMediumAbdomen,
-      initialLowAbdomen: req.body.initialLowAbdomen,
-      finalLowAbdomen: req.body.finalLowAbdomen,
-    };
-
-    this.data.push(data);
-
-    res.status(201).send(data);
+  static async create(req, res, next) {
+    try {
+      const data = await medicalRecordsMdl.create(req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+      return;
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const json = {
-      data: this.data,
-      message: 'Item updated',
-    };
+  static async edit(req, res) {
+    try {
+      const data = await medicalRecordsMdl.edit(req.body, req.params.id);
 
-    res.status(201).send(json);
+      if (data.lenght === 0) {
+        return res.status(400).send({ message: 'Record could not be updated' });
+      }
+
+      return res.status(200).send({ message: 'Record updated' });
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
