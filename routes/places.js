@@ -5,7 +5,7 @@ const middlewares = require('../middlewares');
 router.get('/', placesCtrl.getAll);
 router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
-    Body: {
+    body: {
       Name: 'required',
       PlaceType: 'required',
       Active: 'required',
