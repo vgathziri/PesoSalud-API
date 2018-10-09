@@ -1,46 +1,50 @@
+const scheduleMdl = require('../models/schedule');
+
 class ScheduleCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        weekDay: 1,
-        startTime: '10:00',
-        endTime: '13:00',
-        active: 1,
-      },
-    ];
-
-    this.get = this.get.bind(this);
-    this.create = this.create.bind(this);
-    this.edit = this.edit.bind(this);
+    this.get = this.constructor.get.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      weekDay: req.body.weekDay,
-      startTime: req.body.startTime,
-      endTime: req.body.endTime,
-      active: req.body.active,
-    };
-    this.data.push(data);
-    res.status(201).send(data);
+  static async create(req, res, next) {
+    try {
+      const data = await scheduleMdl.create(req.body);
+      res.status(200).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const json = {
-      data: this.data,
-      message: 'Item update',
-    };
-    res.status(201).send(json);
+  static async edit(req, res, next) {
+    try {
+      const data = await scheduleMdl.edit(req.body, req.params.ID);
+
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Schedule could not be found' });
+        return;
+      }
+    } catch (e) {
+      next(e);
+    }
+    res.status(200).send({ message: 'Item updated' });
   }
 
   // input: WeekDay
   // Output: Schedules List Filtered by WeekDay
-  get(req, res) {
-    res.send({
-      data: this.data,
-    });
+  static async get(req, res, next) {
+    let data;
+    try {
+      data = await scheduleMdl.findByWeekday(req.params.weekDay);
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Schedule not found' });
+        return;
+      }
+    } catch (e) {
+      next(e);
+    }
+
+    res.status(200).send({ data });
   }
 }
 
