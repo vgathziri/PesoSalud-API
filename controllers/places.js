@@ -1,46 +1,46 @@
+const placesMdl = require('../models/places');
+
 class PlacesCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        name: 'Consultorio',
-        placeType: 'Consultorio',
-        active: 1,
-      },
-    ];
-
-    this.getAll = this.getAll.bind(this);
-    this.edit = this.edit.bind(this);
-    this.create = this.create.bind(this);
+    this.getAll = this.constructor.getAll.bind(this);
+    this.edit = this.constructor.edit.bind(this);
+    this.create = this.constructor.create.bind(this);
   }
 
-  getAll(req, res) {
-    const json = {
-      data: this.data,
-    };
-    res.send(json);
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await placesMdl.findAll();
+    } catch (e) {
+      res.status(400).send({ message: e });
+      return;
+    }
+
+    res.status(200).send({ data });
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      name: req.body.name,
-      place_type: req.body.placeType,
-      active: req.body.active,
-    };
-    this.data.push(data);
-
-    res.status(201).send({
-      data: this.data,
-    });
+  static async create(req, res, next) {
+    try {
+      const data = await placesMdl.create(req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const data = {
-      message: 'Item update',
-      data: this.data,
-    };
-    res.status(201).send(data);
+  static async edit(req, res, next) {
+    try {
+      const data = await placesMdl.edit(req.body, req.params.ID);
+
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Place could not be found' });
+        return;
+      }
+
+      res.status(200).send({ data: 'Place Updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 
