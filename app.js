@@ -1,17 +1,24 @@
+require('dotenv').config();
+
 const express = require('express');
+
 const bodyParser = require('body-parser');
+
+const router = require('./routes');
+
+const { errorHandler } = require('./middlewares');
+
 const app = express();
 
-// parse application/json
+// Cargamos los middlewares
 app.use(bodyParser.json());
-
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('This is Home!');
-});
+// Load routes into app
+app.use(router);
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000...');
+app.use(errorHandler);
+
+app.listen(process.env.DB_PORT, () => {
+  console.log(`Server is running on port ${process.env.DB_PORT}...`);
 });
