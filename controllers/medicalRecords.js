@@ -10,7 +10,6 @@ class MedicalRecordsCtrl {
 
   static async getByAppointmentID(req, res, next) {
     try {
-      console.log('req.params.appointmentID: ', req.params.appointmentID);
       const data = await medicalRecordsMdl.findByAppointmentID(req.params.appointmentID);
 
       if (data.lenght === 0) {
