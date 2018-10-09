@@ -17,9 +17,11 @@ class MedicalRecordsCtrl {
         res.status(409).send({
           message: 'Record not found',
         });
+        return;
       }
 
       res.status(200).send({ data });
+      return;
     } catch (e) {
       next(e);
     }
@@ -33,9 +35,11 @@ class MedicalRecordsCtrl {
         res.status(409).send({
           message: 'Record not found',
         });
+        return;
       }
 
       res.status(200).send({ data });
+      return;
     } catch (e) {
       next(e);
     }
@@ -45,6 +49,7 @@ class MedicalRecordsCtrl {
     try {
       const data = await medicalRecordsMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
+      return;
     } catch (e) {
       next(e);
     }
@@ -55,10 +60,10 @@ class MedicalRecordsCtrl {
       const data = await medicalRecordsMdl.edit(req.body, req.params.id);
 
       if (data.lenght === 0) {
-        res.status(400).send({ message: 'Record could not be updated' });
+        return res.status(400).send({ message: 'Record could not be updated' });
       }
 
-      res.status(200).send({ message: 'Record updated' });
+      return res.status(200).send({ message: 'Record updated' });
     } catch (e) {
       throw e;
     }
