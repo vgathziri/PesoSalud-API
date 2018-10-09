@@ -11,21 +11,24 @@ class PromotionsCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await PromotionsMdl.findAll('Promotions');
+      data = await PromotionsMdl.findAllPromotions('Promotions');
       if (data.length === 0) {
         res.status(400).send({ message: 'Promotions not found' });
+        return;
       }
     } catch (e) {
       res.status(400).send({ message: e });
+      return;
     }
     res.status(201).send({ data });
   }
 
   static async getPromotionbyUser(req, res, next) {
     try {
-      const data = await PromotionsMdl.findByUser('Promotions', req.params.UserID);
+      const data = await PromotionsMdl.findByUserID('Promotions', req.params.UserID);
       if (data.length === 0) {
         res.status(400).send({ message: 'User not found' });
+        return;
       }
       res.status(200).send({ data });
     } catch (e) {
@@ -48,6 +51,7 @@ class PromotionsCtrl {
 
       if (data.length === 0) {
         res.status(400).send({ message: 'Promotions could not be updated' });
+        return;
       }
       res.status(200).send({ data: 'Promotions updated' });
     } catch (e) {

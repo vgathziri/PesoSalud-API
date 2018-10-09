@@ -3,7 +3,7 @@ const { db } = require('../db');
 class PromotionsMdl {
   constructor(data) {
     this.id = data.ID;
-    this.userId = data.UserId;
+    this.userId = data.UserID;
     this.serviceID = data.ServiceID;
     this.date = data.Date;
     this.quantityBought = data.QuantityBought;
@@ -11,7 +11,7 @@ class PromotionsMdl {
     this.active = data.Active;
   }
 
-  static async createPromotion(obj) {
+  static async create(obj) {
     let data;
     try {
       data = await db.create('Promotions', obj);
@@ -21,7 +21,7 @@ class PromotionsMdl {
     return data;
   }
 
-  static async findAll(table) {
+  static async findAllPromotions(table) {
     let data;
     try {
       data = await db.findAll(table);
@@ -31,7 +31,7 @@ class PromotionsMdl {
     return this.processData(data);
   }
 
-  static async getPromotionbyUser(UserId) {
+  static async findByUserID(table, UserId) {
     let data;
     try {
       data = await db.findByAttribute('Promotions', 'UserID', UserId);
@@ -41,10 +41,10 @@ class PromotionsMdl {
     return data;
   }
 
-  static async editPromotion(obj, ID) {
+  static async update(obj, id) {
     let data;
     try {
-      data = await db.update('Promotions', obj, ID);
+      data = await db.update('Promotions', obj, id);
     } catch (e) {
       throw e;
     }

@@ -16,6 +16,7 @@ class AppointmentCtrl {
       // In case Data was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Date not found' });
+        return;
       }
       res.status(200).send({ data });
     } catch (e) {
@@ -29,6 +30,7 @@ class AppointmentCtrl {
       // In case User ID was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'User  not found' });
+        return;
       }
       res.status(200).send({ data });
     } catch (e) {
@@ -42,6 +44,7 @@ class AppointmentCtrl {
       // In case Place was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Place not found' });
+        return;
       }
       res.status(200).send({ data });
     } catch (e) {
@@ -64,6 +67,7 @@ class AppointmentCtrl {
 
       if (data.length === 0) {
         res.status(400).send({ message: 'Appointment could not be aupdate' });
+        return;
       }
       res.status(200).send({ data: 'Appointment update' });
     } catch (e) {
