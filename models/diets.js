@@ -8,6 +8,11 @@ class DietsMdl {
     this.active = data.Active;
   }
 
+  /**
+ * [Create is a method that connects the diets with the db]
+ * @param  {Object]} req [a new objet]
+ * @return {int}     [return ID of created obj]
+ */
   static async create(obj) {
     let data;
     try {
@@ -17,6 +22,10 @@ class DietsMdl {
     } return data;
   }
 
+  /**
+   * [findAll is a method of find all diets were register]
+   * @return {Object} [return objects when is find]
+   */
   static async findAll() {
     let data;
     try {
@@ -27,6 +36,11 @@ class DietsMdl {
     return this.processData(data);
   }
 
+  /**
+   * [findById is a method of find diets by id]
+   * @param  {int]}  req [dietId]
+   * @return {Object} [return an object when is find]
+   */
   static async findById(dietId) {
     let data;
     try {
@@ -38,8 +52,13 @@ class DietsMdl {
     return this.processData(data);
   }
 
+  /**
+ * [update is a method of call aupdate of db]
+ * @param  {[Object]} req    [obj]
+ * @param  {[int]}  dietId [dietId]
+ * @return {int}        [return Id update if does exists]
+ */
   static async update(obj, dietId) {
-    console.log(obj, dietId);
     let data;
     try {
       data = await db.update('Diets', obj, dietId);

@@ -7,6 +7,11 @@ class ServicesCtrl {
     this.edit = this.constructor.edit.bind(this);
   }
 
+  /**
+   * [getAll is a function that get all services]
+   * @param  {[function]}  res [findAll]
+   * @return {response}     [return status 400 if doesnt find services or 2012 if find all services]
+   */
   static async getAll(req, res) {
     let data;
     try {
@@ -22,6 +27,11 @@ class ServicesCtrl {
     res.status(201).send({ data });
   }
 
+  /**
+   * [create is a function of add a new Service]
+   * @param  {Function} next [create]
+   * @return {response}      [return 201 when is created a new objet in db]
+   */
   static async create(req, res, next) {
     try {
       const data = await servicesMdl.create(req.body);
@@ -31,6 +41,12 @@ class ServicesCtrl {
     }
   }
 
+  /**
+ * [edit is a funtion of edit a service in specific]
+ * @param  {[int]}   req  [id]
+ * @param  {Function} next [update]
+ * @return {response}       [return 200 if diet is updated or 400 if it couldn´t be found]
+ */
   static async edit(req, res, next) {
     try {
       const data = await servicesMdl.update(req.body, req.params.id);
