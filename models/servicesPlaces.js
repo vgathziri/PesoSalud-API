@@ -9,7 +9,7 @@ class ServicesPlacesMdl {
   static async create(obj) {
     let data;
     try {
-      data = await db.create('ServicesPlaces', obj);
+      data = await db.create('Services_Places', obj);
     } catch (e) {
       throw e;
     }
@@ -19,7 +19,7 @@ class ServicesPlacesMdl {
   static async findByService(servicesid) {
     let data;
     try {
-      data = await db.findByAttribute('Services_Places', 'ServiceID', servicesid);
+      data = await db.findByAttribute('Services_Places', 'ServicesID', servicesid);
     } catch (e) {
       throw e;
     }

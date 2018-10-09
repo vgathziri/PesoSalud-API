@@ -9,7 +9,7 @@ class ServicesPlacesCtrl {
 
   static async create(req, res, next) {
     try {
-      const data = await servicesPlacesMdl.create('ServicesPlaces', req.body);
+      const data = await servicesPlacesMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -18,11 +18,12 @@ class ServicesPlacesCtrl {
 
   static async searchService(req, res, next) {
     try {
-      const data = await servicesPlacesMdl.findByService('Services_Places', req.params.id);
+      const data = await servicesPlacesMdl.findByService(req.params.serviceID);
 
       // In case user was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Service not found' });
+        return;
       }
 
       res.status(200).send({ data });
@@ -33,11 +34,13 @@ class ServicesPlacesCtrl {
 
   static async searchPlaces(req, res, next) {
     try {
-      const data = await servicesPlacesMdl.findByPlace('Services_Places', req.params.id);
+      console.log(req.params);
+      const data = await servicesPlacesMdl.findByPlace(req.params.placeID);
 
       // In case user was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Places not found' });
+        return;
       }
 
       res.status(200).send({ data });

@@ -4,7 +4,8 @@ class DietsMdl {
   constructor(data) {
     this.id = data.ID;
     this.name = data.Name;
-    this.descripcion = data.Description;
+    this.descripcion = data.Descripcion;
+    this.active = data.Active;
   }
 
   static async create(obj) {
@@ -26,10 +27,11 @@ class DietsMdl {
     return this.processData(data);
   }
 
-  static async findById(dietid) {
+  static async findById(dietId) {
     let data;
     try {
-      data = await db.findById('Diets', dietid);
+      console.log(dietId);
+      data = await db.findById('Diets', dietId);
     } catch (e) {
       throw e;
     }
@@ -37,6 +39,7 @@ class DietsMdl {
   }
 
   static async update(obj, dietId) {
+    console.log(obj, dietId);
     let data;
     try {
       data = await db.update('Diets', obj, dietId);

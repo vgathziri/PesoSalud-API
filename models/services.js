@@ -7,6 +7,7 @@ class ServicesMdl {
     this.description = data.Description;
     this.price = data.Price;
     this.duration = data.Duration;
+    this.active = data.Active;
   }
 
   static async create(obj) {

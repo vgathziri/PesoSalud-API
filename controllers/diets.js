@@ -11,23 +11,26 @@ class DietsCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await dietsMdl.findAll();
+      data = await dietsMdl.findAll('Diets');
       if (data.length === 0) {
         res.status(400).send({ message: 'Diet not found' });
+        return;
       }
     } catch (e) {
       res.status(400).send({ message: e });
+      return;
     }
     res.status(201).send({ data });
   }
 
   static async getID(req, res, next) {
     try {
-      const data = await dietsMdl.findById(req.params.id);
+      const data = await dietsMdl.findById(req.params.ID);
 
       // In case user was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Diet not found' });
+        return;
       }
 
       res.status(200).send({ data });
@@ -47,11 +50,12 @@ class DietsCtrl {
 
   static async edit(req, res, next) {
     try {
-      const data = await dietsMdl.update('Diets', req.body, req.params.id);
+      const data = await dietsMdl.update(req.body, req.params.ID);
 
       // In case user was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Diet could not be updated' });
+        return;
       }
 
       res.status(200).send({ data: 'Diet updated' });
