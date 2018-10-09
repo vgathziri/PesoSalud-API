@@ -7,6 +7,11 @@ class ServicesPlacesCtrl {
     this.searchPlaces = this.constructor.searchPlaces.bind(this);
   }
 
+  /**
+   * [create is a function of add a new Service Places]
+   * @param  {Function} next [create]
+   * @return {response}      [return 201 when is created a new objet in db]
+   */
   static async create(req, res, next) {
     try {
       const data = await servicesPlacesMdl.create(req.body);
@@ -31,6 +36,7 @@ class ServicesPlacesCtrl {
       next(e);
     }
   }
+
 
   static async searchPlaces(req, res, next) {
     try {
