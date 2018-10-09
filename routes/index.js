@@ -31,4 +31,5 @@ router.use('/medicalRecords', medicalRecordsRouter);
 router.use('/services', servicesRouter);
 router.use('/promotions', promotionsRouter);
 
+
 module.exports = router;
