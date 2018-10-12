@@ -4,29 +4,28 @@ const router = Router();
 
 const middlewares = require('../middlewares');
 
-const { serviceCtrl } = require('../controllers');
+const { dietsCtrl } = require('../controllers');
 
-router.get('/', serviceCtrl.getAll);
+router.get('/', dietsCtrl.getAll);
+
+router.get('/:ID', dietsCtrl.get);
 
 router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'word,required',
-      Description: 'required',
-      Price: 'required',
-      Duration: 'required',
+      Name: 'required',
+      Descripcion: 'required',
       Active: 'required',
     },
   });
-}, serviceCtrl.create);
+}, dietsCtrl.create);
 
-router.put('/:id', (req, res, next) => {
+router.put('/:ID', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'word',
-      Description: 'required',
+      Name: 'required',
     },
   });
-}, serviceCtrl.edit);
+}, dietsCtrl.edit);
 
 module.exports = router;

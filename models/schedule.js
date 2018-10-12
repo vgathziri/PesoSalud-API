@@ -1,39 +1,38 @@
 const { db } = require('../db');
 
-class ServicesMdl {
+class ScheduleMdl {
   constructor(data) {
     this.id = data.ID;
-    this.name = data.Name;
-    this.description = data.Description;
-    this.price = data.Price;
-    this.duration = data.Duration;
+    this.weekDay = data.WeekDay;
+    this.startTime = data.StartTime;
+    this.endTime = data.EndTime;
     this.active = data.Active;
   }
 
   static async create(obj) {
     let data;
     try {
-      data = await db.create('Services', obj);
+      data = await db.create('Schedule', obj);
     } catch (e) {
       throw e;
     }
     return data;
   }
 
-  static async findAll() {
+  static async findByWeekday(WeekDay) {
     let data;
     try {
-      data = await db.findAll('Services');
+      data = await db.findByAttribute('Schedule', 'WeekDay', WeekDay);
     } catch (e) {
       throw e;
     }
     return this.processData(data);
   }
 
-  static async update(obj, servicesId) {
+  static async edit(obj, id) {
     let data;
     try {
-      data = await db.update('Services', obj, servicesId);
+      data = await db.update('Schedule', obj, id);
     } catch (e) {
       throw e;
     }
@@ -43,10 +42,10 @@ class ServicesMdl {
   static processData(data) {
     const array = [];
     data.forEach((d) => {
-      array.push(new ServicesMdl(d));
+      array.push(new ScheduleMdl(d));
     });
     return array;
   }
 }
 
-module.exports = ServicesMdl;
+module.exports = ScheduleMdl;

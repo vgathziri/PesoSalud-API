@@ -1,45 +1,67 @@
-class ServiceCtrl {
+const servicesMdl = require('../models/services');
+
+class ServicesCtrl {
   constructor() {
-    this.data = [
-      {
-        id: 1,
-        name: 'Consultory',
-        description: 'Main Place',
-        placeType: 'Consultory',
-        active: 1,
-      },
-    ];
-
-    this.getAll = this.getAll.bind(this);
-    this.create = this.create.bind(this);
-    this.edit = this.edit.bind(this);
+    this.getAll = this.constructor.getAll.bind(this);
+    this.create = this.constructor.create.bind(this);
+    this.edit = this.constructor.edit.bind(this);
   }
 
-  getAll(req, res) {
-    res.send(this.data);
+  /**
+   * [getAll is a function that get all services]
+   * @param  {[function]}  res [findAll]
+   * @return {response}     [return status 400 if doesnt find services or 2012 if find all services]
+   */
+  static async getAll(req, res) {
+    let data;
+    try {
+      data = await servicesMdl.findAll('Services');
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Service not found' });
+        return;
+      }
+    } catch (e) {
+      res.status(400).send({ message: e });
+      return;
+    }
+    res.status(201).send({ data });
   }
 
-  create(req, res) {
-    const data = {
-      id: req.body.id,
-      name: req.body.name,
-      description: req.body.description,
-      placeType: req.body.placeType,
-      actvie: req.body.active,
-    };
-
-    this.data.push(data);
-    res.status(201).send(data);
+  /**
+   * [create is a function of add a new Service]
+   * @param  {Function} next [create]
+   * @return {response}      [return 201 when is created a new objet in db]
+   */
+  static async create(req, res, next) {
+    try {
+      const data = await servicesMdl.create(req.body);
+      res.status(201).send({ message: `ID: ${data}` });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  edit(req, res) {
-    const json = {
-      data: this.data,
-      message: 'Item updated',
-    };
+  /**
+ * [edit is a funtion of edit a service in specific]
+ * @param  {[int]}   req  [id]
+ * @param  {Function} next [update]
+ * @return {response}       [return 200 if diet is updated or 400 if it couldn´t be found]
+ */
+  static async edit(req, res, next) {
+    try {
+      const data = await servicesMdl.update(req.body, req.params.id);
 
-    res.status(200).send(json);
+      // In case user was not found
+      if (data.length === 0) {
+        res.status(400).send({ message: 'Service could not be updated' });
+        return;
+      }
+
+      res.status(200).send({ data: 'Service updated' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 
-module.exports = new ServiceCtrl();
+module.exports = new ServicesCtrl();

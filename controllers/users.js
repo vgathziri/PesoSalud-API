@@ -12,23 +12,23 @@ class UserCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await userMdl.findAll('Users');
+      data = await userMdl.findAll();
       if (data.length === 0) {
-        res.status(400).send({ message: 'User not found' });
+        return res.status(400).send({ message: 'Users not found' });
       }
     } catch (e) {
-      res.status(400).send({ message: e });
+      return res.status(400).send({ message: e });
     }
     res.status(201).send({ data });
   }
 
   static async getUser(req, res, next) {
     try {
-      const data = await userMdl.findById('Users', req.params.id);
+      const data = await userMdl.findById(req.params.id);
 
       // In case user was not found
       if (data.length === 0) {
-        res.status(400).send({ message: 'User not found' });
+        return res.status(400).send({ message: 'User not found' });
       }
 
       res.status(200).send({ data });
@@ -39,7 +39,7 @@ class UserCtrl {
 
   static async create(req, res, next) {
     try {
-      const data = await userMdl.create('Users', req.body);
+      const data = await userMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -48,11 +48,11 @@ class UserCtrl {
 
   static async edit(req, res, next) {
     try {
-      const data = await userMdl.update('Users', req.body, req.params.id);
+      const data = await userMdl.update(req.body, req.params.id);
 
       // In case user was not found
       if (data.length === 0) {
-        res.status(400).send({ message: 'User could not be updated' });
+        return res.status(400).send({ message: 'User could not be updated' });
       }
 
       res.status(200).send({ data: 'User updated' });
