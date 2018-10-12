@@ -10,7 +10,7 @@ class ServicesPlacesCtrl {
   /**
    * [create is a function of add a new Service Places]
    * @param  {Function} next [create]
-   * @return {response}      [return 201 when is created a new objet in db]
+   * @return {json}      [return 201 when is created a new objet in db]
    */
   static async create(req, res, next) {
     try {
@@ -21,6 +21,12 @@ class ServicesPlacesCtrl {
     }
   }
 
+  /**
+   * [searchService is a function of find a service by id]
+   * @param  {[int]}   req  [id of service]
+   * @param  {Function} next [findByService]
+   * @return {json}       [returns the service object in case that find
+   */
   static async searchService(req, res, next) {
     try {
       const data = await servicesPlacesMdl.findByService(req.params.serviceID);
@@ -37,7 +43,12 @@ class ServicesPlacesCtrl {
     }
   }
 
-
+  /**
+   * [searchPlaces is a function of find a place by id]
+   * @param  {[int]}   req  [id of place]
+   * @param  {Function} next [findByPlace]
+   * @return {json}       [returns the place object in case that find
+   */
   static async searchPlaces(req, res, next) {
     try {
       console.log(req.params);
