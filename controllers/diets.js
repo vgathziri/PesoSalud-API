@@ -1,4 +1,7 @@
+// FIXME Deben estandarizar si usaran camelCase para clases estaticas o UpperCamelCase como se recomienda
 const dietsMdl = require('../models/diets');
+
+// FIXME Todos los metodos deben estar documentados
 
 class DietsCtrl {
   constructor() {

@@ -1,5 +1,7 @@
 const AppointmentMdl = require('../models/appointment');
 
+// FIXME Todos los metodos deben estar documentados
+
 class AppointmentCtrl {
   constructor() {
     //

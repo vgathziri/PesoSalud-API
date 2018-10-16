@@ -1,5 +1,7 @@
 const medicalRecordsMdl = require('../models/medicalRecords');
 
+// FIXME Todos los metodos deben estar documentados
+
 class MedicalRecordsCtrl {
   constructor() {
     this.getByAppointmentID = this.constructor.getByAppointmentID.bind(this);

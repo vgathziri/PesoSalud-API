@@ -19,6 +19,7 @@ app.use(router);
 
 app.use(errorHandler);
 
+// FIXME El puerto de la app es diferente al puerto de la base de datos
 app.listen(process.env.DB_PORT, () => {
   console.log(`Server is running on port ${process.env.DB_PORT}...`);
 });

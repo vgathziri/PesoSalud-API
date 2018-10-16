@@ -1,5 +1,7 @@
 const servicesPlacesMdl = require('../models/servicesPlaces');
 
+// FIXME Todos los metodos deben estar documentados
+
 class ServicesPlacesCtrl {
   constructor() {
     this.create = this.constructor.create.bind(this);

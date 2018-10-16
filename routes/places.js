@@ -12,6 +12,11 @@ router.post('/', (req, res, next) => {
     },
   });
 }, placesCtrl.create);
+
+// FIXME Falta en el middleware validar el param :ID que sea un identificador valido, ejem que sea un numero en un cierto rango
+// FIXME Falta middleware para validar el cuerpo del request
 router.put('/:ID', placesCtrl.edit);
+
+// FIXME Falta ruta para eliminación
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const scheduleMdl = require('../models/schedule');
 
+// FIXME Todos los metodos deben estar documentados
+
 class ScheduleCtrl {
   constructor() {
     this.get = this.constructor.get.bind(this);

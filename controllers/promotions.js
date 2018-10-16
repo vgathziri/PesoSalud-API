@@ -1,5 +1,7 @@
 const PromotionsMdl = require('../models/promotions');
 
+// FIXME Todos los metodos deben estar documentados
+
 class PromotionsCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);

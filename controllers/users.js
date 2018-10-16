@@ -1,5 +1,7 @@
 const userMdl = require('../models/users');
 
+// FIXME Todos los metodos deben estar documentados
+
 class UserCtrl {
   constructor() {
     // Binding this to not loose context on router
@@ -19,6 +21,7 @@ class UserCtrl {
     } catch (e) {
       return res.status(400).send({ message: e });
     }
+    // FIXME Esto debería ser un return para confirmar que termine el flujo
     res.status(201).send({ data });
   }
 
@@ -30,7 +33,7 @@ class UserCtrl {
       if (data.length === 0) {
         return res.status(400).send({ message: 'User not found' });
       }
-
+      // FIXME Esto debería ser un return para confirmar que termine el flujo
       res.status(200).send({ data });
     } catch (e) {
       next(e);

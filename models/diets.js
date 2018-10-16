@@ -1,5 +1,7 @@
 const { db } = require('../db');
 
+// FIXME Todos los metodos deben estar documentados
+
 class DietsMdl {
   constructor(data) {
     this.id = data.ID;

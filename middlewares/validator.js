@@ -1,3 +1,5 @@
+// FIXME Todos los metodos deben estar documentados
+
 class Validator {
   static get regex() {
     return {

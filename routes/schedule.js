@@ -12,7 +12,12 @@ router.post('/', (req, res, next) => {
     },
   });
 }, scheduleCtrl.create);
+// FIXME Falta en el middleware validar el param :ID que sea un identificador valido, ejem que sea un numero en un cierto rango
+// FIXME Falta middleware para validar el cuerpo del request
 router.put('/:ID', scheduleCtrl.edit);
+// FIXME Falta en el middleware validar el param :weekDay que sea un identificador valido, ejem que sea un numero en un cierto rango
 router.get('/:weekDay', scheduleCtrl.get);
+
+// FIXME Falta ruta para eliminación
 
 module.exports = router;

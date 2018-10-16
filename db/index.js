@@ -2,6 +2,9 @@ const mysql = require('mysql');
 
 const CircularJSON = require('circular-json');
 
+// FIXME Todos los metodos deben estar documentados
+// FIXME Todos los errores deben ser procesados antes de ser mandados al controlador, faltan varios casos a evaluar
+
 class DB {
   constructor() {
     this.connection = mysql.createConnection({
@@ -71,6 +74,7 @@ class DB {
   }
 
   processResults(data) {
+    // FIXME por que necesitaron esto? no hay necesidad de serializar la informacion
     return JSON.parse(CircularJSON.stringify(data));
   }
 

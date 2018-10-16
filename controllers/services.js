@@ -1,5 +1,7 @@
 const servicesMdl = require('../models/services');
 
+// FIXME Todos los metodos deben estar documentados
+
 class ServicesCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);
