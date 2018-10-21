@@ -3,11 +3,21 @@ const { Router } = require('express');
 const router = Router();
 
 const middlewares = require('../middlewares');
+const { ensureAuth } = require('../middlewares');
 
 const { userCtrl } = require('../controllers');
 
-router.get('/', userCtrl.getAll);
-router.get('/:id', userCtrl.getUser);
+router.post('/login', (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    body: {
+      password: 'required',
+      email: 'email,required',
+    },
+  });
+}, userCtrl.login);
+
+router.get('/', ensureAuth.haveSession, userCtrl.getAll);
+router.get('/:id', ensureAuth.haveSession, userCtrl.getUser);
 
 router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
@@ -29,6 +39,6 @@ router.put('/:id', (req, res, next) => {
       UserType: 'word',
     },
   });
-}, userCtrl.edit);
+}, ensureAuth.haveSession, userCtrl.edit);
 
 module.exports = router;
