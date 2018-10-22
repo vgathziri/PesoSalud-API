@@ -1,4 +1,4 @@
-const PromotionsMdl = require('../models/promotions');
+const promotionsMdl = require('../models/promotions');
 
 class PromotionsCtrl {
   constructor() {
@@ -18,7 +18,7 @@ class PromotionsCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await PromotionsMdl.findAllPromotions();
+      data = await promotionsMdl.findAllPromotions();
       if (data.length === 0) {
         res.status(400).send({ message: 'Promotions not found' });
         return;
@@ -40,7 +40,7 @@ class PromotionsCtrl {
 
   static async getPromotionbyUser(req, res, next) {
     try {
-      const data = await PromotionsMdl.findByUserID(req.params.id);
+      const data = await promotionsMdl.findByUserID(req.params.id);
       if (data.length === 0) {
         res.status(400).send({ message: 'User not found' });
         return;
@@ -61,7 +61,7 @@ class PromotionsCtrl {
 
   static async createPromotion(req, res, next) {
     try {
-      const data = await PromotionsMdl.create(req.body);
+      const data = await promotionsMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -78,7 +78,7 @@ class PromotionsCtrl {
 
   static async editPromotion(req, res, next) {
     try {
-      const data = await PromotionsMdl.update(req.body, req.params.id);
+      const data = await promotionsMdl.update(req.body, req.params.id);
       // In case the promotion isn´t found
       if (data.length === 0) {
         res.status(400).send({ message: 'Promotions could not be updated' });

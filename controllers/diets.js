@@ -1,4 +1,4 @@
-const dietsMdl = require('../models/diets');
+const DietsMdl = require('../models/diets');
 
 class DietsCtrl {
   constructor() {
@@ -16,7 +16,7 @@ class DietsCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await dietsMdl.findAll('Diets');
+      data = await DietsMdl.findAll('Diets');
       if (data.length === 0) {
         res.status(400).send({ message: 'Diet not found' });
         return;
@@ -36,7 +36,7 @@ class DietsCtrl {
 
   static async getID(req, res, next) {
     try {
-      const data = await dietsMdl.findById(req.params.ID);
+      const data = await DietsMdl.findById(req.params.ID);
 
       // In case user was not found
       if (data.length === 0) {
@@ -58,7 +58,7 @@ class DietsCtrl {
 
   static async create(req, res, next) {
     try {
-      const data = await dietsMdl.create(req.body);
+      const data = await DietsMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -74,7 +74,7 @@ class DietsCtrl {
 
   static async edit(req, res, next) {
     try {
-      const data = await dietsMdl.update(req.body, req.params.ID);
+      const data = await DietsMdl.update(req.body, req.params.ID);
 
       // In case user was not found
       if (data.length === 0) {

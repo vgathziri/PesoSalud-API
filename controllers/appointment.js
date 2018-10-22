@@ -1,4 +1,4 @@
-const AppointmentMdl = require('../models/appointment');
+const appointmentMdl = require('../models/appointment');
 
 class AppointmentCtrl {
   constructor() {
@@ -21,7 +21,7 @@ class AppointmentCtrl {
   static async getByDate(req, res, next) {
     try {
       console.log(req.params);
-      const data = await AppointmentMdl.findByDate(req.params.date);
+      const data = await appointmentMdl.findByDate(req.params.date);
       // In case the appoinment doesn´t coincidental
       if (data.length === 0) {
         res.status(400).send({ message: 'Date not found' });
@@ -42,7 +42,7 @@ class AppointmentCtrl {
    */
   static async getByUserID(req, res, next) {
     try {
-      const data = await AppointmentMdl.findByUserID(req.params.userID);
+      const data = await appointmentMdl.findByUserID(req.params.userID);
       // In case User ID was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'User  not found' });
@@ -63,7 +63,7 @@ class AppointmentCtrl {
    */
   static async getByPlaceID(req, res, next) {
     try {
-      const data = await AppointmentMdl.findByPlaceID(req.params.placeID);
+      const data = await appointmentMdl.findByPlaceID(req.params.placeID);
       // In case Place was not found
       if (data.length === 0) {
         res.status(400).send({ message: 'Place not found' });
@@ -84,7 +84,7 @@ class AppointmentCtrl {
    */
   static async create(req, res, next) {
     try {
-      const data = await AppointmentMdl.create(req.body);
+      const data = await appointmentMdl.create(req.body);
       res.status(201).send({ message: `ID: ${data}` });
     } catch (e) {
       next(e);
@@ -101,7 +101,7 @@ class AppointmentCtrl {
   static async edit(req, res, next) {
     try {
       console.log(req.params);
-      const data = await AppointmentMdl.update(req.body, req.params.id);
+      const data = await appointmentMdl.update(req.body, req.params.id);
 
       if (data.length === 0) {
         res.status(400).send({ message: 'Appointment could not be aupdate' });
