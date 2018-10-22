@@ -36,8 +36,9 @@ CREATE TABLE MedicalRecords (
   PRIMARY KEY (ID));
 CREATE TABLE Permission (
   ID          int(10) NOT NULL AUTO_INCREMENT,
-  Description varchar(255) NOT NULL,
-  Acrive      tinyint(1) DEFAULT 1 NOT NULL,
+  Route       varchar(255) NOT NULL,
+  Method      varchar(255) NOT NULL,
+  Active      tinyint(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (ID));
 CREATE TABLE Places (
   ID        int(10) NOT NULL AUTO_INCREMENT,
