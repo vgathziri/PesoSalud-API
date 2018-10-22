@@ -1,9 +1,5 @@
 const { db } = require('../db');
 
-/**
- * [Its a class of package more cheaper for the services in the hospital]
- * this are data the claass to need for the diferentes methods
- */
 class PromotionsMdl {
   constructor(data) {
     this.id = data.ID;

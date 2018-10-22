@@ -69,7 +69,7 @@ class PromotionsCtrl {
   }
 
   /**
- * [editPromotion description]
+ * [editPromotion Modify data in a object previusly created ]
  * @param  {[int]}   req  [id, identicador the promotions client´s request]
  * @param  {[type]}   res  [reponse the status of the function 200 its successful]
  * @param  {Function} next [ The next funtion ]
