@@ -53,9 +53,9 @@ class PromotionsCtrl {
 
   /**
  * [createPromotion Add a new object Promotion ]
- * @param  {[int]}   req  [client´s request for create a new object, id identicador]
- * @param  {[type]}   res  [response that status to the fuction]
- * @param  {Function} next [Continuos to the next create]
+ * @param  {[body]}   req  [client´s request for create a new object, id identicador]
+ * @param  {[status]}   res  [response that status to the fuction]
+ * @param  {createPromotion} next [Continuos to the next fuction the middlewear]
  * @return {Promise}       [The method to the next fuction]
  */
 
@@ -72,8 +72,8 @@ class PromotionsCtrl {
  * [editPromotion Modify data in a object previusly created ]
  * @param  {[int]}   req  [id, identicador the promotions client´s request]
  * @param  {[type]}   res  [reponse the status of the function 200 its successful]
- * @param  {Function} next [ The next funtion ]
- * @return {Promise}       [Excute the  Next function]
+ * @param  {Function} next [Continue whith The next funtion ]
+ * @return {Promise}       [Message when the data is send ]
  */
 
   static async editPromotion(req, res, next) {

@@ -54,9 +54,9 @@ class PromotionsMdl {
     return data;
   }
   /**
-   * [update is a funtion that modify data in the objeto previusly create]
-   * @param  {[type]}  obj [recibe the object of the class]
-   * @param  {[type]}  id  [its a integer, key value , identificador of every object]
+   * ["update" is a funtion that modify data in the objeto previusly create]
+   * @param  {[type]}  obj [Receive the object of the class]
+   * @param  {[type]}  id  [Its a integer, key value , identificador of every object]
    * @return {Promise}     [Try to change the data register modified]
    */
 
@@ -73,8 +73,8 @@ class PromotionsMdl {
 
   /**
  * [processData is a funcion for tour registers and show all]
- * @param  {[type]} data [Atrribute for tour the register ]
- * @return {[type]}      [Its a array that contain the register tour previusly]
+ * @param  {[type]} data [Attribute for tour the register ]
+ * @return {[type]}      [Its an array that contain the register tour previusly]
  */
   static processData(data) {
     const array = [];
