@@ -94,7 +94,7 @@ CREATE TABLE Tokens (
   UserID      int(10) NOT NULL,
   Created_at  datetime NOT NULL,
   Expires     int(10) NOT NULL,
-  TokenType   char(5) NOT NULL,
+  TypeToken   char(5) NOT NULL,
   Active      tinyint(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (Token));
 CREATE TABLE Users (

@@ -16,7 +16,7 @@ router.post('/login', (req, res, next) => {
   });
 }, userCtrl.login);
 
-router.get('/', ensureAuth.haveSession, userCtrl.getAll);
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
 router.get('/:id', ensureAuth.haveSession, userCtrl.getUser);
 
 router.post('/', (req, res, next) => {
