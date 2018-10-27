@@ -36,8 +36,9 @@ CREATE TABLE MedicalRecords (
   PRIMARY KEY (ID));
 CREATE TABLE Permission (
   ID          int(10) NOT NULL AUTO_INCREMENT,
-  Description varchar(255) NOT NULL,
-  Acrive      tinyint(1) DEFAULT 1 NOT NULL,
+  Route       varchar(255) NOT NULL,
+  Method      varchar(255) NOT NULL,
+  Active      tinyint(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (ID));
 CREATE TABLE Places (
   ID        int(10) NOT NULL AUTO_INCREMENT,
@@ -89,12 +90,12 @@ CREATE TABLE Services_Places (
   PRIMARY KEY (ServicesID,
   PlaceID));
 CREATE TABLE Tokens (
-  Token    varchar(255) NOT NULL,
-  UserID   int(10) NOT NULL,
-  `Date`   datetime NOT NULL,
-  Expires  int(10) NOT NULL,
-  Type     char(5) NOT NULL,
-  Active   tinyint(1) DEFAULT 1 NOT NULL,
+  Token       varchar(255) NOT NULL,
+  UserID      int(10) NOT NULL,
+  Created_at  datetime NOT NULL,
+  Expires     int(10) NOT NULL,
+  TokenType   char(5) NOT NULL,
+  Active      tinyint(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (Token));
 CREATE TABLE Users (
   ID             int(10) NOT NULL AUTO_INCREMENT,
