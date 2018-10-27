@@ -1,26 +1,23 @@
-const { Router } = require('express');
-
-const router = Router();
-
+const router = require('express').Router();
 const middlewares = require('../middlewares');
-
 const { dietsCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
 /**
  * [get is a route gets everything diets that is registered]
  */
-router.get('/', dietsCtrl.getAll);
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtrl.getAll);
 
 /**
  * [get by id is a route get a diet in specific]
  */
 
-router.get('/:ID', dietsCtrl.get);
+router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtrl.get);
 
 /**
  * [post is a route adds a new diet]
 */
-router.post('/', (req, res, next) => {
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'required',
@@ -28,17 +25,17 @@ router.post('/', (req, res, next) => {
       Active: 'required',
     },
   });
-}, dietsCtrl.create);
+}], dietsCtrl.create);
 
 /**
  * [put es a route that update the diets]
  */
-router.put('/:ID', (req, res, next) => {
+router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'required',
     },
   });
-}, dietsCtrl.edit);
+}], dietsCtrl.edit);
 
 module.exports = router;

@@ -1,13 +1,11 @@
-const { Router } = require('express');
-
-const router = Router();
-
-const { promotionsCtrl } = require('../controllers');
+const router = require('express').Router();
 const middlewares = require('../middlewares');
+const { promotionsCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
-router.get('/', promotionsCtrl.getAll);
-router.get('/:id', promotionsCtrl.getPromotionbyUser);
-router.post('/', (req, res, next) => {
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], promotionsCtrl.getAll);
+router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], promotionsCtrl.getPromotionbyUser);
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       UserID: 'required',
@@ -16,7 +14,7 @@ router.post('/', (req, res, next) => {
       QuantityBought: 'required',
     },
   });
-}, promotionsCtrl.createPromotion);
-router.put('/:id', promotionsCtrl.editPromotion);
+}], promotionsCtrl.createPromotion);
+router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], promotionsCtrl.editPromotion);
 
 module.exports = router;

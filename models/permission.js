@@ -17,6 +17,10 @@ class PermissionMdl {
         route,
       }));
 
+      if (data.length === 0) {
+        return false;
+      }
+
       Permission = await db.findWithFilters('Roles_Permission', {
         RolesID: user.UserType,
         PermissionID: data[0].ID,

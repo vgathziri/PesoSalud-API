@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { medicalRecordsCtrl } = require('../controllers');
-
 const middlewares = require('../middlewares');
+const { medicalRecordsCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
-router.get('/user/:userID', medicalRecordsCtrl.getByUserID);
+router.get('/user/:userID', [ensureAuth.haveSession, ensureAuth.havePermission], medicalRecordsCtrl.getByUserID);
 
-router.get('/:appointmentID', medicalRecordsCtrl.getByAppointmentID);
+router.get('/:appointmentID', [ensureAuth.haveSession, ensureAuth.havePermission], medicalRecordsCtrl.getByAppointmentID);
 
-router.post('/', (req, res, next) => {
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       userID: 'required',
@@ -15,8 +15,8 @@ router.post('/', (req, res, next) => {
       serviceID: 'required',
     },
   });
-}, medicalRecordsCtrl.create);
+}], medicalRecordsCtrl.create);
 
-router.put('/:id', medicalRecordsCtrl.edit);
+router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], medicalRecordsCtrl.edit);
 
 module.exports = router;

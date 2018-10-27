@@ -47,7 +47,7 @@ class Auth {
     } else {
       next({
         status: 403,
-        message: 'Access Deny',
+        message: 'Access Denied',
       });
     }
   }

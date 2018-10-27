@@ -84,22 +84,11 @@ class DB {
     });
   }
 
-  findPermission(method, route) {
-    return new Promise((resolve, reject) => {
-      this.connection.query('SELECT * FROM Permission WHERE Method = ? AND Route = ?', [method, route], (err, rows) => {
-        if (err) {
-          return reject(this.processError(err));
-        }
-        return resolve(this.processResults(rows));
-      });
-    });
-  }
-
   findWithFilters(table, filters) {
     let filter = '';
     for(let field in filters) {
       filter += `${field} = '${filters[field]}' AND `;
-    };
+    }
 
     filter = filter.substr(0, filter.length - 4);
 
