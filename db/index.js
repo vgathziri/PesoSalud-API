@@ -62,6 +62,28 @@ class DB {
     });
   }
 
+  updateToken(data, value) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('UPDATE Tokens SET ? WHERE token = ?', [data, value], (err, results) => {
+        if (err) {
+          return reject(this.processError(err));
+        }
+        return resolve(results.changedRows);
+      });
+    });
+  }
+
+  findTokenActive(table, userId) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('SELECT * FROM ?? WHERE id = ? AND active = 1 ORDER BY created_at DESC LIMIT 1', [table, userId], (err, rows) => {
+        if (err) {
+          return reject(this.processError(err));
+        }
+        return resolve(this.processResults(rows));
+      });
+    });
+  }
+
   disconnect() {
     this.connection.end();
   }
