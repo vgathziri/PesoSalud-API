@@ -1,14 +1,17 @@
-const { Router } = require('express');
-
-const router = Router();
-
+const router = require('express').Router();
 const middlewares = require('../middlewares');
-
 const { serviceCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
-router.get('/', serviceCtrl.getAll);
+/**
+ * [get is a route gets everything services that is registered]
+ */
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], serviceCtrl.getAll);
 
-router.post('/', (req, res, next) => {
+/**
+ * [post is a route adds a new Services]
+*/
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'word,required',
@@ -18,15 +21,18 @@ router.post('/', (req, res, next) => {
       Active: 'required',
     },
   });
-}, serviceCtrl.create);
+}], serviceCtrl.create);
 
-router.put('/:id', (req, res, next) => {
+/**
+ * [put es a route that update the services]
+ */
+router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'word',
       Description: 'required',
     },
   });
-}, serviceCtrl.edit);
+}], serviceCtrl.edit);
 
 module.exports = router;
