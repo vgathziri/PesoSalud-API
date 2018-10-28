@@ -1,5 +1,7 @@
 const dietsMdl = require('../models/diets');
-
+/**
+ * [DietsCtrl is a class that initializes the functions and the prototype of them]
+ */
 class DietsCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);
@@ -12,7 +14,6 @@ class DietsCtrl {
  * [getAll is a function to get all diets]
  * @return {json}     [returns the objets]
  */
-
   static async getAll(req, res) {
     let data;
     try {
@@ -33,7 +34,6 @@ class DietsCtrl {
    * @param  {[int]}   req  [id]
    * @return {json}       [returns the object in case that exist or 400 if doesn't exists]
    */
-
   static async getID(req, res, next) {
     try {
       const data = await dietsMdl.findById(req.params.ID);
@@ -55,7 +55,6 @@ class DietsCtrl {
    * @param  {Function} next [create]
    * @return {response}      [return 201 when is created a new objet in db]
    */
-
   static async create(req, res, next) {
     try {
       const data = await dietsMdl.create(req.body);
@@ -66,12 +65,12 @@ class DietsCtrl {
   }
 
   /**
- * [edit is a funtion of edit o diet in specific]
+ * [edit is a funtion of edit a diet in specific]
  * @param  {[int]}   req  [id]
  * @param  {Function} next [update]
- * @return {response}       [return 200 if diet is updated or 400 if it couldn´t be found]
+ * @return {response}       [returns status 200 if diet is updated or
+ * status 400 if it couldn´t be found]
  */
-
   static async edit(req, res, next) {
     try {
       const data = await dietsMdl.update(req.body, req.params.ID);

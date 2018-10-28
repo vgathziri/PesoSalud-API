@@ -1,7 +1,9 @@
 const mysql = require('mysql');
 
 const CircularJSON = require('circular-json');
-
+/**
+ * [DB is a class of data base]
+ */
 class DB {
   constructor() {
     this.connection = mysql.createConnection({
@@ -13,6 +15,11 @@ class DB {
     this.connection.connect();
   }
 
+  /**
+ * [findAll is a function that gets all the tuples of a table]
+ * @param  {[]} table [table in specific]
+ * @return {[Function]}       [returns an error if exists an error or a function processResults]
+ */
   findAll(table) {
     return new Promise((resolve, reject) => {
       this.connection.query('SELECT * FROM ??', [table], (err, rows) => {
@@ -22,6 +29,12 @@ class DB {
     });
   }
 
+  /**
+   * [findById is a function that gets the tuples of a table by id]
+   * @param  {[type]} table  [table in specific]
+   * @param  {[int]} userId [userId]
+   * @return {[Function]}       [returns an error if exists an error or a function processResults]
+   */
   findById(table, userId) {
     return new Promise((resolve, reject) => {
       this.connection.query('SELECT * FROM ?? WHERE id = ?', [table, userId], (err, rows) => {
@@ -31,6 +44,12 @@ class DB {
     });
   }
 
+  /**
+   * [findByAttribute is a function that gets the tuples of a table by attribute]
+   * @param  {[table]} table     [table in specific]
+   * @param  {[Object]} data  [attributes of object]
+   * @return {[type]}           [returns an error if exists an error or a function processResults]]
+   */
   findByAttribute(table, attribute, value) {
     return new Promise((resolve, reject) => {
       this.connection.query('SELECT * FROM ?? WHERE ?? = ?', [table, attribute, value], (err, rows) => {
@@ -40,6 +59,13 @@ class DB {
     });
   }
 
+  /**
+   * [create is a function that create a new tuples in a table]
+   * @param  {[table]} table     [table in specific]
+   * @param  {[Object]} data  [attributes of object]
+   * @return {[Function]}       [returns a function processError if exists an error
+   * or a function processResults]]
+   */
   create(table, data) {
     return new Promise((resolve, reject) => {
       this.connection.query('INSERT INTO ?? SET ?', [table, data], (err, results) => {
@@ -51,6 +77,14 @@ class DB {
     });
   }
 
+  /**
+   * [update is a function that edit a tuple of specific table]
+   * @param  {[]} table  [specific table]
+   * @param  {[Object]} data  [attributes of object]
+   * @param  {[int]} userId [Id of tuple]
+   * @return {[Function]}       [returns a function processError if exists an error
+   * or a function that modifies the changed values]
+   */
   update(table, data, userId) {
     return new Promise((resolve, reject) => {
       this.connection.query('UPDATE ?? SET ? WHERE id = ?', [table, data, userId], (err, results) => {
@@ -62,18 +96,36 @@ class DB {
     });
   }
 
+  /**
+   * [disconnect is a function to disconnect db]
+   * @return {[Function]} [returns end function]
+   */
   disconnect() {
     this.connection.end();
   }
 
+  /**
+   * [destroy is a function to destroy db]
+   * @return {[Function]} [returns destroy function]
+   */
   destroy() {
     this.connection.destroy();
   }
 
+  /**
+ * [processResults description]
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
   processResults(data) {
     return JSON.parse(CircularJSON.stringify(data));
   }
 
+  /**
+   * [processError description]
+   * @param  {[type]} err [description]
+   * @return {[type]}     [description]
+   */
   processError(err) {
     const error = {};
 
@@ -91,6 +143,11 @@ class DB {
     return error;
   }
 
+  /**
+   * [getDataFromErrorMsg description]
+   * @param  {[type]} message [description]
+   * @return {[type]}         [description]
+   */
   static getDataFromErrorMsg(message) {
     const data = unescape(message).match(/'([^']+)'/g);
     return {
