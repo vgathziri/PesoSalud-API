@@ -84,6 +84,26 @@ class DB {
     });
   }
 
+  findWithFilters(table, filters) {
+    let filter = '';
+    for(let field in filters) {
+      filter += `${field} = '${filters[field]}' AND `;
+    }
+
+    filter = filter.substr(0, filter.length - 4);
+
+    const query = `SELECT * FROM ${table} WHERE ${filter};`;
+
+    return new Promise((resolve, reject) => {
+      this.connection.query(query, (err, rows) => {
+        if (err) {
+          return reject(this.processError(err));
+        }
+        return resolve(this.processResults(rows));
+      });
+    });
+  }
+
   disconnect() {
     this.connection.end();
   }

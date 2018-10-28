@@ -1,6 +1,7 @@
 const userMdl = require('../models/users');
 
 const tokenMdl = require('../models/token');
+const permissionMdl = require('../models/permission');
 
 class Auth {
   contructor() {
@@ -18,6 +19,7 @@ class Auth {
     }
     let token = req.headers.authorization.split(' ')[1];
     token = await tokenMdl.getOne('Token', token);
+
     if (token.length !== 0 && Auth['isActive'](token)) {
       req.session = {
         token,
@@ -28,6 +30,24 @@ class Auth {
       next({
         status: 403,
         message: 'Invalid token or Token has expired.',
+      });
+    }
+  }
+
+  async havePermission(req, res, next) {
+    if (!req.session) {
+      next({
+        status: 403,
+        message: 'There is no active session',
+      });
+    }
+
+    if (await permissionMdl.getPermission(req.session.user[0], req.method, req.originalUrl)){
+      next();
+    } else {
+      next({
+        status: 403,
+        message: 'Access Denied',
       });
     }
   }

@@ -1,11 +1,9 @@
 const { Router } = require('express');
 
 const router = Router();
-
 const middlewares = require('../middlewares');
-const { ensureAuth } = require('../middlewares');
-
 const { userCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
 router.post('/login', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
@@ -16,10 +14,10 @@ router.post('/login', (req, res, next) => {
   });
 }, userCtrl.login);
 
-router.get('/', ensureAuth.haveSession, userCtrl.getAll);
-router.get('/:id', ensureAuth.haveSession, userCtrl.getUser);
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
+router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getUser);
 
-router.post('/', (req, res, next) => {
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'word,required',
@@ -29,9 +27,9 @@ router.post('/', (req, res, next) => {
       UserType: 'word,required',
     },
   });
-}, userCtrl.create);
+}], userCtrl.create);
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'word',
@@ -39,6 +37,6 @@ router.put('/:id', (req, res, next) => {
       UserType: 'word',
     },
   });
-}, ensureAuth.haveSession, userCtrl.edit);
+}], userCtrl.edit);
 
 module.exports = router;
