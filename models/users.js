@@ -6,6 +6,7 @@ class UserMdl {
   constructor(data) {
     this.id = data.ID;
     this.email = data.Email;
+    this.password = data.Password;
     this.name = data.Name;
     this.gender = data.Gender;
     this.phone = data.Phone;

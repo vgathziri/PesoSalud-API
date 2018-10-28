@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const userMdl = require('../models/users');
 /**
  * [Userctrl is a class that initializes the functions and the prototype of them]
@@ -9,6 +10,40 @@ class UserCtrl {
     this.getUser = this.constructor.getUser.bind(this);
     this.create = this.constructor.create.bind(this);
     this.edit = this.constructor.edit.bind(this);
+    this.login = this.constructor.login.bind(this);
+  }
+
+  static async login(req, res, next) {
+    try {
+      const user = await userMdl.findByAttribute('Email', req.body.email);
+      if (!(user[0].email === req.body.email && user[0].password === req.body.password)) {
+        return next({
+          status: 401,
+          message: 'Invalid username or password',
+        });
+      }
+
+      // Create token
+      bcrypt.hash(`${user[0].email}${new Date()}`, Number(process.env.SECRET))
+        .then((hash) => {
+          tokenMdl.create({
+            Token: hash,
+            UserID: user[0].id,
+            Expires: 24,
+            TypeToken: 's',
+            Active: 1,
+            Created_at: new Date(),
+          });
+          return hash;
+        })
+        .then(hash => res.status(200).send({ id: user[0].id, token: hash }))
+        .catch(err => next({ status: 400, message: err }));
+    } catch (e) {
+      next({
+        status: 400,
+        message: e,
+      });
+    }
   }
 
   /**

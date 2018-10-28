@@ -9,20 +9,34 @@ class ScheduleMdl {
     this.active = data.Active;
   }
 
-  create() {
-    return new Promise((resolve, reject) => {
-      db.create('Schedule', this)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async create(obj) {
+    let data;
+    try {
+      data = await db.create('Schedule', obj);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
-  static findAll(table) {
-    return new Promise((resolve, reject) => {
-      db.findAll(table)
-        .then(res => resolve(this.processData(res)))
-        .catch(err => reject(err));
-    });
+  static async findByWeekday(WeekDay) {
+    let data;
+    try {
+      data = await db.findByAttribute('Schedule', 'WeekDay', WeekDay);
+    } catch (e) {
+      throw e;
+    }
+    return this.processData(data);
+  }
+
+  static async edit(obj, id) {
+    let data;
+    try {
+      data = await db.update('Schedule', obj, id);
+    } catch (e) {
+      throw e;
+    }
+    return data;
   }
 
   static processData(data) {
