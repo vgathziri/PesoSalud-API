@@ -96,6 +96,12 @@ class DB {
     });
   }
 
+  /**
+ * [updateToken description]
+ * @param  {[type]} data  [description]
+ * @param  {[type]} value [description]
+ * @return {[type]}       [description]
+ */
   updateToken(data, value) {
     return new Promise((resolve, reject) => {
       this.connection.query('UPDATE Tokens SET ? WHERE token = ?', [data, value], (err, results) => {
@@ -107,6 +113,12 @@ class DB {
     });
   }
 
+  /**
+   * [findTokenActive description]
+   * @param  {[type]} table  [description]
+   * @param  {[type]} userId [description]
+   * @return {[type]}        [description]
+   */
   findTokenActive(table, userId) {
     return new Promise((resolve, reject) => {
       this.connection.query('SELECT * FROM ?? WHERE id = ? AND active = 1 ORDER BY created_at DESC LIMIT 1', [table, userId], (err, rows) => {
@@ -118,6 +130,12 @@ class DB {
     });
   }
 
+  /**
+   * [findWithFilters description]
+   * @param  {[type]} table   [description]
+   * @param  {[type]} filters [description]
+   * @return {[type]}         [description]
+   */
   findWithFilters(table, filters) {
     let filter = '';
     for(let field in filters) {
