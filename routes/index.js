@@ -12,10 +12,12 @@ const scheduleRouter = require('./schedule');
 const dietsRouter = require('./diets');
 const servicesPlacesRouter = require('./servicesPlaces');
 const promotionsRouter = require('./promotions');
+const mailer = require('./mail');
 
 router.get('/', (req, res) => {
   res.send('This is Home!');
 });
+
 
 // Cargamos la rutas de los modulos
 // const usersRouter = require('./users');
@@ -30,6 +32,6 @@ router.use('/appointments', appointmentsRouter);
 router.use('/medicalRecords', medicalRecordsRouter);
 router.use('/services', servicesRouter);
 router.use('/promotions', promotionsRouter);
-
+router.use('/mail', mailer);
 
 module.exports = router;
