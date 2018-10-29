@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const userMdl = require('../models/users');
+const tokenMdl = require('../models/token');
+
 /**
  * [Userctrl is a class that initializes the functions and the prototype of them]
  */
