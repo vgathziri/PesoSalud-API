@@ -29,7 +29,7 @@ class Auth {
     } else {
       next({
         status: 403,
-        message: 'Invalid token or Token has expired.',
+        message: 'Invalid token or token has expired.',
       });
     }
   }
@@ -39,6 +39,13 @@ class Auth {
       next({
         status: 403,
         message: 'There is no active session',
+      });
+    }
+
+    if (req.session.user.Active === 0){
+      next({
+        status: 403,
+        message: 'This user is not longer active',
       });
     }
 

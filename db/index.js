@@ -128,6 +128,12 @@ class DB {
           sql: err.sql,
         };
         break;
+      case 'ER_PARSE_ERROR':
+        error[''] = {
+          error: err.sqlMessage,
+          sql: err.sql,
+        };
+        break;
       default:
     }
     return error;
