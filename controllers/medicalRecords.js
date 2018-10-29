@@ -1,5 +1,8 @@
 const medicalRecordsMdl = require('../models/medicalRecords');
 
+/**
+ * [MedicalRecordsCtrl is a class that initializes the functions and the prototype of them]
+ */
 class MedicalRecordsCtrl {
   constructor() {
     this.getByAppointmentID = this.constructor.getByAppointmentID.bind(this);
@@ -8,12 +11,17 @@ class MedicalRecordsCtrl {
     this.edit = this.constructor.edit.bind(this);
   }
 
+  /**
+   * [getByAppointmentID is a function to get appointment by id]
+   * @param  {[int]}   req  [id]
+   * @return {json}       [returns the object in case that exist or 400 if doesn't exists]
+   */
   static async getByAppointmentID(req, res, next) {
     try {
       const data = await medicalRecordsMdl.findByAppointmentID(req.params.appointmentID);
 
       if (data.lenght === 0) {
-        res.status(409).send({
+        res.status(400).send({
           message: 'Record not found',
         });
         return;
@@ -26,6 +34,11 @@ class MedicalRecordsCtrl {
     }
   }
 
+  /**
+ * [getByUserID is a function to get medicalRecords by user id]
+ * @param  {[int]}   req  [id]
+ * @return {json}       [returns the object in case that exist or 400 if doesn't exists]
+ */
   static async getByUserID(req, res, next) {
     try {
       const data = await medicalRecordsMdl.findByUser(req.params.userID);
@@ -44,6 +57,11 @@ class MedicalRecordsCtrl {
     }
   }
 
+  /**
+   * [create is a function of add a new medicalRecord]
+   * @param  {Function} next [create]
+   * @return {response}      [return 201 when is created a new objet in db]
+   */
   static async create(req, res, next) {
     try {
       const data = await medicalRecordsMdl.create(req.body);
@@ -54,6 +72,13 @@ class MedicalRecordsCtrl {
     }
   }
 
+  /**
+  * [edit is a funtion of edit a medicalRecord in specific]
+  * @param  {[int]}   req  [id]
+  * @param  {Function} next [update]
+  * @return {response}       [returns status 200 if medicalRecord is updated or
+  * status 400 if it couldn´t be found]
+  */
   static async edit(req, res) {
     try {
       const data = await medicalRecordsMdl.edit(req.body, req.params.id);

@@ -1,4 +1,14 @@
+/**
+ * [Validator-
+ *The class validates and specifies the syntax rules of the data]
+ */
 class Validator {
+  /**
+   * [word Regular expression for the words introduced for the user ]
+   * @type {[type]}
+   * [email Regular expression for add email in data]
+   * @type {[type]}
+   */
   static get regex() {
     return {
       word: /[a-zA-ZñÑ ]{3,}/,
@@ -6,18 +16,41 @@ class Validator {
     };
   }
 
+  /**
+ * [word Fuction for validated word in data ]
+ * @param  {[type]} data [Any word ]
+ * @return {[type]}      [description]
+ */
   static word(data) {
     return (Validator.regex.word.test(data));
   }
 
+  /**
+ * [required description]
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
   static required(data) {
     return data !== undefined && data !== null && data.length;
   }
 
+  /**
+ * [email description]
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
   static email(data) {
     return (Validator.regex.email.test(data));
   }
 
+  /**
+ * [validate description]
+ * @param  {[type]}   req   [description]
+ * @param  {[type]}   res   [description]
+ * @param  {Function} next  [description]
+ * @param  {[type]}   rules [description]
+ * @return {[type]}         [description]
+ */
   static validate(req, res, next, rules) {
     const error = {
       message: 'Validation Error',
