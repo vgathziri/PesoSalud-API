@@ -5,9 +5,9 @@
 class Validator {
   /**
    * [word Regular expression for the words introduced for the user ]
-   * @type {[type]}
+   * @type {[varchar]}
    * [email Regular expression for add email in data]
-   * @type {[type]}
+   * @type {[varchar]}
    */
   static get regex() {
     return {
@@ -17,39 +17,39 @@ class Validator {
   }
 
   /**
- * [word Fuction for validated word in data ]
- * @param  {[type]} data [Any word ]
- * @return {[type]}      [description]
+ * ["word" Fuction for validated word in data ]
+ * @param  {[Object]} data [Any word inside API to add or updated regiters]
+ * @return {[Fuction]}      [Fuction to test regular expression inside the words ]
  */
   static word(data) {
     return (Validator.regex.word.test(data));
   }
 
   /**
- * [required description]
- * @param  {[type]} data [description]
- * @return {[type]}      [description]
+ * ["required" fuction for validated when data introduced its empty or incorrect]
+ * @param  {[Object]} data [Data introduced by user ]
+ * @return {[Fuction]}      [Fuction for compare data with other cases]
  */
   static required(data) {
     return data !== undefined && data !== null && data.length;
   }
 
   /**
- * [email description]
- * @param  {[type]} data [description]
- * @return {[type]}      [description]
+ * ["email" Fuction to Valited regular expression to entry data to e-mail ]
+ * @param  {[Object]} data [Data introduced by user, to validate]
+ * @return {[Fuction]}      [Fuction to validate the rules with regular expression]
  */
   static email(data) {
     return (Validator.regex.email.test(data));
   }
 
   /**
- * [validate description]
- * @param  {[type]}   req   [description]
- * @param  {[type]}   res   [description]
- * @param  {Function} next  [description]
- * @param  {[type]}   rules [description]
- * @return {[type]}         [description]
+ * [validate Fuction general to validate with diferent rules and details]
+ * @param  {[Object]}   req   [data introced by user to validate]
+ * @param  {[Object]}   res   [type of rule to aplicate]
+ * @param  {Function} next  [Continue with the next fuction in case of error ]
+ * @param  {[Object]}   rules [validate with especific rule in especial case of data]
+ * @return {[message]}         [Details to validate the mistake ]
  */
   static validate(req, res, next, rules) {
     const error = {

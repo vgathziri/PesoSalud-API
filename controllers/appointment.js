@@ -1,8 +1,9 @@
 const appointmentMdl = require('../models/appointment');
-
+/**
+ * [AppointmentCtrl is a class that initializes the functions.]
+ */
 class AppointmentCtrl {
   constructor() {
-    //
     this.getByDate = this.constructor.getByDate.bind(this);
     this.getByUserID = this.constructor.getByUserID.bind(this);
     this.getByPlaceID = this.constructor.getByPlaceID.bind(this);
@@ -12,10 +13,9 @@ class AppointmentCtrl {
 
   /**
  * [getByDate Funtion to filter appoinments per Date]
- * @param  {[type]}   req  [client´s request]
- * @param  {[type]}   res  [response that status to the fuction]
+ * @param  {[Object]}   req  [client´s request body.date for the find value ]
+ * @param  {[Object]}   res  [response that status to the fuction or data]
  * @param  {Function} next [The function nerby or next funcio]
- * @return {Promise}       [Return a next function ]
  */
 
   static async getByDate(req, res, next) {
@@ -35,10 +35,9 @@ class AppointmentCtrl {
 
   /**
    * [getByUserID  Funtion to filter appoinments per id of user]
-   * @param  {[type]}   req  [client´s request]
-   * @param  {[type]}   res  [response that status to the fuction]
+   * @param  {[Object]}   req  [client´s request body.id for find value]
+   * @param  {[Object]}   res  [response that status to the fuction or data]
    * @param  {Function} next [The function nerby or next funcion]
-   * @return {Promise}       [Return a next function]
    */
   static async getByUserID(req, res, next) {
     try {
@@ -56,8 +55,8 @@ class AppointmentCtrl {
 
   /**
    * [getByPlaceID Funtion to filter appoinments per id of place]
-   * @param  {[type]}   req  [client´s request]
-   * @param  {[type]}   res  [response that status to the fuction]
+   * @param  {[object]}   req  [client´s request body.id value int to filter data]
+   * @param  {[Object]}   res  [response to the fuction status ]
    * @param  {Function} next [The function nerby or next funcion]
    * @return {Promise}       [Return a next function ]
    */
@@ -77,8 +76,8 @@ class AppointmentCtrl {
 
   /**
    * [create dd a new object Appointment]
-   * @param  {[type]}   req  [client´s request for create a new object, id identicador]
-   * @param  {[type]}   res  [response that status to the fuction]
+   * @param  {[Object]}   req  [client´s request for create a new object body ]
+   * @param  {[Object]}   res  [response that status to the fuction]
    * @param  {Function} next [Continuos to the next fuction for create]
    * @return {Promise}       [The method to the next fuction]
    */
@@ -92,9 +91,9 @@ class AppointmentCtrl {
   }
   /**
  * [ Funtion to Modify data in a object previusly created ]
- * @param  {[int]}    req  [id, identicador the appoinment client´s request]
- * @param  {[type]}   res  [reponse the status of the function 200 its successful]
- * @param  {Function} next [ The next funtion ]
+ * @param  {[Object]}    req  [Body form   and id, identicador the appoinment client´s request]
+ * @param  {[Object]}   res  [reponse the status of the function 200 its successful]
+ * @param  {Function} next [ The next funtion to the middlewear]
  * @return {Promise}       [Excute the  Next function]
  */
 

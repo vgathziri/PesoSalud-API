@@ -1,5 +1,7 @@
 const scheduleMdl = require('../models/schedule');
-
+/**
+ * [ScheduleCtrl Class manage schedule for weekDay, add a new schedule and updated ]
+ */
 class ScheduleCtrl {
   constructor() {
     this.get = this.constructor.get.bind(this);
@@ -10,9 +12,9 @@ class ScheduleCtrl {
   /**
  *
  * [create -Function for Add a new Object Schedule]
- * @param  {[body]}   req  [Clientś required for Schedule]
- * @param  {[status]} res  [response that status to the fuction]
- * @param  {create}   next [Argument for the next fuction to middlewear]
+ * @param  {[object]}   req  [Body form Clientś required for Schedule]
+ * @param  {[Obect]} res  [response that status to the fuction and send new add ]
+ * @param  {create}   next [Argument for the next fuction to middlewear in error case]
  * @return {Promise}       [Continue with the next fuction]
  */
   static async create(req, res, next) {
@@ -47,10 +49,10 @@ class ScheduleCtrl {
 
   /**
  * [get Show the Schedules for especific weekDay]
- * @param  {[weekDay]}   req  [Clien require for attribute weekDay especific]
- * @param  {[status]}   res  [In case especific data in weekDay doesn´t found ]
+ * @param  {[Obect]}   req  [Clien require for body attribute weekDay especific]
+ * @param  {[Obeject]}   res  [Status in case especific data in weekDay doesn´t found or was found]
  * @param  {Function} next [Continue to the next fuction in the middlewear]
- * @return {Status}       [Message when the data is send ]
+ * @return {Status}       [Message when the data in weekDay doesn´t found]
  */
   // input: WeekDay
   // Output: Schedules List Filtered by WeekDay

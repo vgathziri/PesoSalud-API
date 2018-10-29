@@ -1,5 +1,8 @@
 const promotionsMdl = require('../models/promotions');
 
+/**
+ * [PromotionsCtrl class to manage search registers,to filter, add new object and updated fuctions]
+ */
 class PromotionsCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);
@@ -9,10 +12,9 @@ class PromotionsCtrl {
   }
 
   /**
- * [getAll -Fuction to get all the promotions]
- * @param  {[type]}  req [client´s request ]
- * @param  {[type]}  res [response that status to the fuction]
- * @return {Promise}     [return a message when status is 400 becase it has syntax error]
+ * [getAll -Fuction to get(show) all the promotions]
+ * @param  {[Obect]}  req [client´s request all objects Body ]
+ * @param  {[Object]}  res [response that status to the fuction or send data founded ]
  */
 
   static async getAll(req, res) {
@@ -32,10 +34,9 @@ class PromotionsCtrl {
 
   /**
      * [getPromotionbyUser is a fuction for get to promotions per id of user ]
-     * @param  {[type]}   req  [client´s request ]
-     * @param  {[type]}   res  [response that status to the fuction]
-     * @param  {Function} next [The function nerby or next funcion]
-     * @return {Promise}       [Return a next function ]
+     * @param  {[Obect]}   req  [client´s request body.id (interger)key attribute]
+     * @param  {[Obect]}   res  [response the data and status from fuction]
+     * @param  {Function} next [The function nerby or next funcion middlewear]
      */
 
   static async getPromotionbyUser(req, res, next) {
@@ -53,10 +54,9 @@ class PromotionsCtrl {
 
   /**
  * [createPromotion Add a new object Promotion ]
- * @param  {[body]}   req  [client´s request for create a new object, id identicador]
- * @param  {[status]}   res  [response that status to the fuction]
+ * @param  {[Object]}   req  [client´s request for create a new object, Body.id identicador]
+ * @param  {[Obect]}   res  [response the data and  status to the fuction]
  * @param  {createPromotion} next [Continuos to the next fuction the middlewear]
- * @return {Promise}       [The method to the next fuction]
  */
 
   static async createPromotion(req, res, next) {
@@ -70,10 +70,9 @@ class PromotionsCtrl {
 
   /**
  * [editPromotion Modify data in a object previusly created ]
- * @param  {[int]}   req  [id, identicador the promotions client´s request]
- * @param  {[type]}   res  [reponse the status of the function 200 its successful]
- * @param  {Function} next [Continue whith The next funtion ]
- * @return {Promise}       [Message when the data is send ]
+ * @param  {[Object]}   req  [Body form and id interger, key value the promotions client´s request]
+ * @param  {[Obect]}   res  [reponse the status of the function 200 its successful]
+ * @param  {Function} next [Continue whith The next funtion in the middlewear ]
  */
 
   static async editPromotion(req, res, next) {
