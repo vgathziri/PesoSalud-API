@@ -1,7 +1,8 @@
 exports.UserMdl = require('./users');
 exports.PlaceMdl = require('./places');
 exports.MedicalRecordsMdl = require('./medicalRecords');
-exports.AppointmetMdl = require('./appointment');
+// FIXED error in name  AppoinmetMdl not exist
+exports.AppointmentMdl = require('./appointment');
 exports.ServicesMdl = require('./services');
 exports.DietsMdl = require('./diets');
 exports.PromotionsMdl = require('./promotions');

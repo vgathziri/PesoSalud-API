@@ -7,4 +7,3 @@ exports.placesCtrl = require('./places');
 exports.scheduleCtrl = require('./schedule');
 exports.dietsCtrl = require('./diets');
 exports.ServicesPlacesCtrl = require('./servicesPlaces');
-

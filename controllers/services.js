@@ -1,5 +1,8 @@
 const servicesMdl = require('../models/services');
 
+/**
+ * [ServicesCtrl is a class that initializes the functions and the prototype of them]
+ */
 class ServicesCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);
@@ -10,7 +13,8 @@ class ServicesCtrl {
   /**
    * [getAll is a function that get all services]
    * @param  {[function]}  res [findAll]
-   * @return {response}     [return status 400 if doesnt find services or 2012 if find all services]
+   * @return {response}       [returns message with status 400 if isn't found services
+   * or status 400 with all services]
    */
   static async getAll(req, res) {
     let data;
@@ -42,10 +46,11 @@ class ServicesCtrl {
   }
 
   /**
- * [edit is a funtion of edit a service in specific]
+ * [edit is a function of edit a service in specific]
  * @param  {[int]}   req  [id]
  * @param  {Function} next [update]
- * @return {response}       [return 200 if diet is updated or 400 if it couldn´t be found]
+ * @return {response}       [returns status 200 if service is updated or
+ * status 400 if it couldn´t be found]
  */
   static async edit(req, res, next) {
     try {
