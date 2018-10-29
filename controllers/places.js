@@ -1,5 +1,7 @@
 const placesMdl = require('../models/places');
-
+/**
+ * [PlacesCtrl its a class to manage search, add new data and updated fuctions ]
+ */
 class PlacesCtrl {
   constructor() {
     this.getAll = this.constructor.getAll.bind(this);
@@ -9,8 +11,8 @@ class PlacesCtrl {
 
   /**
  * [create Fuction for Add a new Object Places]
- * @param  {[body]}   req  [Client required for new Place]
- * @param  {[status]}   res  [Response that status to the fuction]
+ * @param  {[Object]}   req  [Client required body for new Place  ]
+ * @param  {[Object]}   res  [Response that status to the fuction and send data]
  * @param  {Function} next [Argument for the next fuction in the middlewear]
  * @return {Promise}       [Continue with the next fuction]
  */
@@ -25,8 +27,8 @@ class PlacesCtrl {
 
   /**
  * [getAll Fuction for show Places registers]
- * @param  {[type]}  req [Client require show the table ]
- * @param  {[status]}  res [Status 400 when table dont have registers ]
+ * @param  {[Object]}  req [Client require show body the all objects in  table ]
+ * @param  {[object]}  res [Status 400 when table dont have registers or 201 if it has data]
  * @return {Promise}     [Status 200 , successful show data registers]
  */
   static async getAll(req, res) {
@@ -43,10 +45,9 @@ class PlacesCtrl {
 
   /**
    * [edit fuction search register and updated with  new changes in Places  ]
-   * @param  {[ID]}   req  [Especific attribute  key identifier ]
-   * @param  {[type]}   res  [Return status 400 if dont have any value equal]
+   * @param  {[Object]}   req  [ Body and id (int)  param to Especific attribute  key identifier ]
+   * @param  {[Object]}   res  [Return status 400 if dont have any value equal]
    * @param  {Function} next [Argument for continue the next fuction and manage error]
-   * @return {Promise}       [Message when data is modified successful ]
    */
   static async edit(req, res, next) {
     try {

@@ -1,5 +1,7 @@
 const { db } = require('../db');
-
+/**
+ * [PlaceMdl contains the body of the object and the attributes of the DB for its connection]
+ */
 class PlaceMdl {
   constructor(data) {
     this.id = data.ID;
@@ -10,8 +12,8 @@ class PlaceMdl {
 
   /**
  * [create Fuction for add new instance in the table (database)]
- * @param  {[type]}  obj [New instance in database that Place- to assind¿g Atrributes ]
- * @return {Promise}     [Try to connet the new object Place in table]
+ * @param  {[Object]}  obj [New instance in database that Place- to assing Atrributes ]
+ * @return {Promise}     [ Connet for add the new object Place in table]
  */
   static async create(obj) {
     let data;
@@ -39,8 +41,8 @@ class PlaceMdl {
 
   /**
  * [edit fuction to change or updated registers in database ]
- * @param  {[type]}  obj [It´s instance especific for change by key value id]
- * @param  {[int]}  id  [Attribute key with value identifier in the database]
+ * @param  {[Object]}  obj [It´s instance especific for change by key value id]
+ * @param  {[Object]}  id  [Interget Attribute key with value identifier in the database]
  * @return {Promise}     [Updated object in database with new changes ]
  */
   static async edit(obj, id) {
@@ -55,8 +57,8 @@ class PlaceMdl {
 
   /**
  * [processData Fuction for tour register in database and show all]
- * @param  {[type]} data [Attribute for tour the register]
- * @return {[type]}      [It´s an array that contain the registers tour previusly]
+ * @param  {[Object]} data [Attribute for tour the register and find it]
+ * @return {[Array]}      [It´s an array that contain the registers tour previusly]
  */
   static processData(data) {
     const array = [];

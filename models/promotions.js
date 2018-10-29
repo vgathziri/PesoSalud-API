@@ -1,5 +1,7 @@
 const { db } = require('../db');
-
+/**
+ * [PromotionsMdl contains the body of the object and the attributes of the DB for its connection]
+ */
 class PromotionsMdl {
   constructor(data) {
     this.id = data.ID;
@@ -12,8 +14,8 @@ class PromotionsMdl {
 
   /**
  * [create is a function for add a new instance in the table(database)]
- * @param  {[type]}  obj [The "obj" is a new promotion]
- * @return {Promise}     [Try to conect the object in the table "Promotions"]
+ * @param  {[Object]}  obj [The "obj" is a new object body promotion]
+ * @return {Promise}     [Try to add and conect the new object in the table "Promotions"]
  */
   static async create(obj) {
     let data;
@@ -27,7 +29,7 @@ class PromotionsMdl {
 
   /**
  * [Its a funcion for show all the promotions are register in the table(database)]
- * @return {Promise} [Try to find the intances in the table "Promotions"]
+ * @return {Promise} [ Fuction for tour and Find All the intances in the table "Promotions"]
  */
   static async findAllPromotions() {
     let data;
@@ -41,8 +43,8 @@ class PromotionsMdl {
 
   /**
  * [Its a funcion try to search and show the promotions register per id of user]
- * @param  {[type]}  UserId [Attribute foreigh in the table, and value of reference its a int ]
- * @return {Promise}        [Try to get all the IDs are register in the table]
+ * @param  {[Object]}  UserId [Attribute foreigh in the table, and value of reference its a int ]
+ * @return {Promise}        [find data by IDs are register in the table]
  */
   static async findByUserID(UserId) {
     let data;
@@ -55,9 +57,9 @@ class PromotionsMdl {
   }
   /**
    * ["update" is a funtion that modify data in the objeto previusly create]
-   * @param  {[type]}  obj [Receive the object of the class]
-   * @param  {[type]}  id  [Its a integer, key value , identificador of every object]
-   * @return {Promise}     [Try to change the data register modified]
+   * @param  {[Obeject]}  obj [Receive the object of the class for changes ]
+   * @param  {[Obejct]}  id  [Its a integer, key value , identificador of every object]
+   * @return {Promise}     [Change the data register modified successful]
    */
 
   static async update(obj, id) {
@@ -73,8 +75,8 @@ class PromotionsMdl {
 
   /**
  * [processData is a funcion for tour registers and show all]
- * @param  {[type]} data [Attribute for tour the register ]
- * @return {[type]}      [Its an array that contain the register tour previusly]
+ * @param  {[Object]} data [Attribute for tour the register in table promotions ]
+ * @return {[Array]}      [Its an array that contain the register tour previusly]
  */
   static processData(data) {
     const array = [];
