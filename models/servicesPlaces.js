@@ -6,6 +6,11 @@ class ServicesPlacesMdl {
     this.placeid = data.PlaceID;
   }
 
+  /**
+  * [Create is a method that connects the ServicesPlaces with the db]
+  * @param  {Object]} req [a new objet]
+  * @return {int}     [return id of created obj]
+  */
   static async create(obj) {
     let data;
     try {
@@ -16,6 +21,10 @@ class ServicesPlacesMdl {
     return data;
   }
 
+  /**
+   * [findByService is a method of find service in specific]
+   * @return {Object} [return a service is that  exists]
+   */
   static async findByService(servicesid) {
     let data;
     try {
@@ -26,6 +35,10 @@ class ServicesPlacesMdl {
     return this.processData(data);
   }
 
+  /**
+   * [findByPLace is a method of find place in specific]
+   * @return {Object} [return a place is that  exists]
+   */
   static async findByPlace(placeid) {
     let data;
     try {

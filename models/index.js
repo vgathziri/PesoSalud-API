@@ -7,3 +7,4 @@ exports.DietsMdl = require('./diets');
 exports.PromotionsMdl = require('./promotions');
 exports.ScheduleMdl = require('./schedule');
 exports.ServicesPlacesMdl = require('./servicesPlaces');
+exports.TokenMdl = require('./token');

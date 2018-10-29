@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const { placesCtrl } = require('../controllers');
 const middlewares = require('../middlewares');
+const { placesCtrl } = require('../controllers');
+const { ensureAuth } = require('../middlewares');
 
-router.get('/', placesCtrl.getAll);
-router.post('/', (req, res, next) => {
+router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], placesCtrl.getAll);
+router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'required',
@@ -11,7 +12,7 @@ router.post('/', (req, res, next) => {
       Active: 'required',
     },
   });
-}, placesCtrl.create);
-router.put('/:ID', placesCtrl.edit);
+}], placesCtrl.create);
+router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission], placesCtrl.edit);
 
 module.exports = router;

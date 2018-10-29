@@ -1,5 +1,6 @@
 # PesoSalud-API
 
+http://ec2-13-58-51-216.us-east-2.compute.amazonaws.com:3000/
 
 ## Descripción general  
 Peso y Salud es un consultorio que se encarga de ofrecer servicios a sus clientes sobre medicina alternativa. Requiere una plataforma web que sea capaz de manejar la administración de dicho consultorio. 
