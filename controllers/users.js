@@ -56,7 +56,7 @@ class UserCtrl {
   static async getAll(req, res) {
     let data;
     try {
-      data = await userMdl.findAll('Users');
+      data = await userMdl.findAll();
       if (data.length === 0) {
         return res.status(400).send({ message: 'Users not found' });
       }
