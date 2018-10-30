@@ -122,7 +122,7 @@ class UserCtrl {
       });
     }
   }
-  
+
   /**
  * [create is a function that creates a new user]
   * @param  {Function} next [next]
@@ -258,6 +258,7 @@ class UserCtrl {
     } catch (e) {
       next(e);
     }
+  }
 
   static isActive(token) {
     const createdAt = (new Date(token[0].Created_at)).getTime();
