@@ -99,7 +99,7 @@ CREATE TABLE Tokens (
   PRIMARY KEY (Token));
 CREATE TABLE Users (
   ID             int(10) NOT NULL AUTO_INCREMENT,
-  Email          varchar(255) NOT NULL,
+  Email          varchar(255) NOT NULL UNIQUE,
   Password       varchar(255) NOT NULL,
   Name           varchar(255) NOT NULL,
   Gender         char(1) NOT NULL,

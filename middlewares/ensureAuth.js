@@ -42,10 +42,10 @@ class Auth {
       });
     }
 
-    if (req.session.user.Active === 0){
+    if (Number(req.session.user.Active) === 0){
       next({
         status: 403,
-        message: 'This user is not longer active',
+        message: 'This user is not active',
       });
     }
 

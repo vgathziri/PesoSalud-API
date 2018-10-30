@@ -30,6 +30,9 @@ router.put('/password_reset/:token', (req, res, next) => {
   });
 }, userCtrl.updatePassword);
 
+router.get('/verify-email/:token', userCtrl.activateUser);
+
+// CRUD
 router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
 router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getUser);
 
@@ -40,7 +43,7 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
       Email: 'email,required',
       Password: 'required',
       Gender: 'required',
-      UserType: 'word,required',
+      UserType: 'required',
     },
   });
 }], userCtrl.create);
