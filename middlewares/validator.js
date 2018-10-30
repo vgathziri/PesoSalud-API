@@ -13,6 +13,10 @@ class Validator {
     return {
       word: /[a-zA-ZñÑ ]{3,}/,
       email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      number: /^\d+$/,
+      decimal: /^(\d+\.?\d{0,4}|\.\d{1,4})$/,
+      date: /^[1-2][0-9]{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-2])$/,
+      hour: /^([01][0-9]|2[0-3]:[0-5][0-9])$/,
     };
   }
 
@@ -23,6 +27,26 @@ class Validator {
  */
   static word(data) {
     return (Validator.regex.word.test(data));
+  }
+
+  static number(data) {
+    return (Validator.regex.number.test(data));
+  }
+
+  static decimal(data) {
+    return (Validator.regex.decimal.test(data));
+  }
+
+  static date(data) {
+    return (Validator.regex.date.test(data));
+  }
+
+  static hour(data) {
+    return (Validator.regex.hour.test(data));
+  }
+
+  static image(data) {
+    return data === 'image/jpeg';
   }
 
   /**
