@@ -109,6 +109,7 @@ CREATE TABLE Users (
   Height         varchar(10),
   UserType       int(10) NOT NULL,
   Comments       varchar(1000),
+  Picture        varchar(255),
   PRIMARY KEY (ID));
 ALTER TABLE Tokens ADD INDEX FKTokens513099 (UserID), ADD CONSTRAINT FKTokens513099 FOREIGN KEY (UserID) REFERENCES Users (ID);
 ALTER TABLE Users ADD INDEX FKUsers649923 (UserType), ADD CONSTRAINT FKUsers649923 FOREIGN KEY (UserType) REFERENCES Roles (ID);

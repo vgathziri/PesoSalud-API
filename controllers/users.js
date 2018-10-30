@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 const userMdl = require('../models/users');
 const tokenMdl = require('../models/token');
-
 /**
  * [Userctrl is a class that initializes the functions and the prototype of them]
  */
@@ -125,6 +125,10 @@ class UserCtrl {
   static async setPicture(req, res, next) {
     try {
       const data = await userMdl.update({ picture: req.file.path }, req.session.user[0].id);
+
+      if (req.session.user[0].picture != null) {
+        fs.unlink(req.session.user[0].picture);
+      }
 
       // In case user was not found
       if (data.length === 0) {
