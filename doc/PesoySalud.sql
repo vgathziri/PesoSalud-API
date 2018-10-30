@@ -99,7 +99,7 @@ CREATE TABLE Tokens (
   PRIMARY KEY (Token));
 CREATE TABLE Users (
   ID             int(10) NOT NULL AUTO_INCREMENT,
-  Email          varchar(255) NOT NULL,
+  Email          varchar(255) NOT NULL UNIQUE,
   Password       varchar(255) NOT NULL,
   Name           varchar(255) NOT NULL,
   Gender         char(1) NOT NULL,
@@ -109,6 +109,7 @@ CREATE TABLE Users (
   Height         varchar(10),
   UserType       int(10) NOT NULL,
   Comments       varchar(1000),
+  Active         tinyint(1) DEFAULT 0 NOT NULL,
   Picture        varchar(255),
   PRIMARY KEY (ID));
 ALTER TABLE Tokens ADD INDEX FKTokens513099 (UserID), ADD CONSTRAINT FKTokens513099 FOREIGN KEY (UserID) REFERENCES Users (ID);
@@ -116,7 +117,7 @@ ALTER TABLE Users ADD INDEX FKUsers649923 (UserType), ADD CONSTRAINT FKUsers6499
 ALTER TABLE Roles_Permission ADD INDEX FKRoles_Perm807637 (PermissionID), ADD CONSTRAINT FKRoles_Perm807637 FOREIGN KEY (PermissionID) REFERENCES Permission (ID);
 ALTER TABLE Roles_Permission ADD INDEX FKRoles_Perm245097 (RolesID), ADD CONSTRAINT FKRoles_Perm245097 FOREIGN KEY (RolesID) REFERENCES Roles (ID);
 ALTER TABLE PromotionsUser ADD INDEX FKPromotionsUser550782 (UserID), ADD CONSTRAINT FKPromotionsUsers550782 FOREIGN KEY (UserID) REFERENCES Users (ID);
-ALTER TABLE PromotionsUser ADD INDEX FKPromotionsUser550782 (PromotionID), ADD CONSTRAINT FKPromotionsUsers550783 FOREIGN KEY (PromotionID) REFERENCES Promotions (ID);
+ALTER TABLE PromotionsUser ADD INDEX FKPromotionsUser550783 (PromotionID), ADD CONSTRAINT FKPromotionsUsers550783 FOREIGN KEY (PromotionID) REFERENCES Promotions (ID);
 ALTER TABLE Promotions ADD INDEX FKPromotions357747 (ServiceID), ADD CONSTRAINT FKPromotions357747 FOREIGN KEY (ServiceID) REFERENCES Services (ID);
 ALTER TABLE Appointment ADD INDEX FKAppointmen602706 (PlaceID), ADD CONSTRAINT FKAppointmen602706 FOREIGN KEY (PlaceID) REFERENCES Places (ID);
 ALTER TABLE Services_Places ADD INDEX FKServices_P171158 (PlaceID), ADD CONSTRAINT FKServices_P171158 FOREIGN KEY (PlaceID) REFERENCES Places (ID);
@@ -145,11 +146,12 @@ INSERT INTO Users(
   RegisteredDate,
   Height,
   UserType,
-  Comments
+  Comments,
+  Active
 )
 VALUES
-  ('ceoe1996@hotmail.com', '1234', 'Carlos Orozco', 'M', '3334644819', '19960218', '20180926', '1.85', 1, ''),
-  ('jacobnugo@gmail.com', '1234', 'Jacob Nuño', 'M', '3334623845', '19971222', '20181003', '1.70', 1, '');
+  ('ceoe1996@hotmail.com', '1234', 'Carlos Orozco', 'M', '3334644819', '19960218', '20180926', '1.85', 1, '', 1),
+  ('jacobnugo@gmail.com', '1234', 'Jacob Nuño', 'M', '3334623845', '19971222', '20181003', '1.70', 1, '', 1);
 
 INSERT INTO Services(
   Name,

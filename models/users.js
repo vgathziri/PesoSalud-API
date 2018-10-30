@@ -16,6 +16,7 @@ class UserMdl {
     this.UserType = data.UserType;
     this.Comments = data.Comments;
     this.picture = data.Picture;
+    this.Active = data.Active;
   }
 
   /**
