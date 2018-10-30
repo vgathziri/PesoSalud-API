@@ -14,6 +14,25 @@ router.post('/login', (req, res, next) => {
   });
 }, userCtrl.login);
 
+router.post('/password_reset', (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    body: {
+      email: 'email,required',
+    },
+  });
+}, userCtrl.passwordReset);
+
+router.put('/password_reset/:token', (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    body: {
+      password: 'required',
+    },
+  });
+}, userCtrl.updatePassword);
+
+router.get('/verify-email/:token', userCtrl.activateUser);
+
+// CRUD
 router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
 router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getUser);
 
@@ -24,7 +43,7 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
       Email: 'email,required',
       Password: 'required',
       Gender: 'required',
-      UserType: 'word,required',
+      UserType: 'required',
     },
   });
 }], userCtrl.create);

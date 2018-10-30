@@ -15,6 +15,7 @@ class UserMdl {
     this.Height = data.Height;
     this.UserType = data.UserType;
     this.Comments = data.Comments;
+    this.Active = data.Active;
   }
 
   /**
