@@ -3,6 +3,9 @@ const userMdl = require('../models/users');
 const tokenMdl = require('../models/token');
 const { sendMail } = require('../services/mail');
 
+/**
+ * [Userctrl is a class that initializes the functions and the prototype of them]
+ */
 class UserCtrl {
   constructor() {
     // Binding this to not loose context on router
@@ -117,7 +120,12 @@ class UserCtrl {
       });
     }
   }
-
+  
+  /**
+ * [create is a function that creates a new user]
+  * @param  {Function} next [next]
+ * @return {response}       [returns a status 201 that a new user has been created]
+ */
   static async create(req, res, next) {
     try {
       const id = await userMdl.create(req.body);
@@ -172,6 +180,11 @@ class UserCtrl {
     }
   }
 
+  /**
+ * [getAll is a function to get all users]
+ * @return {response}       [returns message with status 400 if isn't found Users
+ * or status 400 with all users]
+ */
   static async getAll(req, res) {
     let data;
     try {
@@ -185,6 +198,11 @@ class UserCtrl {
     res.status(201).send({ data });
   }
 
+  /**
+ * [getUser is a function to get one user by id]
+ * @param  {[integer]}   req  [id]
+ * @return {json}       [returns the user object in case that exists]
+ */
   static async getUser(req, res, next) {
     try {
       const data = await userMdl.findById(req.params.id);
@@ -200,6 +218,12 @@ class UserCtrl {
     }
   }
 
+  /**
+ * [edit is a function of edit a user in specific]
+ * @param  {[integer]}   req  [id]
+ * @return {response}       [returns status 200 if diet is updated
+ * or status 400 if it couldn´t be found]
+  */
   static async edit(req, res, next) {
     try {
       const data = await userMdl.update(req.body, req.params.id);

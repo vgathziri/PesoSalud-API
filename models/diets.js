@@ -1,5 +1,7 @@
 const { db } = require('../db');
-
+/**
+ * [DietsMdl is a class that initializes the functions and the prototype of them]
+ */
 class DietsMdl {
   constructor(data) {
     this.id = data.ID;
@@ -53,10 +55,10 @@ class DietsMdl {
   }
 
   /**
- * [update is a method of call aupdate of db]
+ * [update is a method of call update of db]
  * @param  {[Object]} req    [obj]
  * @param  {[int]}  dietId [dietId]
- * @return {int}        [return Id update if does exists]
+ * @return {Object}        [return object update if does exists]
  */
   static async update(obj, dietId) {
     let data;
@@ -68,6 +70,11 @@ class DietsMdl {
     return data;
   }
 
+  /**
+   * [processData is a function that creates array of Diets]
+   * @param  {[objetc]} data [DietsMdl]
+   * @return {[array]}      [returns array of Diets]
+   */
   static processData(data) {
     const array = [];
     data.forEach((d) => {

@@ -1,5 +1,7 @@
 const { db } = require('../db');
-
+/**
+ * [ServicesPlacesMdl is a class that initializes the functions and the prototype of them]
+ */
 class ServicesPlacesMdl {
   constructor(data) {
     this.servicesid = data.ServicesID;
@@ -49,6 +51,11 @@ class ServicesPlacesMdl {
     return this.processData(data);
   }
 
+  /**
+   * [processData is a function that creates array of ServicesPlaces]
+   * @param  {[Objetc]} data [ServicesPlacesMdl]
+   * @return {[array]}      [returns array of ServicesPlaces]
+   */
   static processData(data) {
     const array = [];
     data.forEach((d) => {
