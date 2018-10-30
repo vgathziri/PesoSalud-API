@@ -12,7 +12,13 @@ router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtrl.g
  * [get by id is a route get a diet in specific]
  */
 
-router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtrl.get);
+router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
+  middlewares.validator(req, res, next, {
+    params: {
+      ID: 'require,number',
+    },
+  });
+}], dietsCtrl.get);
 
 /**
  * [post is a route adds a new diet]
@@ -20,9 +26,9 @@ router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtr
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'required',
-      Descripcion: 'required',
-      Active: 'required',
+      name: 'word,required',
+      descripcion: 'word,required',
+      active: 'bool,required',
     },
   });
 }], dietsCtrl.create);
@@ -33,7 +39,10 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
 router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'required',
+      name: 'word',
+    },
+    params: {
+      ID: 'number',
     },
   });
 }], dietsCtrl.edit);

@@ -7,12 +7,23 @@ router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], placesCtrl.
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'required',
-      PlaceType: 'required',
-      Active: 'required',
+      name: 'required,word',
+      placeType: 'require,word',
+      active: 'required,bool',
     },
   });
 }], placesCtrl.create);
-router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission], placesCtrl.edit);
+router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    body: {
+      name: 'word',
+      placeType: 'word',
+      active: 'bool',
+    },
+    params: {
+      ID: 'number',
+    },
+  });
+}], placesCtrl.edit);
 
 module.exports = router;
