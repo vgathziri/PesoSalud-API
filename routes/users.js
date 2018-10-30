@@ -1,9 +1,13 @@
 const { Router } = require('express');
 
 const router = Router();
+const multer = require('multer');
 const middlewares = require('../middlewares');
+
+const upload = multer({ dest: 'files/' });
 const { userCtrl } = require('../controllers');
 const { ensureAuth } = require('../middlewares');
+
 
 router.post('/login', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
@@ -57,5 +61,7 @@ router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
     },
   });
 }], userCtrl.edit);
+
+router.post('/setPicture', [ensureAuth.haveSession, upload.single('picture')], userCtrl.setPicture);
 
 module.exports = router;
