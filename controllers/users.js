@@ -12,6 +12,7 @@ class UserCtrl {
     this.getUser = this.constructor.getUser.bind(this);
     this.create = this.constructor.create.bind(this);
     this.edit = this.constructor.edit.bind(this);
+    this.setPicture = this.constructor.setPicture.bind(this);
     this.login = this.constructor.login.bind(this);
   }
 
@@ -109,6 +110,21 @@ class UserCtrl {
   static async edit(req, res, next) {
     try {
       const data = await userMdl.update(req.body, req.params.id);
+
+      // In case user was not found
+      if (data.length === 0) {
+        return res.status(400).send({ message: 'User could not be updated' });
+      }
+
+      res.status(200).send({ data: 'User updated' });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async setPicture(req, res, next) {
+    try {
+      const data = await userMdl.update({ picture: req.file.path }, req.session.user[0].id);
 
       // In case user was not found
       if (data.length === 0) {
