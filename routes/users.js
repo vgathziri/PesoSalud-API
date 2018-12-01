@@ -40,7 +40,7 @@ router.get('/verify-email/:token', userCtrl.activateUser);
 router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
 router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getUser);
 
-router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
+router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
       Name: 'word,required',
@@ -50,7 +50,7 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
       UserType: 'required',
     },
   });
-}], userCtrl.create);
+}, userCtrl.create);
 
 router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
