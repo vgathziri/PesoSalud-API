@@ -128,12 +128,72 @@ ALTER TABLE Appointment ADD INDEX FKAppointmen456648 (ServiceID), ADD CONSTRAINT
 ALTER TABLE MedicalRecords ADD INDEX FKMedicalRec525156 (UserID), ADD CONSTRAINT FKMedicalRec525156 FOREIGN KEY (UserID) REFERENCES Users (ID);
 ALTER TABLE Appointment ADD INDEX FKAppointmen263613 (UserID), ADD CONSTRAINT FKAppointmen263613 FOREIGN KEY (UserID) REFERENCES Users (ID);
 
-INSERT INTO Roles(Description)
+CREATE TABLE RolesTemp(
+  Role    VARCHAR(100),
+  IsAdmin BIT
+);
+
+CREATE TABLE RoutesTemp(
+  Route VARCHAR(255),
+  Method VARCHAR(255),
+  OnlyAdmin BIT
+);
+
+INSERT INTO RolesTemp
 VALUES
-  ('Admin'),
-  ('Doctora'),
-  ('Recepcionista'),
-  ('Paciente');
+  ('Admin', 1),
+  ('Doctora', 1),
+  ('Recepcionista', 1),
+  ('Paciente', 0);
+
+INSERT INTO Roles(Description)
+SELECT Role FROM RolesTemp;
+
+INSERT INTO RoutesTemp
+VALUES
+  ('/users/', 'GET', 0),
+  ('/users/', 'POST', 0),
+  ('/users/', 'PUT', 0),
+
+  ('/places/', 'GET', 1),
+  ('/places/', 'POST', 1),
+  ('/places/', 'PUT', 1),
+
+  ('/appointments/', 'GET', 0),
+  ('/appointments/user/', 'GET', 1),
+  ('/appointments/place/', 'GET', 1),
+  ('/appointments/', 'POST', 0),
+  ('/appointments/', 'PUT', 1);
+
+INSERT INTO Permission(
+  Route,
+  Method
+)
+SELECT
+  Route,
+  Method
+FROM RoutesTemp;
+
+INSERT INTO Roles_Permission(
+  RolesID,
+  PermissionID
+)
+SELECT
+  R.ID,
+  P.ID
+FROM RolesTemp RT
+JOIN Roles R ON R.Description = RT.Role
+JOIN RoutesTemp RoT ON 1 = 1
+JOIN Permission P ON P.Route = RoT.Route
+                  AND P.Method = RoT.Method
+WHERE
+  RoT.OnlyAdmin = 0
+  OR (
+      RT.IsAdmin = 1
+      AND RoT.OnlyAdmin = 1
+    );
+
+DROP TABLE RolesTemp, RoutesTemp;
 
 INSERT INTO Users(
   Email,
