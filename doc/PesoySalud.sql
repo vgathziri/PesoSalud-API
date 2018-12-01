@@ -163,7 +163,31 @@ VALUES
   ('/appointments/user/', 'GET', 1),
   ('/appointments/place/', 'GET', 1),
   ('/appointments/', 'POST', 0),
-  ('/appointments/', 'PUT', 1);
+  ('/appointments/', 'PUT', 1)
+
+  ('/schedule/', 'GET', 1),
+  ('/schedule/', 'POST', 1),
+  ('/schedule/', 'PUT', 1),
+
+  ('/diets/', 'GET', 0),
+  ('/diets/', 'POST', 1),
+  ('/diets/', 'PUT', 1),
+
+  ('/servicesPlaces/', 'GET', 1),
+  ('/servicesPlaces/', 'POST', 1),
+
+  ('/medicalRecords/', 'GET', 0),
+  ('/medicalRecords/user/', 'GET', 0),
+  ('/medicalRecords/', 'PUT', 1),
+  ('/medicalRecords/', 'POST', 1),
+
+  ('/services/', 'GET', 0),
+  ('/services/', 'PUT', 1),
+  ('/services/', 'POST', 1),
+
+  ('/promotions/', 'GET', 0),
+  ('/promotions/', 'POST', 1),
+  ('/promotions/', 'PUT', 1);
 
 INSERT INTO Permission(
   Route,
