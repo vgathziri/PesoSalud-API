@@ -1,0 +1,1840 @@
+{
+	"info": {
+		"_postman_id": "17556774-183d-4ec8-a2bb-f34bb0b36d7b",
+		"name": "PesoySalud-API",
+		"description": "Testing Peso y Salud Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "PUT: Appointments/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserID",
+									"value": "5",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ServiceID",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "PlaceID",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Date",
+									"value": "20180901",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Status",
+									"value": "Scheduled",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/appointments/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Appointments/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ServiceID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "PlaceID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "20180901",
+									"type": "text"
+								},
+								{
+									"key": "Status",
+									"value": "Cancel",
+									"type": "text"
+								},
+								{
+									"key": "UserID",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/appointments/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Appointments/place/:placeID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/appointments/place/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								"place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Appointments/User/:userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/appointments/user/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Appointments/:date",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/appointments/20181005",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								"20181005"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MedicalRecord",
+			"item": [
+				{
+					"name": "POST: MedicalRecords/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "userID",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "appointmentID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "serviceID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "81.2",
+									"type": "text"
+								},
+								{
+									"key": "bust",
+									"value": "72.8",
+									"type": "text"
+								},
+								{
+									"key": "waistline",
+									"value": "69.7",
+									"type": "text"
+								},
+								{
+									"key": "hip",
+									"value": "73.4",
+									"type": "text"
+								},
+								{
+									"key": "chest",
+									"value": "80.7",
+									"type": "text"
+								},
+								{
+									"key": "abdomen",
+									"value": "78.5",
+									"type": "text"
+								},
+								{
+									"key": "dietID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "symptom",
+									"value": "Tos",
+									"type": "text"
+								},
+								{
+									"key": "comments",
+									"value": "Paciente",
+									"type": "text"
+								},
+								{
+									"key": "initialHighAbdomen",
+									"value": "71.3",
+									"type": "text"
+								},
+								{
+									"key": "finalHighAbdomen",
+									"value": "69.1",
+									"type": "text"
+								},
+								{
+									"key": "initialMediumAbdomen",
+									"value": "72.8",
+									"type": "text"
+								},
+								{
+									"key": "finalMediumAbdomen",
+									"value": "71.6",
+									"type": "text"
+								},
+								{
+									"key": "initialLowAbdomen",
+									"value": "70.8",
+									"type": "text"
+								},
+								{
+									"key": "finalLowAbdomen",
+									"value": "69.9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/medicalRecords/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicalRecords",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: MedicalRecords/User/:userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/medicalRecords/user/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicalRecords",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: MedicalRecords/:appointmentID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/medicalRecords/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicalRecords",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: MedicalRecords/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "userID",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "appointmentID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "serviceID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "81.2",
+									"type": "text"
+								},
+								{
+									"key": "bust",
+									"value": "72.8",
+									"type": "text"
+								},
+								{
+									"key": "waistline",
+									"value": "69.7",
+									"type": "text"
+								},
+								{
+									"key": "hip",
+									"value": "73.4",
+									"type": "text"
+								},
+								{
+									"key": "chest",
+									"value": "80.7",
+									"type": "text"
+								},
+								{
+									"key": "abdomen",
+									"value": "78.5",
+									"type": "text"
+								},
+								{
+									"key": "dietID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "symptom",
+									"value": "Tos",
+									"type": "text"
+								},
+								{
+									"key": "comments",
+									"value": "Paciente",
+									"type": "text"
+								},
+								{
+									"key": "initialHighAbdomen",
+									"value": "71.3",
+									"type": "text"
+								},
+								{
+									"key": "finalHighAbdomen",
+									"value": "69.1",
+									"type": "text"
+								},
+								{
+									"key": "initialMediumAbdomen",
+									"value": "72.8",
+									"type": "text"
+								},
+								{
+									"key": "finalMediumAbdomen",
+									"value": "71.6",
+									"type": "text"
+								},
+								{
+									"key": "initialLowAbdomen",
+									"value": "70.8",
+									"type": "text"
+								},
+								{
+									"key": "finalLowAbdomen",
+									"value": "69.8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/medicalRecords/3",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicalRecords",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "POST: Service/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "Control de Peso",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Control de Peso",
+									"type": "text"
+								},
+								{
+									"key": "Price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Duration",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/services/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"services",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Service/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/services/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"services",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Service/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "Control de Peso",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Control de Peso",
+									"type": "text"
+								},
+								{
+									"key": "Price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Duration",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/services/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"services",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET: Users/:userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/users/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Users/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "email",
+								"value": "ceoe1996@hotmail.com",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/Users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Users/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "Carlos",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "ceoe1996@hotmail.com",
+									"type": "text"
+								},
+								{
+									"key": "Gender",
+									"value": "M",
+									"type": "text"
+								},
+								{
+									"key": "Phone",
+									"value": "3334644819",
+									"type": "text"
+								},
+								{
+									"key": "BirthDate",
+									"value": "19960218",
+									"type": "text"
+								},
+								{
+									"key": "RegisteredDate",
+									"value": "20181008",
+									"type": "text"
+								},
+								{
+									"key": "Height",
+									"value": "1.85",
+									"type": "text"
+								},
+								{
+									"key": "UserType",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "Comments",
+									"value": "Cool",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "carlos1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Users/:userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Phone",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "Name",
+									"value": "Juan",
+									"type": "text"
+								},
+								{
+									"key": "UserType",
+									"value": "Pacien",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "prueba@hotmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/users/3",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Users/login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ceoe1996@hotmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/users/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promotions",
+			"item": [
+				{
+					"name": "GET: Promotions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/promotions/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"promotions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Promotions/:userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/promotions/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"promotions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Promotions/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "UserID",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "ServiceID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "20181001",
+									"type": "text"
+								},
+								{
+									"key": "QuantityBought",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "QuantityUsed",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/Promotions/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"Promotions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Promotions/:promotionID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "QuantityUsed",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/promotions/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"promotions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Diets",
+			"item": [
+				{
+					"name": "GET: Diets/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/diets/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Diets/:dietID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/diets/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Diets/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "2",
+								"disabled": true
+							},
+							{
+								"key": "name",
+								"value": "A2",
+								"disabled": true
+							},
+							{
+								"key": "description",
+								"value": "Desayuno: Fruta con yogurth",
+								"disabled": true
+							},
+							{
+								"key": "active",
+								"value": "1",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "A3",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Desayuno: Fruta con yogurth",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/diets/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Diets/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "id",
+								"value": "3"
+							},
+							{
+								"key": "name",
+								"value": "A2"
+							},
+							{
+								"key": "description",
+								"value": "Desayuno: Fruta con yogurth"
+							},
+							{
+								"key": "active",
+								"value": "1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "A3",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Desayuno: Fruta con yogurth",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/diets/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedule",
+			"item": [
+				{
+					"name": "GET: Schedule/:weekDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/schedule/2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"schedule",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Schedule/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "WeekDay",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "StartTime",
+									"value": "17:00",
+									"type": "text"
+								},
+								{
+									"key": "EndTime",
+									"value": "20:00",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/schedule/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"schedule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Schedule/:weekDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/schedule/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"schedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "GET: Places/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/places/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"places",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST: Places/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Name",
+									"value": "Cabina 2",
+									"type": "text"
+								},
+								{
+									"key": "PlaceType",
+									"value": "Cabina",
+									"type": "text"
+								},
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/places/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"places",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: Places/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/places/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServicesPlaces",
+			"item": [
+				{
+					"name": "GET: ServicePlaces/:serviceID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/servicesPlaces/Service/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"servicesPlaces",
+								"Service",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: ServicePlaces/:placeID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/servicesPlaces/Place/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"servicesPlaces",
+								"Place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT: ServicePlace/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "service",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "place",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/servicesPlaces/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"servicesPlaces",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

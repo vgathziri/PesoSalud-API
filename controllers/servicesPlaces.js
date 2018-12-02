@@ -1,5 +1,7 @@
 const servicesPlacesMdl = require('../models/servicesPlaces');
-
+/**
+ * [ServicesPlacesCtrl is a class that initializes the functions and the prototype of them]
+ */
 class ServicesPlacesCtrl {
   constructor() {
     this.create = this.constructor.create.bind(this);
@@ -10,7 +12,7 @@ class ServicesPlacesCtrl {
   /**
    * [create is a function of add a new Service Places]
    * @param  {Function} next [create]
-   * @return {response}      [return 201 when is created a new objet in db]
+   * @return {json}      [return 201 when is created a new objet in db]
    */
   static async create(req, res, next) {
     try {
@@ -21,6 +23,11 @@ class ServicesPlacesCtrl {
     }
   }
 
+  /**
+   * [searchService is a function to get services by id]
+   * @param  {[int]}   req  [id]
+   * @return {json}       [returns the object in case that exist or 400 if doesn't exists]
+   */
   static async searchService(req, res, next) {
     try {
       const data = await servicesPlacesMdl.findByService(req.params.serviceID);
@@ -37,7 +44,11 @@ class ServicesPlacesCtrl {
     }
   }
 
-
+  /**
+   * [searchPlaces is a function to get Places by id]
+   * @param  {[int]}   req  [id]
+   * @return {json}       [returns the object in case that exist or 400 if doesn't exists]
+   */
   static async searchPlaces(req, res, next) {
     try {
       console.log(req.params);
@@ -56,5 +67,4 @@ class ServicesPlacesCtrl {
   }
 }
 
-// find by 2
 module.exports = new ServicesPlacesCtrl();

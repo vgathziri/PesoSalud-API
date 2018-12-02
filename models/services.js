@@ -1,5 +1,7 @@
 const { db } = require('../db');
-
+/**
+ * [ServicesMdl is a class that initializes the functions and the prototype of them]]
+ */
 class ServicesMdl {
   constructor(data) {
     this.id = data.ID;
@@ -10,6 +12,11 @@ class ServicesMdl {
     this.active = data.Active;
   }
 
+  /**
+  * [Create is a method that connects the Services with the db]
+  * @param  {Object]} req [a new objet]
+  * @return {int}     [return id of created obj]
+  */
   static async create(obj) {
     let data;
     try {
@@ -20,6 +27,10 @@ class ServicesMdl {
     return data;
   }
 
+  /**
+   * [findAlly is a method of find all services registered]
+   * @return {Object} [return a Services is that  exists]
+   */
   static async findAll() {
     let data;
     try {
@@ -30,6 +41,12 @@ class ServicesMdl {
     return this.processData(data);
   }
 
+  /**
+ * [update is a method of call update of db]
+ * @param  {[Object]} req    [obj]
+ * @param  {[int]}  serviceId [Id]
+ * @return {Object}        [return object update if does exists]
+ */
   static async update(obj, servicesId) {
     let data;
     try {
@@ -40,6 +57,11 @@ class ServicesMdl {
     return data;
   }
 
+  /**
+   * [processData is a function that creates array of Services]
+   * @param  {[Object]} data [ServicesMdl]
+   * @return {[array]}      [returns array of Services]
+   */
   static processData(data) {
     const array = [];
     data.forEach((d) => {
