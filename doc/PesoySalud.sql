@@ -1,3 +1,7 @@
+DROP DATABASE PesoySaludDB;
+CREATE DATABASE PesoySaludDB;
+USE PesoySaludDB
+
 CREATE TABLE Appointment (
   ID        int(10) NOT NULL AUTO_INCREMENT,
   UserID    int(10) NOT NULL,
@@ -38,6 +42,8 @@ CREATE TABLE Permission (
   ID          int(10) NOT NULL AUTO_INCREMENT,
   Route       varchar(255) NOT NULL,
   Method      varchar(255) NOT NULL,
+  hasParams   tinyint NOT NULL DEFAULT 0,
+  onlyUser    tinyint NOT NULL DEFAULT 0,
   Active      tinyint(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (ID));
 CREATE TABLE Places (
@@ -136,6 +142,8 @@ CREATE TABLE RolesTemp(
 CREATE TABLE RoutesTemp(
   Route VARCHAR(255),
   Method VARCHAR(255),
+  hasParams BIT,
+  OnlyUser BIT,
   OnlyAdmin BIT
 );
 
@@ -151,51 +159,62 @@ SELECT Role FROM RolesTemp;
 
 INSERT INTO RoutesTemp
 VALUES
-  ('/users/', 'GET', 0),
-  ('/users/', 'POST', 0),
-  ('/users/', 'PUT', 0),
+  ('/users/', 'GET', 0, 0, 1),
+  ('/users/', 'GET', 1, 1, 0),
+  ('/users/', 'GET', 1, 0, 1),
+  ('/users/', 'POST', 0, 0, 0),
+  ('/users/', 'PUT', 1, 1, 0),
+  ('/users/', 'PUT', 1, 0, 1),
 
-  ('/places/', 'GET', 1),
-  ('/places/', 'POST', 1),
-  ('/places/', 'PUT', 1),
+  ('/places/', 'GET', 0, 0, 1),
+  ('/places/', 'POST', 0, 0, 1),
+  ('/places/', 'PUT', 1, 0, 1),
 
-  ('/appointments/', 'GET', 0),
-  ('/appointments/user/', 'GET', 1),
-  ('/appointments/place/', 'GET', 1),
-  ('/appointments/', 'POST', 0),
-  ('/appointments/', 'PUT', 1)
+  ('/appointments/', 'GET', 1, 0, 1),
+  ('/appointments/user/', 'GET', 1, 1, 0),
+  ('/appointments/user/', 'GET', 1, 0, 1),
+  ('/appointments/place/', 'GET', 1, 0, 1),
+  ('/appointments/', 'POST', 0, 0, 0),
+  ('/appointments/', 'PUT', 1, 0, 1),
 
-  ('/schedule/', 'GET', 1),
-  ('/schedule/', 'POST', 1),
-  ('/schedule/', 'PUT', 1),
+  ('/schedule/', 'GET', 1, 0, 1),
+  ('/schedule/', 'POST', 1, 0, 1),
+  ('/schedule/', 'PUT', 1, 0, 1),
 
-  ('/diets/', 'GET', 0),
-  ('/diets/', 'POST', 1),
-  ('/diets/', 'PUT', 1),
+  ('/diets/', 'GET', 1, 0, 0),
+  ('/diets/', 'GET', 0, 0, 1),
+  ('/diets/', 'POST', 0, 0, 1),
+  ('/diets/', 'PUT', 1, 0, 1),
 
-  ('/servicesPlaces/', 'GET', 1),
-  ('/servicesPlaces/', 'POST', 1),
+  ('/servicesPlaces/', 'GET', 1, 0, 1),
+  ('/servicesPlaces/', 'POST', 0, 0, 1),
 
-  ('/medicalRecords/', 'GET', 0),
-  ('/medicalRecords/user/', 'GET', 0),
-  ('/medicalRecords/', 'PUT', 1),
-  ('/medicalRecords/', 'POST', 1),
+  ('/medicalRecords/', 'GET', 1, 0, 0),
+  ('/medicalRecords/user/', 'GET', 1, 1, 0),
+  ('/medicalRecords/user/', 'GET', 1, 0, 1),
+  ('/medicalRecords/', 'PUT', 1, 0, 1),
+  ('/medicalRecords/', 'POST', 0, 0, 1),
 
-  ('/services/', 'GET', 0),
-  ('/services/', 'PUT', 1),
-  ('/services/', 'POST', 1),
+  ('/services/', 'GET', 0, 0, 0),
+  ('/services/', 'PUT', 1, 0, 1),
+  ('/services/', 'POST', 0, 0, 1),
 
-  ('/promotions/', 'GET', 0),
-  ('/promotions/', 'POST', 1),
-  ('/promotions/', 'PUT', 1);
+  ('/promotions/', 'GET', 0, 0, 0),
+  ('/promotions/', 'GET', 1, 0, 0),
+  ('/promotions/', 'POST', 0, 0, 1),
+  ('/promotions/', 'PUT', 1, 0, 1);
 
 INSERT INTO Permission(
   Route,
-  Method
+  Method,
+  hasParams,
+  OnlyUser
 )
 SELECT
   Route,
-  Method
+  Method,
+  hasParams,
+  OnlyUser
 FROM RoutesTemp;
 
 INSERT INTO Roles_Permission(
@@ -210,12 +229,21 @@ JOIN Roles R ON R.Description = RT.Role
 JOIN RoutesTemp RoT ON 1 = 1
 JOIN Permission P ON P.Route = RoT.Route
                   AND P.Method = RoT.Method
+                  AND P.hasParams = RoT.hasParams
+                  AND P.OnlyUser = RoT.OnlyUser
 WHERE
-  RoT.OnlyAdmin = 0
-  OR (
-      RT.IsAdmin = 1
-      AND RoT.OnlyAdmin = 1
-    );
+  (
+    RoT.OnlyAdmin = 0
+    OR (
+        RT.IsAdmin = 1
+        AND RoT.OnlyAdmin = 1
+      )
+  ) AND (
+    NOT (
+      RoT.OnlyUser = 1
+      AND RT.IsAdmin = 1
+    )
+  );
 
 DROP TABLE RolesTemp, RoutesTemp;
 

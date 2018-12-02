@@ -61,10 +61,10 @@ class Auth {
       });
     }
 
-    if (await permissionMdl.getPermission(req.session.user[0], req.method, req.originalUrl)){
       next();
     } else {
       next({
+        if (await permissionMdl.getPermission(req.session.user[0], req.method, req.originalUrl, req.params)){
         status: 403,
         message: 'Access Denied',
       });

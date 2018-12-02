@@ -7,6 +7,8 @@ class PermissionMdl {
     this.ID = data.ID;
     this.Route = data.Route;
     this.Method = data.Method;
+    this.hasParams = data.hasParams;
+    this.onlyUser = data.onlyUser;
     this.Active = data.Active;
   }
 
@@ -17,16 +19,21 @@ class PermissionMdl {
  * @param  {[Object]}  route  [route you are trying to access]
  * @return {Promise}        [Validate if the user has the permission for the action ]
  */
-  static async getPermission(user, method, route) {
+  static async getPermission(user, method, route, params) {
     let data;
     let Permission;
     try {
       data = this.processData(await await db.findWithFilters('Permission', {
         method,
         route,
+        hasParams: params === undefined,
       }));
 
       if (data.length === 0) {
+        return false;
+      }
+
+      if (data[0].onlyUser === 1 && params[0] !== user.ID) {
         return false;
       }
 
@@ -34,6 +41,7 @@ class PermissionMdl {
         RolesID: user.UserType,
         PermissionID: data[0].ID,
       });
+
     } catch (e) {
       throw e;
     }
