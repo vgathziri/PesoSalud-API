@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS db_pesoysalud;
+CREATE DATABASE db_pesoysalud CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+use db_pesoysalud;
+
 CREATE TABLE Appointment (
   ID        int(10) NOT NULL AUTO_INCREMENT,
   UserID    int(10) NOT NULL,
@@ -164,7 +169,7 @@ VALUES
   ('/appointments/user/', 'GET', 1),
   ('/appointments/place/', 'GET', 1),
   ('/appointments/', 'POST', 0),
-  ('/appointments/', 'PUT', 1)
+  ('/appointments/', 'PUT', 1),
 
   ('/schedule/', 'GET', 1),
   ('/schedule/', 'POST', 1),
