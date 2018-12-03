@@ -6,10 +6,10 @@ const { ensureAuth } = require('../middlewares');
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      WeekDay: 'required,weekDay',
-      StartTime: 'required,hour',
-      EndTime: 'required,hour',
-      Active: 'required,bool',
+      weekDay: 'required,weekDay',
+      startTime: 'required,hour',
+      endTime: 'required,hour',
+      active: 'required,bool',
     },
   });
 }], scheduleCtrl.create);
@@ -20,10 +20,10 @@ router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
       id: 'number,required',
     },
     body: {
-      WeekDay: 'weekDay',
-      StartTime: 'hour',
-      EndTime: 'hour',
-      Active: 'bool',
+      weekDay: 'weekDay',
+      startTime: 'hour',
+      endTime: 'hour',
+      active: 'bool',
     },
   });
 }], scheduleCtrl.edit);
