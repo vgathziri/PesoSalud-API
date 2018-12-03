@@ -22,18 +22,32 @@ class PermissionMdl {
   static async getPermission(user, method, route, params) {
     let data;
     let Permission;
+
     try {
+      let findRoute = route;
+      if (params !== undefined) {
+        findRoute = '';
+        const regex = /(\/?\w+\/)/g;
+        let m;
+        do {
+          m = regex.exec(route);
+          if (m) {
+            findRoute += m[0];
+          }
+        } while (m);
+      }
+
       data = this.processData(await await db.findWithFilters('Permission', {
         method,
-        route,
-        hasParams: params === undefined,
+        route: findRoute,
+        hasParams: (params === undefined ? 0 : 1),
       }));
 
       if (data.length === 0) {
         return false;
       }
 
-      if (data[0].onlyUser === 1 && params[0] !== user.ID) {
+      if (data[0].onlyUser === 1 && params[Object.keys(params)[0]] != user.id) {
         return false;
       }
 
@@ -41,7 +55,6 @@ class PermissionMdl {
         RolesID: user.UserType,
         PermissionID: data[0].ID,
       });
-
     } catch (e) {
       throw e;
     }

@@ -54,17 +54,17 @@ class Auth {
       });
     }
 
-    if (Number(req.session.user.Active) === 0){
+    if (Number(req.session.user.Active) === 0) {
       next({
         status: 403,
         message: 'This user is not active',
       });
     }
-
+    
+    if (await permissionMdl.getPermission(req.session.user[0], req.method, req.originalUrl, req.params)){
       next();
     } else {
       next({
-        if (await permissionMdl.getPermission(req.session.user[0], req.method, req.originalUrl, req.params)){
         status: 403,
         message: 'Access Denied',
       });
