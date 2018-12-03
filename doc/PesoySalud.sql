@@ -1,6 +1,7 @@
-DROP DATABASE PesoySaludDB;
-CREATE DATABASE PesoySaludDB;
-USE PesoySaludDB
+DROP DATABASE IF EXISTS db_pesoysalud;
+CREATE DATABASE db_pesoysalud CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE db_pesoysalud;
 
 CREATE TABLE Appointment (
   ID        int(10) NOT NULL AUTO_INCREMENT,
@@ -116,6 +117,7 @@ CREATE TABLE Users (
   UserType       int(10) NOT NULL,
   Comments       varchar(1000),
   Active         tinyint(1) DEFAULT 0 NOT NULL,
+  Picture        varchar(255),
   PRIMARY KEY (ID));
 ALTER TABLE Tokens ADD INDEX FKTokens513099 (UserID), ADD CONSTRAINT FKTokens513099 FOREIGN KEY (UserID) REFERENCES Users (ID);
 ALTER TABLE Users ADD INDEX FKUsers649923 (UserType), ADD CONSTRAINT FKUsers649923 FOREIGN KEY (UserType) REFERENCES Roles (ID);
