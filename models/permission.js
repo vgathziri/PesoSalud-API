@@ -22,10 +22,11 @@ class PermissionMdl {
   static async getPermission(user, method, route, params) {
     let data;
     let Permission = [];
+    let paramsLen = Object.keys(params).length;
 
     try {
       let findRoute = route;
-      if (params !== undefined) {
+      if (params > 0) {
         findRoute = '';
         const regex = /(\/?\w+\/)/g;
         let m;
@@ -36,11 +37,11 @@ class PermissionMdl {
           }
         } while (m);
       }
-      console.log(findRoute, method, params === undefined);
+
       data = this.processData(await await db.findWithFilters('Permission', {
         method,
         route: findRoute,
-        hasParams: (params === undefined ? 0 : 1),
+        hasParams: (params > 0 ? 1 : 0),
       }));
 
       if (data.length === 0) {
