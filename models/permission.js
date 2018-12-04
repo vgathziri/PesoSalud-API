@@ -21,7 +21,7 @@ class PermissionMdl {
  */
   static async getPermission(user, method, route, params) {
     let data;
-    let Permission;
+    let Permission = [];
 
     try {
       let findRoute = route;
@@ -36,7 +36,7 @@ class PermissionMdl {
           }
         } while (m);
       }
-
+      console.log(findRoute, method, params === undefined);
       data = this.processData(await await db.findWithFilters('Permission', {
         method,
         route: findRoute,
@@ -47,14 +47,19 @@ class PermissionMdl {
         return false;
       }
 
-      if (data[0].onlyUser === 1 && params[Object.keys(params)[0]] != user.id) {
-        return false;
+      for (let e in data ) {
+        let p = await db.findWithFilters('Roles_Permission', {
+          RolesID: user.UserType,
+          PermissionID: data[e].ID,
+        });
+        if(p.length > 0) {
+          if (data[e].onlyUser === 0) {
+            Permission.push(p);
+          } else if(params[Object.keys(params)[0]] == user.id) {
+            Permission.push(p);
+          }
+        }
       }
-
-      Permission = await db.findWithFilters('Roles_Permission', {
-        RolesID: user.UserType,
-        PermissionID: data[0].ID,
-      });
     } catch (e) {
       throw e;
     }
