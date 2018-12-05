@@ -31,14 +31,29 @@ router.put('/password_reset/:token', (req, res, next) => {
     body: {
       password: 'required',
     },
+    params: {
+      token: 'required',
+    },
   });
 }, userCtrl.updatePassword);
 
-router.get('/verify-email/:token', userCtrl.activateUser);
+router.get('/verify-email/:token', (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    params: {
+      token: 'required',
+    },
+  });
+}, userCtrl.activateUser);
 
 // CRUD
 router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getAll);
-router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], userCtrl.getUser);
+router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    params: {
+      id: 'required,number',
+    },
+  });
+}], userCtrl.getUser);
 
 router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
@@ -46,8 +61,12 @@ router.post('/', (req, res, next) => {
       Name: 'word,required',
       Email: 'email,required',
       Password: 'required',
-      Gender: 'required',
+      Gender: 'word,required',
       UserType: 'required',
+      Phone: 'number',
+      BirthDate: 'date',
+      Height: 'decimal',
+      Comments: 'word',
     },
   });
 }, userCtrl.create);
@@ -57,7 +76,11 @@ router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
     body: {
       Name: 'word',
       Email: 'email',
-      UserType: 'word',
+      Gender: 'word',
+      Phone: 'number',
+      BirthDate: 'date',
+      Height: 'decimal',
+      Comments: 'word',
     },
   });
 }], userCtrl.edit);

@@ -17,6 +17,8 @@ class Validator {
       decimal: /^(\d+\.?\d{0,4}|\.\d{1,4})$/,
       date: /^[1-2][0-9]{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-2])$/,
       hour: /^([01][0-9]|2[0-3]:[0-5][0-9])$/,
+      weekDay: /^[0-7]$/,
+      bool: /^[01]$/,
     };
   }
 
@@ -43,6 +45,10 @@ class Validator {
 
   static hour(data) {
     return (Validator.regex.hour.test(data));
+  }
+
+  static bool(data) {
+    return (Validator.regex.bool.test(data));
   }
 
   static image(data) {

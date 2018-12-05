@@ -7,6 +7,8 @@ class PermissionMdl {
     this.ID = data.ID;
     this.Route = data.Route;
     this.Method = data.Method;
+    this.hasParams = data.hasParams;
+    this.onlyUser = data.onlyUser;
     this.Active = data.Active;
   }
 
@@ -17,23 +19,48 @@ class PermissionMdl {
  * @param  {[Object]}  route  [route you are trying to access]
  * @return {Promise}        [Validate if the user has the permission for the action ]
  */
-  static async getPermission(user, method, route) {
+  static async getPermission(user, method, route, params) {
     let data;
-    let Permission;
+    let Permission = [];
+    const paramsLen = Object.keys(params).length;
+
     try {
+      let findRoute = route;
+      if (paramsLen > 0) {
+        findRoute = '';
+        const regex = /(\/?\w+\/)/g;
+        let m;
+        do {
+          m = regex.exec(route);
+          if (m) {
+            findRoute += m[0];
+          }
+        } while (m);
+      }
+
       data = this.processData(await await db.findWithFilters('Permission', {
         method,
-        route,
+        route: findRoute,
+        hasParams: (paramsLen > 0 ? 1 : 0),
       }));
 
       if (data.length === 0) {
         return false;
       }
 
-      Permission = await db.findWithFilters('Roles_Permission', {
-        RolesID: user.UserType,
-        PermissionID: data[0].ID,
-      });
+      for (let e in data ) {
+        let p = await db.findWithFilters('Roles_Permission', {
+          RolesID: user.UserType,
+          PermissionID: data[e].ID,
+        });
+        if(p.length > 0) {
+          if (data[e].onlyUser === 0) {
+            Permission.push(p);
+          } else if(params[Object.keys(params)[0]] == user.id) {
+            Permission.push(p);
+          }
+        }
+      }
     } catch (e) {
       throw e;
     }

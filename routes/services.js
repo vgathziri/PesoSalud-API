@@ -14,11 +14,11 @@ router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], serviceCtrl
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'word,required',
-      Description: 'required',
-      Price: 'required',
-      Duration: 'required',
-      Active: 'required',
+      name: 'word,required',
+      description: 'required,word',
+      price: 'required,decimal',
+      duration: 'required,number',
+      active: 'required,bool',
     },
   });
 }], serviceCtrl.create);
@@ -29,8 +29,14 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
 router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      Name: 'word',
-      Description: 'required',
+      name: 'word',
+      description: 'required,word',
+      price: 'decimal',
+      duration: 'number',
+      active: 'bool',
+    },
+    params: {
+      id: 'required,number',
     },
   });
 }], serviceCtrl.edit);
