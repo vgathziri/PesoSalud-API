@@ -22,6 +22,8 @@ app.use(router);
 
 app.use(errorHandler);
 
-app.listen(process.env.DB_PORT, () => {
-  console.log(`Server is running on port ${process.env.DB_PORT}...`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}...`);
 });
