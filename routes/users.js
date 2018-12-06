@@ -47,13 +47,7 @@ router.get('/verify-email/:token', (req, res, next) => {
 
 // CRUD
 router.get('/', userCtrl.getAll);
-router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
-  middlewares.validator.validate(req, res, next, {
-    params: {
-      id: 'required,number',
-    },
-  });
-}], userCtrl.getUser);
+router.get('/:id', userCtrl.getUser);
 
 router.post('/', (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
