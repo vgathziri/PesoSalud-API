@@ -12,10 +12,11 @@ const { errorHandler } = require('./middlewares');
 
 const app = express();
 
+app.use(cors());
+
 // Cargamos los middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 // Load routes into app
 app.use(router);
