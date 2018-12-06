@@ -61,7 +61,7 @@ router.post('/', (req, res, next) => {
       Name: 'word,required',
       Email: 'email,required',
       Password: 'required',
-      Gender: 'word,required',
+      Gender: 'gender,required',
       UserType: 'required',
       Phone: 'number',
       BirthDate: 'date',
