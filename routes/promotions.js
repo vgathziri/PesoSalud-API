@@ -8,10 +8,10 @@ router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], promotio
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      UserID: 'required',
-      ServiceID: 'required',
-      Date: 'required',
-      QuantityBought: 'required',
+      UserID: 'number,required',
+      ServiceID: 'number,required',
+      Date: 'date,required',
+      QuantityBought: 'number,required',
     },
   });
 }], promotionsCtrl.createPromotion);
