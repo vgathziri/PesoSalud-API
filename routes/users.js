@@ -76,7 +76,7 @@ router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
     body: {
       Name: 'word',
       Email: 'email',
-      Gender: 'word',
+      Gender: 'gender',
       Phone: 'number',
       BirthDate: 'date',
       Height: 'decimal',
