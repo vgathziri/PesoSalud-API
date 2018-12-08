@@ -5,11 +5,10 @@ const { db } = require('../db');
 class PromotionsMdl {
   constructor(data) {
     this.id = data.ID;
-    this.userId = data.UserID;
     this.serviceID = data.ServiceID;
-    this.date = data.Date;
-    this.quantityBought = data.QuantityBought;
-    this.quantityiUsed = data.QuantityUsed;
+    this.description = data.Description;
+    this.quantity = data.Quantity;
+    this.active = data.Active;
   }
 
   /**
@@ -35,6 +34,7 @@ class PromotionsMdl {
     let data;
     try {
       data = await db.findAll('Promotions');
+      console.log(data);
     } catch (e) {
       throw e;
     }
@@ -65,7 +65,6 @@ class PromotionsMdl {
   static async update(obj, id) {
     let data;
     try {
-      console.log(obj, id);
       data = await db.update('Promotions', obj, id);
     } catch (e) {
       throw e;

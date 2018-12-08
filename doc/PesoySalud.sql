@@ -180,7 +180,7 @@ VALUES
   ('/appointments/', 'PUT', 1, 0, 1),
 
   ('/schedule/', 'GET', 1, 0, 1),
-  ('/schedule/', 'POST', 1, 0, 1),
+  ('/schedule/', 'POST', 0, 0, 1),
   ('/schedule/', 'PUT', 1, 0, 1),
 
   ('/diets/', 'GET', 1, 0, 0),
@@ -188,7 +188,8 @@ VALUES
   ('/diets/', 'POST', 0, 0, 1),
   ('/diets/', 'PUT', 1, 0, 1),
 
-  ('/servicesPlaces/', 'GET', 1, 0, 1),
+  ('/servicesPlaces/Service/', 'GET', 1, 0, 1),
+  ('/servicesPlaces/Place/', 'GET', 1, 0, 1),
   ('/servicesPlaces/', 'POST', 0, 0, 1),
 
   ('/medicalRecords/', 'GET', 1, 0, 0),

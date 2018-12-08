@@ -4,9 +4,9 @@ const middlewares = require('../middlewares');
 const { ensureAuth } = require('../middlewares');
 
 router.get('/:date', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
-  middlewares.validator(req, res, next, {
+  middlewares.validator.validate(req, res, next, {
     params: {
-      date: 'require,date',
+      date: 'required,date',
     },
   });
 }], appointmentCtrl.getByDate);
@@ -14,7 +14,7 @@ router.get('/:date', [ensureAuth.haveSession, ensureAuth.havePermission, (req, r
 router.get('/user/:userID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     params: {
-      userID: 'require,number',
+      userID: 'required,number',
     },
   });
 }], appointmentCtrl.getByUserID);
@@ -22,7 +22,7 @@ router.get('/user/:userID', [ensureAuth.haveSession, ensureAuth.havePermission, 
 router.get('/place/:placeID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     params: {
-      placeID: 'require,number',
+      placeID: 'required,number',
     },
   });
 }], appointmentCtrl.getByPlaceID);

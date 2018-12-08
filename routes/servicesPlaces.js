@@ -9,7 +9,7 @@ const { ensureAuth } = require('../middlewares');
 router.get('/Service/:serviceID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     params: {
-      serviceID: 'required, number',
+      serviceID: 'required,number',
     },
   });
 }], ServicesPlacesCtrl.searchService);
@@ -20,7 +20,7 @@ router.get('/Service/:serviceID', [ensureAuth.haveSession, ensureAuth.havePermis
 router.get('/Place/:placeID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     params: {
-      placeID: 'required, number',
+      placeID: 'required,number',
     },
   });
 }], ServicesPlacesCtrl.searchPlaces);

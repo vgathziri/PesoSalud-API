@@ -1,4 +1,4 @@
-const dietsMdl = require('../models/diets');
+const DietsMdl = require('../models/diets');
 /**
  * [DietsCtrl is a class that initializes the functions and the prototype of them]
  */

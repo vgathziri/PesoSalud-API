@@ -30,7 +30,7 @@ router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
   middlewares.validator.validate(req, res, next, {
     body: {
       name: 'word',
-      description: 'required,word',
+      description: 'word',
       price: 'decimal',
       duration: 'number',
       active: 'bool',
