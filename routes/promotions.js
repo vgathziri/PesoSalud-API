@@ -8,13 +8,25 @@ router.get('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], promotio
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      UserID: 'number,required',
+      Description: 'word,required',
       ServiceID: 'number,required',
-      Date: 'date,required',
-      QuantityBought: 'number,required',
+      Quantity: 'number,required',
+      Active: 'bool',
     },
   });
 }], promotionsCtrl.createPromotion);
-router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission], promotionsCtrl.editPromotion);
+router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
+  middlewares.validator.validate(req, res, next, {
+    params: {
+      id: 'number,required',
+    },
+    body: {
+      Description: 'word',
+      ServiceID: 'number',
+      Quantity: 'number',
+      Active: 'bool',
+    },
+  });
+}], promotionsCtrl.editPromotion);
 
 module.exports = router;
