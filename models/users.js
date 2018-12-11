@@ -14,6 +14,7 @@ class UserMdl {
     this.RegisteredDate = data.RegisteredDate;
     this.Height = data.Height;
     this.UserType = data.UserType;
+    this.Role = data.Description;
     this.Comments = data.Comments;
     this.picture = data.Picture;
     this.Active = data.Active;
@@ -41,7 +42,7 @@ class UserMdl {
   static async findAll() {
     let data;
     try {
-      data = await db.findAll('Users');
+      data = await db.select('SELECT A.*, B.Description FROM Users AS A JOIN Roles AS B ON A.UserType = B.ID');
     } catch (e) {
       throw e;
     }
