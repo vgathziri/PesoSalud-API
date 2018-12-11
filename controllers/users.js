@@ -50,7 +50,7 @@ class UserCtrl {
           });
           return hash;
         })
-        .then(hash => res.status(200).send({ id: user[0].id, token: hash }))
+        .then(hash => res.status(200).send({ id: user[0].id, UserType: user[0].UserType, token: hash }))
         .catch(err => next({ status: 400, message: err }));
     } catch (e) {
       next({
