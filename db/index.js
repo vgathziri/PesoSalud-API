@@ -156,6 +156,17 @@ class DB {
     });
   }
 
+  select(query) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(query, (err, rows) => {
+        if (err) {
+          return reject(this.processError(err));
+        }
+        return resolve(this.processResults(rows));
+      });
+    });
+  }
+
   disconnect() {
     this.connection.end();
   }
@@ -201,6 +212,10 @@ class DB {
         };
         break;
       default:
+        error[''] = {
+          error: err.sqlMessage,
+          sql: err.sql,
+        };
     }
     return error;
   }
@@ -210,7 +225,7 @@ class DB {
    * @param  {[type]} message [description]
    * @return {[type]}         [description]
    */
-  static getDataFromErrorMsg(message) {
+  getDataFromErrorMsg(message) {
     const data = unescape(message).match(/'([^']+)'/g);
     return {
       field: data[1].slice(1, -1),

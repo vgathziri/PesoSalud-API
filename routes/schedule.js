@@ -17,7 +17,7 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
 router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     params: {
-      id: 'number,required',
+      ID: 'number,required',
     },
     body: {
       weekDay: 'weekDay',

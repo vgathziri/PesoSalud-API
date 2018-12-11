@@ -50,7 +50,7 @@ class UserCtrl {
           });
           return hash;
         })
-        .then(hash => res.status(200).send({ id: user[0].id, token: hash }))
+        .then(hash => res.status(200).send({ id: user[0].id, token: hash, role: user[0].UserType }))
         .catch(err => next({ status: 400, message: err }));
     } catch (e) {
       next({
@@ -84,7 +84,7 @@ class UserCtrl {
           return hash;
         })
         .then((hash) => {
-          sendMail(user[0].email, '[Peso Y Salud] Please reset your password', 'html', `<div><span>We heard that you lost your Peso y Salud password. Sorry about that!</span><br><br><span>But don’t worry! You can use the following link to reset your password:</span><br><br><a href="${process.env.ENVIRONMENT}:${process.env.DB_PORT}/users/password_reset/${hash.replace(/\//g, '')}" target="_blank">Reset Password</a><br><br><span>or copy and paste this link in your browser</span><br><b>${process.env.ENVIRONMENT}:${process.env.DB_PORT}/users/password_reset/${hash.replace(/\//g, '')}</b><br><br><span>If you don’t use this link within 3 hours, it will expire.</span><br><br><span>Thanks,</span><br><span>Your friends at Peso y Salud</span></div>`);
+          sendMail(user[0].email, '[Peso Y Salud] Please reset your password', 'html', `<div><span>We heard that you lost your Peso y Salud password. Sorry about that!</span><br><br><span>But don’t worry! You can use the following link to reset your password:</span><br><br><a href="${process.env.ENVIRONMENT}/users/password_reset/${hash.replace(/\//g, '')}" target="_blank">Reset Password</a><br><br><span>or copy and paste this link in your browser</span><br><b>${process.env.ENVIRONMENT}/users/password_reset/${hash.replace(/\//g, '')}</b><br><br><span>If you don’t use this link within 3 hours, it will expire.</span><br><br><span>Thanks,</span><br><span>Your friends at Peso y Salud</span></div>`);
         })
         .then(res.status(200).send({ message: 'Check your email for a link to reset your password. If it doesn’t appear within a few minutes, check your spam folder.' }))
         .catch(err => next({ status: 400, message: err }));
@@ -147,7 +147,7 @@ class UserCtrl {
           return hash;
         })
         .then((hash) => {
-          sendMail(user[0].email, '[Peso Y Salud] Please activate your acount', 'html', `<div><span>Dear ${user[0].name},</span><br><br><span>Thank you for joining Peso Y Salud! You have successfully created your account</span><br><br><span>Please press the link below  to verify your email address and complete your registration.</span><br><br><a href="${process.env.ENVIRONMENT}:${process.env.DB_PORT}/users/verify-email/${hash.replace(/\//g, '')}" target="_blank">Complete registration</a><br><br><span>or copy and paste this link in your browser</span><br><b>${process.env.ENVIRONMENT}:${process.env.DB_PORT}/users/verify-email/${hash.replace(/\//g, '')}</b><br><br><span>Best regards,</span><br><span>Your friends at Peso y Salud</span></div>`);
+          sendMail(user[0].email, '[Peso Y Salud] Please activate your acount', 'html', `<div><span>Dear ${user[0].name},</span><br><br><span>Thank you for joining Peso Y Salud! You have successfully created your account</span><br><br><span>Please press the link below  to verify your email address and complete your registration.</span><br><br><a href="${process.env.ENVIRONMENT}/users/verify-email/${hash.replace(/\//g, '')}" target="_blank">Complete registration</a><br><br><span>or copy and paste this link in your browser</span><br><b>${process.env.ENVIRONMENT}/users/verify-email/${hash.replace(/\//g, '')}</b><br><br><span>Best regards,</span><br><span>Your friends at Peso y Salud</span></div>`);
         })
         .then(res.status(201).send({ message: 'Check your email for a link to activate your acount. If it doesn’t appear within a few minutes, check your spam folder.' }))
         .catch(err => next({ status: 400, message: err }));

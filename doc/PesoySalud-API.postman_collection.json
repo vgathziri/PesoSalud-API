@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17556774-183d-4ec8-a2bb-f34bb0b36d7b",
+		"_postman_id": "ac01c9e1-07b4-4798-8c33-444b7549ac16",
 		"name": "PesoySalud-API",
 		"description": "Testing Peso y Salud Endpoints",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -64,13 +64,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{HOST}}/appointments/1",
+							"raw": "{{HOST}}/appointments/2",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"appointments",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -84,7 +84,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -100,28 +100,28 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "ServiceID",
+									"key": "userID",
 									"value": "1",
 									"type": "text"
 								},
 								{
-									"key": "PlaceID",
+									"key": "serviceID",
 									"value": "1",
 									"type": "text"
 								},
 								{
-									"key": "Date",
+									"key": "placeID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "date",
 									"value": "20180901",
 									"type": "text"
 								},
 								{
-									"key": "Status",
+									"key": "status",
 									"value": "Cancel",
-									"type": "text"
-								},
-								{
-									"key": "UserID",
-									"value": "1",
 									"type": "text"
 								}
 							]
@@ -147,17 +147,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/appointments/place/1",
 							"host": [
@@ -180,17 +177,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/appointments/user/1",
 							"host": [
@@ -213,25 +207,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "{{HOST}}/appointments/20181005",
+							"raw": "{{HOST}}/appointments/2018-10-05",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"appointments",
-								"20181005"
+								"2018-10-05"
 							]
 						}
 					},
@@ -250,7 +241,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -273,7 +264,7 @@
 								},
 								{
 									"key": "userID",
-									"value": "5",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -384,17 +375,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/medicalRecords/user/1",
 							"host": [
@@ -417,25 +405,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "{{HOST}}/medicalRecords/1",
+							"raw": "{{HOST}}/medicalRecords/2",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"medicalRecords",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -449,7 +434,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -473,103 +458,120 @@
 								{
 									"key": "userID",
 									"value": "5",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "appointmentID",
 									"value": "2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "serviceID",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "weight",
 									"value": "81.2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "bust",
-									"value": "72.8",
+									"value": "80",
 									"type": "text"
 								},
 								{
 									"key": "waistline",
 									"value": "69.7",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "hip",
 									"value": "73.4",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "chest",
 									"value": "80.7",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "abdomen",
 									"value": "78.5",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "dietID",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "symptom",
 									"value": "Tos",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "comments",
 									"value": "Paciente",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "initialHighAbdomen",
 									"value": "71.3",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "finalHighAbdomen",
 									"value": "69.1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "initialMediumAbdomen",
 									"value": "72.8",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "finalMediumAbdomen",
 									"value": "71.6",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "initialLowAbdomen",
 									"value": "70.8",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "finalLowAbdomen",
 									"value": "69.8",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{HOST}}/medicalRecords/3",
+							"raw": "{{HOST}}/medicalRecords/2",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"medicalRecords",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -588,7 +590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -610,27 +612,27 @@
 									"disabled": true
 								},
 								{
-									"key": "Name",
+									"key": "name",
 									"value": "Control de Peso",
 									"type": "text"
 								},
 								{
-									"key": "Description",
+									"key": "description",
 									"value": "Control de Peso",
 									"type": "text"
 								},
 								{
-									"key": "Price",
+									"key": "price",
 									"value": "100",
 									"type": "text"
 								},
 								{
-									"key": "Active",
+									"key": "active",
 									"value": "1",
 									"type": "text"
 								},
 								{
-									"key": "Duration",
+									"key": "duration",
 									"value": "10",
 									"type": "text"
 								}
@@ -657,17 +659,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/services/",
 							"host": [
@@ -689,7 +688,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -706,34 +705,38 @@
 							"urlencoded": [
 								{
 									"key": "id",
-									"value": "2",
+									"value": "1",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "Name",
-									"value": "Control de Peso",
+									"value": "Control Peso",
 									"type": "text"
 								},
 								{
 									"key": "Description",
 									"value": "Control de Peso",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Price",
 									"value": "100",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Active",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Duration",
 									"value": "10",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -756,6 +759,35 @@
 			"name": "Users",
 			"item": [
 				{
+					"name": "GET: Users/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HOST}}/users/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET: Users/:userID",
 					"request": {
 						"auth": {
@@ -763,17 +795,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/users/1",
 							"host": [
@@ -788,50 +817,6 @@
 					"response": []
 				},
 				{
-					"name": "GET: Users/",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "email",
-								"value": "ceoe1996@hotmail.com",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "password",
-								"value": "1234",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{HOST}}/Users",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"Users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "POST: Users/",
 					"request": {
 						"auth": {
@@ -839,25 +824,24 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "id",
-									"value": "5",
-									"type": "text",
-									"disabled": true
-								},
-								{
 									"key": "Name",
-									"value": "Carlos",
+									"value": "Carlos1",
 									"type": "text"
 								},
 								{
@@ -877,7 +861,7 @@
 								},
 								{
 									"key": "BirthDate",
-									"value": "19960218",
+									"value": "1996-02-18",
 									"type": "text"
 								},
 								{
@@ -892,7 +876,7 @@
 								},
 								{
 									"key": "UserType",
-									"value": "Admin",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -902,18 +886,19 @@
 								},
 								{
 									"key": "Password",
-									"value": "carlos1",
+									"value": "1234",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{HOST}}/users",
+							"raw": "{{HOST}}/users/",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
-								"users"
+								"users",
+								""
 							]
 						}
 					},
@@ -922,16 +907,6 @@
 				{
 					"name": "PUT: Users/:userID",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [
 							{
@@ -953,50 +928,51 @@
 									"type": "text"
 								},
 								{
-									"key": "UserType",
-									"value": "Pacien",
+									"key": "Email",
+									"value": "prueba@gmail.com",
 									"type": "text"
 								},
 								{
-									"key": "Email",
-									"value": "prueba@hotmail.com",
+									"key": "UserType",
+									"value": "Pacient",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{HOST}}/users/3",
+							"raw": "{{HOST}}/users/5",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"users",
-								"3"
+								"5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "POST: Users/login",
+					"name": "POST: Users/LogIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dd1720f8-721d-4b5e-928e-e2960a3ce14f",
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"TOKEN\", data.token);"
+								]
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1040,17 +1016,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/promotions/",
 							"host": [
@@ -1065,38 +1038,6 @@
 					"response": []
 				},
 				{
-					"name": "GET: Promotions/:userID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{HOST}}/promotions/1",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"promotions",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "POST: Promotions/",
 					"request": {
 						"auth": {
@@ -1104,7 +1045,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1126,28 +1067,23 @@
 									"disabled": true
 								},
 								{
-									"key": "UserID",
-									"value": "5",
-									"type": "text"
-								},
-								{
 									"key": "ServiceID",
 									"value": "1",
 									"type": "text"
 								},
 								{
-									"key": "Date",
-									"value": "20181001",
+									"key": "Description",
+									"value": "2x1 en Control de Peso",
 									"type": "text"
 								},
 								{
-									"key": "QuantityBought",
-									"value": "10",
+									"key": "Quantity",
+									"value": "2",
 									"type": "text"
 								},
 								{
-									"key": "QuantityUsed",
-									"value": "0",
+									"key": "Active",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -1173,7 +1109,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1189,8 +1125,8 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "QuantityUsed",
-									"value": "1",
+									"key": "Quantity",
+									"value": "12",
 									"type": "text"
 								}
 							]
@@ -1221,17 +1157,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/diets/",
 							"host": [
@@ -1253,17 +1186,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/diets/1",
 							"host": [
@@ -1285,7 +1215,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1294,28 +1224,23 @@
 						"header": [
 							{
 								"key": "id",
-								"value": "2",
-								"disabled": true
+								"value": "3"
 							},
 							{
 								"key": "name",
-								"value": "A2",
-								"disabled": true
+								"value": "A2"
 							},
 							{
 								"key": "description",
-								"value": "Desayuno: Fruta con yogurth",
-								"disabled": true
+								"value": "Desayuno: Fruta con yogurth"
 							},
 							{
 								"key": "active",
-								"value": "1",
-								"disabled": true
+								"value": "1"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"disabled": true
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1328,17 +1253,17 @@
 									"disabled": true
 								},
 								{
-									"key": "Name",
+									"key": "name",
 									"value": "A3",
 									"type": "text"
 								},
 								{
-									"key": "Description",
+									"key": "description",
 									"value": "Desayuno: Fruta con yogurth",
 									"type": "text"
 								},
 								{
-									"key": "Active",
+									"key": "active",
 									"value": "1",
 									"type": "text"
 								}
@@ -1365,7 +1290,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1403,17 +1328,19 @@
 									"disabled": true
 								},
 								{
-									"key": "Name",
+									"key": "name",
 									"value": "A3",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "Description",
+									"key": "descripcion",
 									"value": "Desayuno: Fruta con yogurth",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "Active",
+									"key": "active",
 									"value": "0",
 									"type": "text"
 								}
@@ -1445,17 +1372,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/schedule/2",
 							"host": [
@@ -1477,7 +1401,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1499,22 +1423,22 @@
 									"disabled": true
 								},
 								{
-									"key": "WeekDay",
+									"key": "weekDay",
 									"value": "2",
 									"type": "text"
 								},
 								{
-									"key": "StartTime",
+									"key": "startTime",
 									"value": "17:00",
 									"type": "text"
 								},
 								{
-									"key": "EndTime",
+									"key": "endTime",
 									"value": "20:00",
 									"type": "text"
 								},
 								{
-									"key": "Active",
+									"key": "active",
 									"value": "1",
 									"type": "text"
 								}
@@ -1541,7 +1465,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1557,8 +1481,8 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "Active",
-									"value": "1",
+									"key": "active",
+									"value": "0",
 									"type": "text"
 								}
 							]
@@ -1589,17 +1513,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/places/",
 							"host": [
@@ -1621,7 +1542,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1643,17 +1564,17 @@
 									"disabled": true
 								},
 								{
-									"key": "Name",
+									"key": "name",
 									"value": "Cabina 2",
 									"type": "text"
 								},
 								{
-									"key": "PlaceType",
+									"key": "placeType",
 									"value": "Cabina",
 									"type": "text"
 								},
 								{
-									"key": "Active",
+									"key": "active",
 									"value": "1",
 									"type": "text"
 								}
@@ -1680,7 +1601,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1697,7 +1618,7 @@
 							"urlencoded": [
 								{
 									"key": "Active",
-									"value": "1",
+									"value": "0",
 									"type": "text"
 								}
 							]
@@ -1718,7 +1639,7 @@
 			]
 		},
 		{
-			"name": "ServicesPlaces",
+			"name": "ServicePlaces",
 			"item": [
 				{
 					"name": "GET: ServicePlaces/:serviceID",
@@ -1728,17 +1649,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/servicesPlaces/Service/1",
 							"host": [
@@ -1761,17 +1679,14 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{HOST}}/servicesPlaces/Place/1",
 							"host": [
@@ -1787,14 +1702,14 @@
 					"response": []
 				},
 				{
-					"name": "PUT: ServicePlace/",
+					"name": "POST: ServicePlace/",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1810,12 +1725,12 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "service",
+									"key": "servicesID",
 									"value": "2",
 									"type": "text"
 								},
 								{
-									"key": "place",
+									"key": "placeID",
 									"value": "1",
 									"type": "text"
 								}

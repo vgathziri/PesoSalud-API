@@ -12,16 +12,19 @@ const { errorHandler } = require('./middlewares');
 
 const app = express();
 
+app.use(cors());
+
 // Cargamos los middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 // Load routes into app
 app.use(router);
 
 app.use(errorHandler);
 
-app.listen(process.env.DB_PORT, () => {
-  console.log(`Server is running on port ${process.env.DB_PORT}...`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}...`);
 });

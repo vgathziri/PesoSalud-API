@@ -8,7 +8,7 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
   middlewares.validator.validate(req, res, next, {
     body: {
       name: 'required,word',
-      placeType: 'require,word',
+      placeType: 'required,word',
       active: 'required,bool',
     },
   });

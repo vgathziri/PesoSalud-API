@@ -8,6 +8,7 @@ class AppointmentMdl {
     this.userID = data.UserID;
     this.date = data.Date;
     this.serviceID = data.ServiceID;
+    this.Service = data.Name;
     this.status = data.Status;
     this.placeID = data.PlaceID;
   }
@@ -50,7 +51,7 @@ class AppointmentMdl {
   static async findByUserID(userID) {
     let data;
     try {
-      data = await db.findByAttribute('Appointment', 'UserID', userID);
+      data = await db.select(`SELECT A.*, B.Name FROM Appointment AS A JOIN Services AS B ON A.serviceID = B.ID WHERE userID = ${userID}`);
     } catch (e) {
       throw e;
     }

@@ -13,9 +13,9 @@ router.get('/', [ensureAuth.haveSession, ensureAuth.havePermission], dietsCtrl.g
  */
 
 router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
-  middlewares.validator(req, res, next, {
+  middlewares.validator.validate(req, res, next, {
     params: {
-      ID: 'require,number',
+      ID: 'required,number',
     },
   });
 }], dietsCtrl.get);
@@ -26,8 +26,8 @@ router.get('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
 router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
   middlewares.validator.validate(req, res, next, {
     body: {
-      name: 'word,required',
-      descripcion: 'word,required',
+      name: 'required',
+      description: 'word,required',
       active: 'bool,required',
     },
   });
@@ -40,9 +40,11 @@ router.put('/:ID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
   middlewares.validator.validate(req, res, next, {
     body: {
       name: 'word',
+      description: 'word',
+      active: 'bool',
     },
     params: {
-      ID: 'number',
+      ID: 'number,required',
     },
   });
 }], dietsCtrl.edit);

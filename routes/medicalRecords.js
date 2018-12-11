@@ -4,7 +4,7 @@ const { medicalRecordsCtrl } = require('../controllers');
 const { ensureAuth } = require('../middlewares');
 
 router.get('/user/:userID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
-  middlewares.validator.validar(req, res, next, {
+  middlewares.validator.validate(req, res, next, {
     params: {
       userID: 'required,number',
     },
@@ -12,7 +12,7 @@ router.get('/user/:userID', [ensureAuth.haveSession, ensureAuth.havePermission, 
 }], medicalRecordsCtrl.getByUserID);
 
 router.get('/:appointmentID', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, next) => {
-  middlewares.validator.validar(req, res, next, {
+  middlewares.validator.validate(req, res, next, {
     params: {
       appointmentID: 'required,number',
     },
@@ -33,6 +33,14 @@ router.post('/', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res, 
       chest: 'decimal',
       abdomen: 'decimal',
       dietID: 'number',
+      symptom: 'word',
+      comments: 'word',
+      initialHighAbdomen: 'decimal',
+      finalHighAbdomen: 'decimal',
+      initialMediumAbdomen: 'decimal',
+      finalMediumAbdomen: 'decimal',
+      initialLowAbdomen: 'decimal',
+      finalLowAbdomen: 'decimal',
     },
   });
 }], medicalRecordsCtrl.create);
@@ -51,6 +59,14 @@ router.put('/:id', [ensureAuth.haveSession, ensureAuth.havePermission, (req, res
       chest: 'decimal',
       abdomen: 'decimal',
       dietID: 'number',
+      symptom: 'word',
+      comments: 'word',
+      initialHighAbdomen: 'decimal',
+      finalHighAbdomen: 'decimal',
+      initialMediumAbdomen: 'decimal',
+      finalMediumAbdomen: 'decimal',
+      initialLowAbdomen: 'decimal',
+      finalLowAbdomen: 'decimal',
     },
     params: {
       id: 'required,number',

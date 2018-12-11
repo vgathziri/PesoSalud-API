@@ -12,11 +12,13 @@ class Validator {
   static get regex() {
     return {
       word: /[a-zA-ZñÑ ]{3,}/,
+      gender: /[MF]/,
       email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       number: /^\d+$/,
       decimal: /^(\d+\.?\d{0,4}|\.\d{1,4})$/,
-      date: /^[1-2][0-9]{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-2])$/,
-      hour: /^([01][0-9]|2[0-3]:[0-5][0-9])$/,
+      date: /^[1-2][0-9]{3}[-]?(0[1-9]|1[0-2])[-]?(0[1-9]|[1-2][0-9]|3[0-1])$/,
+      datetime: /^[1-2][0-9]{3}[-]?(0[1-9]|1[0-2])[-]?(0[1-9]|[1-2][0-9]|3[0-1]) ([01][0-9]|2[0-3]):[0-5][0-9]$/,
+      hour: /^([01][0-9]|2[0-3]):[0-5][0-9]$/,
       weekDay: /^[0-7]$/,
       bool: /^[01]$/,
     };
@@ -28,27 +30,39 @@ class Validator {
  * @return {[Fuction]}      [Fuction to test regular expression inside the words ]
  */
   static word(data) {
-    return (Validator.regex.word.test(data));
+    return (Validator.regex.word.test(data) === this.required(data));
+  }
+
+  static gender(data) {
+    return (Validator.regex.gender.test(data) === this.required(data));
   }
 
   static number(data) {
-    return (Validator.regex.number.test(data));
+    return (Validator.regex.number.test(data) === this.required(data));
   }
 
   static decimal(data) {
-    return (Validator.regex.decimal.test(data));
+    return (Validator.regex.decimal.test(data) === this.required(data));
   }
 
   static date(data) {
-    return (Validator.regex.date.test(data));
+    return (Validator.regex.date.test(data) === this.required(data));
+  }
+
+  static datetime(data) {
+    return (Validator.regex.datetime.test(data) === this.required(data));
   }
 
   static hour(data) {
-    return (Validator.regex.hour.test(data));
+    return (Validator.regex.hour.test(data) === this.required(data));
   }
 
   static bool(data) {
-    return (Validator.regex.bool.test(data));
+    return (Validator.regex.bool.test(data) === this.required(data));
+  }
+
+  static weekDay(data) {
+    return (Validator.regex.weekDay.test(data) === this.required(data));
   }
 
   static image(data) {
@@ -61,7 +75,7 @@ class Validator {
  * @return {[Fuction]}      [Fuction for compare data with other cases]
  */
   static required(data) {
-    return data !== undefined && data !== null && data.length;
+    return data !== undefined && data !== null && data.length > 0;
   }
 
   /**
@@ -70,7 +84,7 @@ class Validator {
  * @return {[Fuction]}      [Fuction to validate the rules with regular expression]
  */
   static email(data) {
-    return (Validator.regex.email.test(data));
+    return (Validator.regex.email.test(data) === this.required(data));
   }
 
   /**
